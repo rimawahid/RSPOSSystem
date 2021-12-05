@@ -1,0 +1,23 @@
+1.dashboard:
+2.Pos:
+3.Product:
+4.Categories:
+5.Sales:
+6.Purchases:
+7.Gift Card:
+	list gift card:card no, value,balance, created by, expiry
+	add gift card:card no, value, expiry date
+8.People:
+	List users:first name, last name, email, group, store, status, actions
+	add uses:group(admin,staff), first name, last name,phone, gender,email,username,password, confirm password, status, store
+	list customers:name,phone,email,Customer Custom Field 1,Customer Custom Field 2
+	add customer: name, email,phone, Customer Custom Field 1,Customer Custom Field 2
+	list suppliers:name,phone,email,Customer Custom Field 1,Customer Custom Field 2
+	add suppliers:name, email,phone, supplier Custom Field 1,supplier Custom Field 2
+9.Setting:
+	Stores:Name,code,phone,email,address,city,action
+	Add Stores:Name, code, email address, phone, address,city,state,postal code, country, receipt header , receipt footer
+	Printers:title, type,profile, path,ip address,port,action
+	Add Printer: tittle,type, prifile,characters per line, ip address, port
+	Backup
+10.Reports
