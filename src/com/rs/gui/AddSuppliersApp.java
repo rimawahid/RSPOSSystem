@@ -5,6 +5,11 @@
  */
 package com.rs.gui;
 
+import com.rs.dao.AddStoreDAO;
+import com.rs.dao.AddSupplierDAO;
+import com.rs.model.Supplier;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author USER
@@ -53,14 +58,14 @@ public class AddSuppliersApp extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jTextField1 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        supplierName = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
+        supplierEmail = new javax.swing.JTextField();
+        supplierPhone = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jTextField9 = new javax.swing.JTextField();
+        supplierAddress = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnAddSupplier = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -355,40 +360,40 @@ public class AddSuppliersApp extends javax.swing.JFrame {
 
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
         jLabel2.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
-        jLabel2.setText("Nmae");
+        jLabel2.setText("Name");
 
-        jTextField2.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
+        supplierName.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
 
         jLabel4.setBackground(new java.awt.Color(255, 255, 255));
         jLabel4.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
         jLabel4.setText("Eamil");
 
-        jTextField4.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+        supplierEmail.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
+        supplierEmail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
+                supplierEmailActionPerformed(evt);
             }
         });
 
-        jTextField6.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
+        supplierPhone.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
 
         jLabel6.setBackground(new java.awt.Color(255, 255, 255));
         jLabel6.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
         jLabel6.setText("Phone");
 
-        jTextField9.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
+        supplierAddress.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
 
         jLabel9.setBackground(new java.awt.Color(255, 255, 255));
         jLabel9.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
         jLabel9.setText("Address");
 
-        jButton1.setBackground(new java.awt.Color(54, 127, 169));
-        jButton1.setFont(new java.awt.Font("Corbel", 1, 24)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Add Supplier");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnAddSupplier.setBackground(new java.awt.Color(54, 127, 169));
+        btnAddSupplier.setFont(new java.awt.Font("Corbel", 1, 24)); // NOI18N
+        btnAddSupplier.setForeground(new java.awt.Color(255, 255, 255));
+        btnAddSupplier.setText("Add Supplier");
+        btnAddSupplier.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnAddSupplierActionPerformed(evt);
             }
         });
 
@@ -403,15 +408,15 @@ public class AddSuppliersApp extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(31, 31, 31)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE)
+                            .addComponent(supplierName, javax.swing.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField4)
-                            .addComponent(jTextField6)
-                            .addComponent(jTextField9)
+                            .addComponent(supplierEmail)
+                            .addComponent(supplierPhone)
+                            .addComponent(supplierAddress)
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(btnAddSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(974, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -422,21 +427,21 @@ public class AddSuppliersApp extends javax.swing.JFrame {
                 .addGap(14, 14, 14)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(supplierName, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(25, 25, 25)
-                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(supplierEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(supplierPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(supplierAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(47, 47, 47)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnAddSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(59, Short.MAX_VALUE))
         );
 
@@ -544,7 +549,7 @@ public class AddSuppliersApp extends javax.swing.JFrame {
     private void addUsersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addUsersMouseClicked
         // TODO add your handling code here:
         this.setVisible(false);
-       new AddUsersApp().setVisible(true);
+        new AddUsersApp().setVisible(true);
     }//GEN-LAST:event_addUsersMouseClicked
 
     private void listCustomersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listCustomersMouseClicked
@@ -571,17 +576,33 @@ public class AddSuppliersApp extends javax.swing.JFrame {
 //        new AddSuppliersApp().setVisible(true);
     }//GEN-LAST:event_addSuppliersMouseClicked
 
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+    private void supplierEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_supplierEmailActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
+    }//GEN-LAST:event_supplierEmailActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnAddSupplierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddSupplierActionPerformed
+        Supplier suppliers = new Supplier();
+        suppliers.setSupplierName(supplierName.getText());
+        suppliers.setSupplierEmail(supplierEmail.getText());
+        suppliers.setSupplierPhone(supplierPhone.getText());
+        suppliers.setSupplierAddress(supplierAddress.getText());
 
-    /**
-     * @param args the command line arguments
-     */
+        int status = new AddSupplierDAO().save(suppliers);
+        if (status > 0) {
+            JOptionPane.showMessageDialog(rootPane, "supplier Saved!");
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "supplier Not Saved!");
+        }
+        clearFields();
+    }//GEN-LAST:event_btnAddSupplierActionPerformed
+
+    private void clearFields() {
+        supplierName.setText("");
+        supplierEmail.setText("");
+        supplierPhone.setText("");
+        supplierAddress.setText("");
+    }
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -619,10 +640,10 @@ public class AddSuppliersApp extends javax.swing.JFrame {
     private javax.swing.JLabel addSuppliers;
     private javax.swing.JLabel addUsers;
     private javax.swing.JPanel bg;
+    private javax.swing.JButton btnAddSupplier;
     private javax.swing.JLabel categoris;
     private javax.swing.JLabel dashboard;
     private javax.swing.JLabel giftCard;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
@@ -632,10 +653,6 @@ public class AddSuppliersApp extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField9;
     private javax.swing.JLabel listCustomers;
     private javax.swing.JLabel listSuppliers;
     private javax.swing.JLabel listUsers;
@@ -648,6 +665,10 @@ public class AddSuppliersApp extends javax.swing.JFrame {
     private javax.swing.JLabel sales;
     private javax.swing.JLabel setting;
     private javax.swing.JPanel sidemenubar;
+    private javax.swing.JTextField supplierAddress;
+    private javax.swing.JTextField supplierEmail;
+    private javax.swing.JTextField supplierName;
+    private javax.swing.JTextField supplierPhone;
     private javax.swing.JPanel topbar;
     // End of variables declaration//GEN-END:variables
 }

@@ -554,7 +554,7 @@
                                       <Component id="jLabel2" alignment="0" min="-2" pref="67" max="-2" attributes="0"/>
                                       <Component id="storeCode" alignment="0" max="32767" attributes="0"/>
                                       <Component id="storeEmail" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="storePhn" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="storePhone" alignment="0" max="32767" attributes="0"/>
                                       <Component id="jLabel4" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
                                       <Component id="jLabel6" alignment="0" min="-2" pref="106" max="-2" attributes="0"/>
                                       <Component id="jLabel9" alignment="0" min="-2" pref="92" max="-2" attributes="0"/>
@@ -623,7 +623,7 @@
                               <Group type="102" attributes="0">
                                   <Component id="jLabel9" min="-2" pref="29" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="storePhn" min="-2" pref="42" max="-2" attributes="0"/>
+                                  <Component id="storePhone" min="-2" pref="42" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Component id="jLabel12" min="-2" pref="29" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -769,7 +769,7 @@
                     </Property>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="storePhn">
+                <Component class="javax.swing.JTextField" name="storePhone">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Corbel" size="20" style="1"/>

@@ -6,7 +6,7 @@ public class AddStore {
     private String storeName;
     private String storeCode;
     private String storeEmail;
-    private String storePhn;
+    private String storePhone;
     private String storeAddress;
     private String storeCity;
     private String storeState;
@@ -45,12 +45,12 @@ public class AddStore {
         this.storeEmail = storeEmail;
     }
 
-    public String getStorePhn() {
-        return storePhn;
+    public String getstorePhone() {
+        return storePhone;
     }
 
-    public void setStorePhn(String storePhn) {
-        this.storePhn = storePhn;
+    public void setstorePhone(String storePhone) {
+        this.storePhone = storePhone;
     }
 
     public String getStoreAddress() {

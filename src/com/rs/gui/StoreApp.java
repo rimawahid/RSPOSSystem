@@ -5,6 +5,7 @@
  */
 package com.rs.gui;
 
+import com.rs.dao.AddStoreDAO;
 import com.rs.dao.StoreDAO;
 import com.rs.model.AddStore;
 import com.rs.model.Store;
@@ -481,28 +482,19 @@ public class StoreApp extends javax.swing.JFrame {
     }//GEN-LAST:event_settingPAgeMouseClicked
 
     private void storeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_storeMouseClicked
-        // TODO add your handling code here:
-//        List<Store> stores = new StoreDAO().getAll();
-//        String[] columnNames = {"Name", "Code", "Phone", "Email", "Address", "City"};
-//
-//        Object[][] data = new Object[stores.size()][6];
-//
-//        for (int i = 0; i < stores.size(); i++) {
-//            Store s = stores.get(i);
-//            Object[] o = {s.getSotreName(), s.getStoreCode(), s.getStorePhone(), s.getStoreEmail(), s.getStoreAddress(), s.getStoreCity()};
-//            for (int j = 0; j < 6; j++) {
-//                data[i][j] = o[j];
-//            }
-//        }
-//        DefaultTableModel model = new DefaultTableModel(data, columnNames);
-//        showStore.setModel(model);
+
     }//GEN-LAST:event_storeMouseClicked
 
     private void getAllStore() {
         List<Store> stores = new StoreDAO().getAll();
+        Store store = new Store();
+
+//        List<AddStore> stores = new AddStoreDAO().getAll();
+//        AddStore store = new AddStore();
         String[] columnNames = {"Name", "Code", "Phone", "Email", "Address", "City"};
         Object[][] data = new Object[stores.size()][6];
         for (int i = 0; i < stores.size(); i++) {
+//            AddStore s = stores.get(i);
             Store s = stores.get(i);
             Object[] o = {s.getStoreName(), s.getStoreCode(), s.getStorePhone(), s.getStoreEmail(), s.getStoreAddress(), s.getStoreCity(),};
             for (int j = 0; j < 6; j++) {
@@ -511,18 +503,7 @@ public class StoreApp extends javax.swing.JFrame {
         }
         DefaultTableModel model = new DefaultTableModel(data, columnNames);
         storeTable.setModel(model);
-        //saiful vai
-//        storeTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-//            @Override
-//            public void valueChanged(ListSelectionEvent e) {
-//                
-//                storeName.setText(storeTable.getValueAt(storeTable.getSelectedRow(), 1).toString());
-//                storeCode.setText(storeTable.getValueAt(storeTable.getSelectedRow(), 2).toString());
-//                storephone.setText(storeTable.getValueAt(storeTable.getSelectedRow(), 3).toString());
-//
-//            }
-//        });
-        
+
     }
     private void addStoreMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addStoreMouseClicked
         // TODO add your handling code here:
@@ -531,19 +512,21 @@ public class StoreApp extends javax.swing.JFrame {
     }//GEN-LAST:event_addStoreMouseClicked
 
     private void btnUpdateStoreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateStoreActionPerformed
-//        // TODO add your handling code here:
-//        List<Store> stores = new StoreDAO().getAll();
-//        String[] columnNames = {"Name", "Code", "Phone", "Email", "Address", "City"};
-//        Object[][] data = new Object[stores.size()][6];
-//        for (int i = 0; i < stores.size(); i++) {
-//            Store s = stores.get(i);
-//            Object[] o = {s.getStoreName(), s.getStoreCode(), s.getStorePhone(), s.getStoreEmail(), s.getStoreAddress(), s.getStoreCity(),};
-//            for (int j = 0; j < 6; j++) {
-//                data[i][j] = o[j];
-//            }
-//        }
-//        DefaultTableModel model = new DefaultTableModel(data, columnNames);
-//        storeTable.setModel(model);
+        //saiful vai
+        storeTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                Store s = new Store();
+                s.setStoreName(storeTable.getValueAt(storeTable.getSelectedRow(), 0).toString());
+                s.setStoreCode(storeTable.getValueAt(storeTable.getSelectedRow(), 1).toString());
+                s.setStorePhone(storeTable.getValueAt(storeTable.getSelectedRow(), 2).toString());
+                AddStoreApp ap = new AddStoreApp();
+                ap.setVisible(true);
+                ap.addValue(s);
+
+            }
+        });
+
 
     }//GEN-LAST:event_btnUpdateStoreActionPerformed
 

@@ -7,6 +7,7 @@ package com.rs.gui;
 
 import com.rs.dao.AddStoreDAO;
 import com.rs.model.AddStore;
+import com.rs.model.Store;
 import javax.swing.JOptionPane;
 
 /**
@@ -67,7 +68,7 @@ public class AddStoreApp extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         storePostalCode = new javax.swing.JTextField();
         storeCountry = new javax.swing.JTextField();
-        storePhn = new javax.swing.JTextField();
+        storePhone = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
@@ -409,7 +410,7 @@ public class AddStoreApp extends javax.swing.JFrame {
 
         storeCountry.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
 
-        storePhn.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
+        storePhone.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
 
         jLabel9.setBackground(new java.awt.Color(255, 255, 255));
         jLabel9.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
@@ -454,7 +455,7 @@ public class AddStoreApp extends javax.swing.JFrame {
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(storeCode)
                             .addComponent(storeEmail)
-                            .addComponent(storePhn)
+                            .addComponent(storePhone)
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -509,7 +510,7 @@ public class AddStoreApp extends javax.swing.JFrame {
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(storePhn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(storePhone, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
                         .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -645,14 +646,16 @@ public class AddStoreApp extends javax.swing.JFrame {
     }//GEN-LAST:event_storeCodeActionPerformed
 
     
-    
+    public void addValue(Store s){
+        storeName.setText(s.getStoreName());
+    }
     
     private void btnAddStoreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddStoreActionPerformed
         AddStore store = new AddStore();
         store.setStoreName(storeName.getText());
         store.setStoreCode(storeCode.getText());
         store.setStoreEmail(storeEmail.getText());
-        store.setStorePhn(storePhn.getText());
+        store.setstorePhone(storePhone.getText());
         store.setStoreAddress(storeAddress.getText());
         store.setStoreCity(storeCity.getSelectedItem().toString());
         store.setStoreState(storeState.getText());
@@ -742,7 +745,7 @@ public class AddStoreApp extends javax.swing.JFrame {
     private javax.swing.JTextField storeCountry;
     private javax.swing.JTextField storeEmail;
     private javax.swing.JTextField storeName;
-    private javax.swing.JTextField storePhn;
+    private javax.swing.JTextField storePhone;
     private javax.swing.JTextField storePostalCode;
     private javax.swing.JTextField storeState;
     private javax.swing.JPanel topbar;

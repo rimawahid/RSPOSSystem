@@ -484,26 +484,27 @@ public class CategoryApp extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane, "Category Not Saved!");
 
         }
+        getAllCategory();
+
     }//GEN-LAST:event_btnAddCategoryActionPerformed
 
+
     private void btnDeleteCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteCategoryActionPerformed
-        // TODO add your handling code here:
+
         Category category = new Category();
-        //category.setCategoryCode(id.getText());
-        //category.setCategoryCode(categoryCode.getText());
-        System.out.println(categoryCode.getText());
-        System.out.println(categoryName.getText());
-       // category.setCategoryCode(categoryName.getText());
+
+        //System.out.println(categoryCode.getText());
+        // System.out.println(categoryName.getText());
         int option = JOptionPane.showConfirmDialog(rootPane, "Do you want to delete?", null, WIDTH);
-        if(option == 0){
+        if (option == 0) {
             category.setCategoryCode(categoryCode.getText());
-            
-            int status = new CategoryDAO().update(category);
-        if (status > 0) {
-            JOptionPane.showMessageDialog(rootPane, "Category Update!");
-        } else {
-            JOptionPane.showMessageDialog(rootPane, "Category Not Update!");
-        }
+            int status = new CategoryDAO().delete(category);
+            if (status > 0) {
+                JOptionPane.showMessageDialog(rootPane, "Category delete!");
+                getAllCategory();
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Category Not delete!");
+            }
         }
     }//GEN-LAST:event_btnDeleteCategoryActionPerformed
 
@@ -516,6 +517,7 @@ public class CategoryApp extends javax.swing.JFrame {
         int status = new CategoryDAO().update(category);
         if (status > 0) {
             JOptionPane.showMessageDialog(rootPane, "Category Update!");
+
         } else {
             JOptionPane.showMessageDialog(rootPane, "Category Not Update!");
         }
@@ -542,7 +544,7 @@ public class CategoryApp extends javax.swing.JFrame {
             public void valueChanged(ListSelectionEvent e) {
                 categoryCode.setText(categoryTable.getValueAt(categoryTable.getSelectedRow(), 0).toString());
                 categoryName.setText(categoryTable.getValueAt(categoryTable.getSelectedRow(), 1).toString());
-                
+
             }
         });
     }

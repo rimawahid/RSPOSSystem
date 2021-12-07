@@ -3,10 +3,13 @@ package com.rs.dao;
 
 import com.rs.common.ICommonInterface;
 import com.rs.model.AddStore;
+import com.rs.model.Store;
 import com.rs.util.DBConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,7 +28,7 @@ PreparedStatement ps;
         ps.setString(1, t.getStoreName());
         ps.setString(2, t.getStoreCode());
         ps.setString(3, t.getStoreEmail());
-        ps.setString(4, t.getStorePhn());
+        ps.setString(4, t.getstorePhone());
         ps.setString(5, t.getStoreAddress());
         ps.setString(6, t.getStoreCity());
         ps.setString(7, t.getStoreState());
@@ -68,7 +71,32 @@ PreparedStatement ps;
 
     @Override
     public List<AddStore> getAll() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = "Select * from store";
+        List<AddStore> stores = new ArrayList<AddStore>();
+
+        try {
+            con = DBConnection.getConnection();
+            ps = con.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+            int i = 0;
+            while (rs.next()) {
+                AddStore showStore = new AddStore();
+                showStore.setStoreName(rs.getString("store_name"));
+                showStore.setStoreCode(rs.getString("store_code"));
+                showStore.setStoreEmail(rs.getString("store_email"));
+                showStore.setstorePhone(rs.getString("store_phn"));
+                showStore.setStoreAddress(rs.getString("store_address"));
+                showStore.setStoreCity(rs.getString("store_city"));
+
+                stores.add(showStore);
+
+                i++;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(StoreDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return stores;
+       // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     
 }
