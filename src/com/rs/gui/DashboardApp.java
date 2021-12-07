@@ -732,7 +732,7 @@ public class DashboardApp extends javax.swing.JFrame {
     private void btnCategoryMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCategoryMouseClicked
         // TODO add your handling code here:
         this.setVisible(false);
-        new CategorisApp().setVisible(true);
+        new CategoryApp().setVisible(true);
     }//GEN-LAST:event_btnCategoryMouseClicked
 
     private void btnGiftCardMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGiftCardMouseClicked

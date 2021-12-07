@@ -5,17 +5,30 @@
  */
 package com.rs.gui;
 
+import com.rs.dao.CategoryDAO;
+import com.rs.dao.StoreDAO;
+import com.rs.model.Category;
+import com.rs.model.Store;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author USER
  */
-public class CategorisApp extends javax.swing.JFrame {
+public class CategoryApp extends javax.swing.JFrame {
 
     /**
      * Creates new form CategoriesApp
      */
-    public CategorisApp() {
+    public CategoryApp() {
         initComponents();
+        getAllCategory();
     }
 
     /**
@@ -44,14 +57,16 @@ public class CategorisApp extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         categoriesTable = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        categoryTable = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
-        category_code = new javax.swing.JTextField();
+        categoryCode = new javax.swing.JTextField();
         name = new javax.swing.JLabel();
-        category_name = new javax.swing.JTextField();
-        jButton3 = new javax.swing.JButton();
+        categoryName = new javax.swing.JTextField();
+        btnAddCategory = new javax.swing.JButton();
+        btnDeleteCategory = new javax.swing.JButton();
+        btnUpdateCategory = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -236,7 +251,8 @@ public class CategorisApp extends javax.swing.JFrame {
         jLabel1.setText(" AddCategories");
         bg.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 550, 270, 70));
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        categoryTable.setFont(new java.awt.Font("Calibri", 1, 20)); // NOI18N
+        categoryTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -244,7 +260,8 @@ public class CategorisApp extends javax.swing.JFrame {
 
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        categoryTable.setRowHeight(28);
+        jScrollPane1.setViewportView(categoryTable);
 
         javax.swing.GroupLayout categoriesTableLayout = new javax.swing.GroupLayout(categoriesTable);
         categoriesTable.setLayout(categoriesTableLayout);
@@ -274,17 +291,42 @@ public class CategorisApp extends javax.swing.JFrame {
         jTextField1.setText("Please fill in the information below");
         jTextField1.setBorder(null);
 
-        category_code.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
+        categoryCode.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
 
         name.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
         name.setText("Name");
 
-        category_name.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
+        categoryName.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
 
-        jButton3.setBackground(new java.awt.Color(54, 127, 169));
-        jButton3.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setText("Add Categories");
+        btnAddCategory.setBackground(new java.awt.Color(54, 127, 169));
+        btnAddCategory.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
+        btnAddCategory.setForeground(new java.awt.Color(255, 255, 255));
+        btnAddCategory.setText("Add Category");
+        btnAddCategory.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddCategoryActionPerformed(evt);
+            }
+        });
+
+        btnDeleteCategory.setBackground(new java.awt.Color(54, 127, 169));
+        btnDeleteCategory.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
+        btnDeleteCategory.setForeground(new java.awt.Color(255, 255, 255));
+        btnDeleteCategory.setText("Delete Category");
+        btnDeleteCategory.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteCategoryActionPerformed(evt);
+            }
+        });
+
+        btnUpdateCategory.setBackground(new java.awt.Color(54, 127, 169));
+        btnUpdateCategory.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
+        btnUpdateCategory.setForeground(new java.awt.Color(255, 255, 255));
+        btnUpdateCategory.setText("Update Category");
+        btnUpdateCategory.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateCategoryActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -297,36 +339,50 @@ public class CategorisApp extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(54, 54, 54)
-                        .addComponent(category_code, javax.swing.GroupLayout.PREFERRED_SIZE, 545, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(categoryCode, javax.swing.GroupLayout.PREFERRED_SIZE, 545, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(54, 54, 54)
-                        .addComponent(category_name, javax.swing.GroupLayout.PREFERRED_SIZE, 545, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(categoryName, javax.swing.GroupLayout.PREFERRED_SIZE, 545, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(865, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnUpdateCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(318, 318, 318)
+                .addComponent(btnDeleteCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(272, 272, 272))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel1Layout.createSequentialGroup()
                     .addGap(41, 41, 41)
-                    .addComponent(jButton3)
-                    .addContainerGap(1356, Short.MAX_VALUE)))
+                    .addComponent(btnAddCategory)
+                    .addContainerGap(1368, Short.MAX_VALUE)))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(category_code, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(category_name, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(120, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(28, 28, 28)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(categoryCode, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(28, 28, 28)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(name, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(categoryName, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(120, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnUpdateCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnDeleteCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(23, 23, 23))))
             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                     .addContainerGap(214, Short.MAX_VALUE)
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnAddCategory, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGap(23, 23, 23)))
         );
 
@@ -413,6 +469,84 @@ public class CategorisApp extends javax.swing.JFrame {
         new DashboardApp().setVisible(true);
     }//GEN-LAST:event_dashboardMouseClicked
 
+    private void btnAddCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddCategoryActionPerformed
+        // TODO add your handling code here:
+        Category categories = new Category();
+        categories.setCategoryCode(categoryCode.getText());
+        categories.setCategoryName(categoryName.getText());
+//        System.out.println("db connec...");
+//        System.out.println(categoryCode.getText());
+//        System.out.println(categoryName.getText());
+        int status = new CategoryDAO().save(categories);
+        if (status > 0) {
+            JOptionPane.showMessageDialog(rootPane, "Category Saved!");
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Category Not Saved!");
+
+        }
+    }//GEN-LAST:event_btnAddCategoryActionPerformed
+
+    private void btnDeleteCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteCategoryActionPerformed
+        // TODO add your handling code here:
+        Category category = new Category();
+        //category.setCategoryCode(id.getText());
+        //category.setCategoryCode(categoryCode.getText());
+        System.out.println(categoryCode.getText());
+        System.out.println(categoryName.getText());
+       // category.setCategoryCode(categoryName.getText());
+        int option = JOptionPane.showConfirmDialog(rootPane, "Do you want to delete?", null, WIDTH);
+        if(option == 0){
+            category.setCategoryCode(categoryCode.getText());
+            
+            int status = new CategoryDAO().update(category);
+        if (status > 0) {
+            JOptionPane.showMessageDialog(rootPane, "Category Update!");
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Category Not Update!");
+        }
+        }
+    }//GEN-LAST:event_btnDeleteCategoryActionPerformed
+
+    private void btnUpdateCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateCategoryActionPerformed
+        // TODO add your handling code here:
+        Category category = new Category();
+        category.setCategoryCode(categoryCode.getText());
+        category.setCategoryName(categoryName.getText());
+
+        int status = new CategoryDAO().update(category);
+        if (status > 0) {
+            JOptionPane.showMessageDialog(rootPane, "Category Update!");
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Category Not Update!");
+        }
+
+    }//GEN-LAST:event_btnUpdateCategoryActionPerformed
+
+    private void getAllCategory() {
+        List<Category> categories = new CategoryDAO().getAll();
+        String[] columnNames = {"Code", "Name"};
+        Object[][] data = new Object[categories.size()][3];
+        for (int i = 0; i < categories.size(); i++) {
+            Category s = categories.get(i);
+            Object[] o = {s.getCategoryCode(), s.getCategoryName()};
+            for (int j = 0; j < 2; j++) {
+                data[i][j] = o[j];
+            }
+        }
+        DefaultTableModel model = new DefaultTableModel(data, columnNames);
+        categoryTable.setModel(model);
+
+        //saiful vai
+        categoryTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                categoryCode.setText(categoryTable.getValueAt(categoryTable.getSelectedRow(), 0).toString());
+                categoryName.setText(categoryTable.getValueAt(categoryTable.getSelectedRow(), 1).toString());
+                
+            }
+        });
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -430,40 +564,44 @@ public class CategorisApp extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(CategorisApp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CategoryApp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(CategorisApp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CategoryApp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(CategorisApp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CategoryApp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(CategorisApp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CategoryApp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new CategorisApp().setVisible(true);
+                new CategoryApp().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel bg;
+    private javax.swing.JButton btnAddCategory;
+    private javax.swing.JButton btnDeleteCategory;
+    private javax.swing.JButton btnUpdateCategory;
     private javax.swing.JPanel categoriesTable;
     private javax.swing.JLabel categoris;
-    private javax.swing.JTextField category_code;
-    private javax.swing.JTextField category_name;
+    private javax.swing.JTextField categoryCode;
+    private javax.swing.JTextField categoryName;
+    private javax.swing.JTable categoryTable;
     private javax.swing.JLabel dashboard;
     private javax.swing.JLabel giftCard;
-    private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JLabel logo;
     private javax.swing.JLabel name;

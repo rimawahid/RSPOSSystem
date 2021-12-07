@@ -586,7 +586,7 @@ public class AddStoreApp extends javax.swing.JFrame {
     private void categorisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_categorisMouseClicked
         // TODO add your handling code here:
         this.setVisible(false);
-        new CategorisApp().setVisible(true);
+        new CategoryApp().setVisible(true);
     }//GEN-LAST:event_categorisMouseClicked
 
     private void salesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salesMouseClicked
@@ -660,9 +660,9 @@ public class AddStoreApp extends javax.swing.JFrame {
         store.setStoreCountry(storeCountry.getText());
         int status = new AddStoreDAO().save(store);
         if(status > 0){
-            JOptionPane.showMessageDialog(rootPane, "Product Saved!");
+            JOptionPane.showMessageDialog(rootPane, "Store Saved!");
         }else{
-             JOptionPane.showMessageDialog(rootPane, "Product NOT Saved!");
+             JOptionPane.showMessageDialog(rootPane, "Store Not Saved!");
         }
         
     }//GEN-LAST:event_btnAddStoreActionPerformed

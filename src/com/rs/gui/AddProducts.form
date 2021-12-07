@@ -366,17 +366,17 @@
                                   <Component id="jLabel2" min="-2" pref="71" max="-2" attributes="0"/>
                                   <Component id="jLabel3" min="-2" pref="71" max="-2" attributes="0"/>
                                   <Component id="jLabel4" min="-2" pref="82" max="-2" attributes="0"/>
-                                  <Component id="type3" pref="553" max="32767" attributes="0"/>
-                                  <Component id="type5" pref="553" max="32767" attributes="0"/>
-                                  <Component id="type2" alignment="0" pref="553" max="32767" attributes="0"/>
+                                  <Component id="ProductBarCode" pref="553" max="32767" attributes="0"/>
+                                  <Component id="productCost" pref="553" max="32767" attributes="0"/>
+                                  <Component id="productCode" alignment="0" pref="553" max="32767" attributes="0"/>
                                   <Component id="jLabel6" alignment="0" min="-2" pref="138" max="-2" attributes="0"/>
                                   <Component id="jLabel7" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                                  <Component id="type1" alignment="0" pref="553" max="32767" attributes="0"/>
+                                  <Component id="productName" alignment="0" pref="553" max="32767" attributes="0"/>
                                   <Component id="jLabel5" alignment="0" min="-2" pref="128" max="-2" attributes="0"/>
-                                  <Component id="jComboBox1" max="32767" attributes="0"/>
-                                  <Component id="jComboBox2" max="32767" attributes="0"/>
+                                  <Component id="productCategory" max="32767" attributes="0"/>
+                                  <Component id="productType" max="32767" attributes="0"/>
                                   <Component id="jLabel8" alignment="0" min="-2" pref="100" max="-2" attributes="0"/>
-                                  <Component id="type6" pref="553" max="32767" attributes="0"/>
+                                  <Component id="productPrice" pref="553" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace pref="134" max="32767" attributes="0"/>
                               <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
@@ -396,31 +396,31 @@
                               <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
                               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jComboBox2" min="-2" pref="42" max="-2" attributes="0"/>
+                              <Component id="productType" min="-2" pref="42" max="-2" attributes="0"/>
                               <EmptySpace max="32767" attributes="0"/>
                               <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="type1" min="-2" pref="42" max="-2" attributes="0"/>
+                              <Component id="productName" min="-2" pref="42" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="type2" min="-2" pref="42" max="-2" attributes="0"/>
+                              <Component id="productCode" min="-2" pref="42" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="type3" min="-2" pref="42" max="-2" attributes="0"/>
+                              <Component id="ProductBarCode" min="-2" pref="42" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jComboBox1" min="-2" pref="42" max="-2" attributes="0"/>
+                              <Component id="productCategory" min="-2" pref="42" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="type5" min="-2" pref="42" max="-2" attributes="0"/>
+                              <Component id="productCost" min="-2" pref="42" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="type6" min="-2" pref="42" max="-2" attributes="0"/>
+                              <Component id="productPrice" min="-2" pref="42" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="219" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
@@ -471,7 +471,7 @@
                 <Property name="text" type="java.lang.String" value="Name"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="type1">
+            <Component class="javax.swing.JTextField" name="productName">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Corbel" size="20" style="0"/>
@@ -489,14 +489,14 @@
                 <Property name="text" type="java.lang.String" value="Code"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="type2">
+            <Component class="javax.swing.JTextField" name="productCode">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Corbel" size="20" style="0"/>
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="type2ActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="productCodeActionPerformed"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel5">
@@ -510,7 +510,7 @@
                 <Property name="text" type="java.lang.String" value="Bar_Code"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="type3">
+            <Component class="javax.swing.JTextField" name="ProductBarCode">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Corbel" size="20" style="0"/>
@@ -539,7 +539,7 @@
                 <Property name="text" type="java.lang.String" value="Cost"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="type5">
+            <Component class="javax.swing.JTextField" name="productCost">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Corbel" size="20" style="0"/>
@@ -562,13 +562,13 @@
                               <Component id="jPanel3" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="17" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jTextField5" min="-2" pref="533" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="productTax" pref="533" max="32767" attributes="0"/>
                                       <Component id="jLabel11" min="-2" pref="162" max="-2" attributes="0"/>
                                       <Component id="jLabel12" alignment="0" min="-2" pref="162" max="-2" attributes="0"/>
-                                      <Component id="jTextField6" alignment="0" min="-2" pref="533" max="-2" attributes="0"/>
                                       <Component id="jLabel13" alignment="0" min="-2" pref="162" max="-2" attributes="0"/>
-                                      <Component id="jTextField7" alignment="0" min="-2" pref="533" max="-2" attributes="0"/>
+                                      <Component id="alertQty" alignment="0" pref="533" max="32767" attributes="0"/>
+                                      <Component id="taxMethod" alignment="0" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -584,15 +584,15 @@
                           <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
                           <Component id="jLabel11" min="-2" pref="29" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
-                          <Component id="jTextField5" min="-2" pref="42" max="-2" attributes="0"/>
+                          <Component id="productTax" min="-2" pref="42" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="jLabel12" min="-2" pref="29" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="jTextField6" min="-2" pref="42" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="taxMethod" min="-2" pref="48" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                           <Component id="jLabel13" min="-2" pref="29" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
-                          <Component id="jTextField7" min="-2" pref="42" max="-2" attributes="0"/>
+                          <Component id="alertQty" min="-2" pref="42" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -607,7 +607,7 @@
                     <Property name="text" type="java.lang.String" value="Product Tax"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="jTextField5">
+                <Component class="javax.swing.JTextField" name="productTax">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Corbel" size="20" style="1"/>
@@ -622,13 +622,6 @@
                     <Property name="text" type="java.lang.String" value="Tax Method"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="jTextField6">
-                  <Properties>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Corbel" size="20" style="1"/>
-                    </Property>
-                  </Properties>
-                </Component>
                 <Component class="javax.swing.JLabel" name="jLabel13">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -637,7 +630,7 @@
                     <Property name="text" type="java.lang.String" value="Alert Quantity"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="jTextField7">
+                <Component class="javax.swing.JTextField" name="alertQty">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Corbel" size="20" style="1"/>
@@ -730,24 +723,38 @@
                     </Component>
                   </SubComponents>
                 </Container>
+                <Component class="javax.swing.JComboBox" name="taxMethod">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Corbel" size="20" style="0"/>
+                    </Property>
+                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                      <StringArray count="2">
+                        <StringItem index="0" value="Inclusive"/>
+                        <StringItem index="1" value="Exclusive"/>
+                      </StringArray>
+                    </Property>
+                  </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                  </AuxValues>
+                </Component>
               </SubComponents>
             </Container>
-            <Component class="javax.swing.JComboBox" name="jComboBox1">
+            <Component class="javax.swing.JComboBox" name="productCategory">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="4">
-                    <StringItem index="0" value="Item 1"/>
-                    <StringItem index="1" value="Item 2"/>
-                    <StringItem index="2" value="Item 3"/>
-                    <StringItem index="3" value="Item 4"/>
-                  </StringArray>
+                  <StringArray count="0"/>
                 </Property>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="productCategoryActionPerformed"/>
+              </Events>
               <AuxValues>
                 <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
               </AuxValues>
             </Component>
-            <Component class="javax.swing.JComboBox" name="jComboBox2">
+            <Component class="javax.swing.JComboBox" name="productType">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Corbel" size="20" style="1"/>
@@ -775,7 +782,7 @@
                 <Property name="text" type="java.lang.String" value="Price"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="type6">
+            <Component class="javax.swing.JTextField" name="productPrice">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Corbel" size="20" style="0"/>
@@ -797,6 +804,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Add Product"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAddProductActionPerformed"/>
+          </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="330" y="930" width="210" height="50"/>

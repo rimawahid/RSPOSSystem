@@ -259,7 +259,7 @@ public class ReportsApp extends javax.swing.JFrame {
     private void categorisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_categorisMouseClicked
         // TODO add your handling code here:
         this.setVisible(false);
-        new CategorisApp().setVisible(true);
+        new CategoryApp().setVisible(true);
     }//GEN-LAST:event_categorisMouseClicked
 
     private void salesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salesMouseClicked

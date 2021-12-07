@@ -2,19 +2,19 @@ package com.rs.model;
 
 public class Store {
 
-    private String sotreName;
+    private String storeName;
     private String storeCode;
     private String storePhone;
     private String storeEmail;
     private String storeAddress;
     private String storeCity;
 
-    public String getSotreName() {
-        return sotreName;
+    public String getStoreName() {
+        return storeName;
     }
 
-    public void setSotreName(String sotreName) {
-        this.sotreName = sotreName;
+    public void setStoreName(String storeName) {
+        this.storeName = storeName;
     }
 
     public String getStoreCode() {
@@ -56,5 +56,7 @@ public class Store {
     public void setStoreCity(String storeCity) {
         this.storeCity = storeCity;
     }
+
+    
 
 }

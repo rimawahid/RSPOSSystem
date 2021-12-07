@@ -6,8 +6,12 @@
 package com.rs.gui;
 
 import com.rs.dao.StoreDAO;
+import com.rs.model.AddStore;
 import com.rs.model.Store;
 import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -21,6 +25,8 @@ public class StoreApp extends javax.swing.JFrame {
      */
     public StoreApp() {
         initComponents();
+        getAllStore();
+
     }
 
     /**
@@ -55,7 +61,8 @@ public class StoreApp extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        showStore = new javax.swing.JTable();
+        storeTable = new javax.swing.JTable();
+        btnUpdateStore = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -343,24 +350,27 @@ public class StoreApp extends javax.swing.JFrame {
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
-        showStore.setFont(new java.awt.Font("Corbel", 1, 24)); // NOI18N
-        showStore.setModel(new javax.swing.table.DefaultTableModel(
+        storeTable.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
+        storeTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Name", "Code", "Phone", "Email", "Address", "City"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                true, true, true, true, false, true
-            };
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
+            }
+        ));
+        storeTable.setRowHeight(28);
+        jScrollPane1.setViewportView(storeTable);
+
+        btnUpdateStore.setBackground(new java.awt.Color(54, 127, 169));
+        btnUpdateStore.setFont(new java.awt.Font("Corbel", 1, 24)); // NOI18N
+        btnUpdateStore.setForeground(new java.awt.Color(255, 255, 255));
+        btnUpdateStore.setText("Update Store");
+        btnUpdateStore.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateStoreActionPerformed(evt);
             }
         });
-        jScrollPane1.setViewportView(showStore);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -368,7 +378,11 @@ public class StoreApp extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(30, 30, 30)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1499, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(628, 628, 628)
+                        .addComponent(btnUpdateStore, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1499, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(31, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -376,10 +390,12 @@ public class StoreApp extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(59, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
+                .addComponent(btnUpdateStore, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(58, 58, 58))
         );
 
-        bg.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 260, 1560, 520));
+        bg.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 260, 1560, 600));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -421,7 +437,7 @@ public class StoreApp extends javax.swing.JFrame {
     private void categorisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_categorisMouseClicked
         // TODO add your handling code here:
         this.setVisible(false);
-        new CategorisApp().setVisible(true);
+        new CategoryApp().setVisible(true);
     }//GEN-LAST:event_categorisMouseClicked
 
     private void salesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salesMouseClicked
@@ -459,34 +475,78 @@ public class StoreApp extends javax.swing.JFrame {
     }//GEN-LAST:event_reportsMouseClicked
 
     private void settingPAgeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_settingPAgeMouseClicked
-        
-                this.setVisible(false);
-                new SettingApp().setVisible(true);
+
+        this.setVisible(false);
+        new SettingApp().setVisible(true);
     }//GEN-LAST:event_settingPAgeMouseClicked
 
     private void storeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_storeMouseClicked
         // TODO add your handling code here:
-        List<Store> stores = new StoreDAO().getAll();
-        for (Store s : stores) {
-            System.out.println(s.getSotreName());
-        }
-        
+//        List<Store> stores = new StoreDAO().getAll();
+//        String[] columnNames = {"Name", "Code", "Phone", "Email", "Address", "City"};
+//
+//        Object[][] data = new Object[stores.size()][6];
+//
+//        for (int i = 0; i < stores.size(); i++) {
+//            Store s = stores.get(i);
+//            Object[] o = {s.getSotreName(), s.getStoreCode(), s.getStorePhone(), s.getStoreEmail(), s.getStoreAddress(), s.getStoreCity()};
+//            for (int j = 0; j < 6; j++) {
+//                data[i][j] = o[j];
+//            }
+//        }
+//        DefaultTableModel model = new DefaultTableModel(data, columnNames);
+//        showStore.setModel(model);
     }//GEN-LAST:event_storeMouseClicked
 
+    private void getAllStore() {
+        List<Store> stores = new StoreDAO().getAll();
+        String[] columnNames = {"Name", "Code", "Phone", "Email", "Address", "City"};
+        Object[][] data = new Object[stores.size()][6];
+        for (int i = 0; i < stores.size(); i++) {
+            Store s = stores.get(i);
+            Object[] o = {s.getStoreName(), s.getStoreCode(), s.getStorePhone(), s.getStoreEmail(), s.getStoreAddress(), s.getStoreCity(),};
+            for (int j = 0; j < 6; j++) {
+                data[i][j] = o[j];
+            }
+        }
+        DefaultTableModel model = new DefaultTableModel(data, columnNames);
+        storeTable.setModel(model);
+        //saiful vai
+//        storeTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+//            @Override
+//            public void valueChanged(ListSelectionEvent e) {
+//                
+//                storeName.setText(storeTable.getValueAt(storeTable.getSelectedRow(), 1).toString());
+//                storeCode.setText(storeTable.getValueAt(storeTable.getSelectedRow(), 2).toString());
+//                storephone.setText(storeTable.getValueAt(storeTable.getSelectedRow(), 3).toString());
+//
+//            }
+//        });
+        
+    }
     private void addStoreMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addStoreMouseClicked
         // TODO add your handling code here:
         this.setVisible(false);
         new AddStoreApp().setVisible(true);
     }//GEN-LAST:event_addStoreMouseClicked
 
-    public void setStoreToTable(){
-        DefaultTableModel model = new DefaultTableModel();
-            showStore.setModel(model);
-           //model.addRow();
-    }
-    
-    
-    
+    private void btnUpdateStoreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateStoreActionPerformed
+//        // TODO add your handling code here:
+//        List<Store> stores = new StoreDAO().getAll();
+//        String[] columnNames = {"Name", "Code", "Phone", "Email", "Address", "City"};
+//        Object[][] data = new Object[stores.size()][6];
+//        for (int i = 0; i < stores.size(); i++) {
+//            Store s = stores.get(i);
+//            Object[] o = {s.getStoreName(), s.getStoreCode(), s.getStorePhone(), s.getStoreEmail(), s.getStoreAddress(), s.getStoreCity(),};
+//            for (int j = 0; j < 6; j++) {
+//                data[i][j] = o[j];
+//            }
+//        }
+//        DefaultTableModel model = new DefaultTableModel(data, columnNames);
+//        storeTable.setModel(model);
+
+    }//GEN-LAST:event_btnUpdateStoreActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -526,6 +586,7 @@ public class StoreApp extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel addStore;
     private javax.swing.JPanel bg;
+    private javax.swing.JButton btnUpdateStore;
     private javax.swing.JLabel categoris;
     private javax.swing.JLabel dashboard;
     private javax.swing.JLabel giftCard;
@@ -544,9 +605,9 @@ public class StoreApp extends javax.swing.JFrame {
     private javax.swing.JLabel sales;
     private javax.swing.JLabel setting;
     private javax.swing.JLabel settingPAge;
-    private javax.swing.JTable showStore;
     private javax.swing.JPanel sidemenubar;
     private javax.swing.JLabel store;
+    private javax.swing.JTable storeTable;
     private javax.swing.JPanel topbar;
     // End of variables declaration//GEN-END:variables
 }
