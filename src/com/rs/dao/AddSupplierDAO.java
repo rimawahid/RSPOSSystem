@@ -44,7 +44,22 @@ public class AddSupplierDAO implements ICommonInterface<Supplier> {
 
     @Override
     public int update(Supplier t) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = "update supplier set supplier_name = ?, supplier_email = ?, supplier_phn = ?, supplier_address = ? where supplier_name = ?";
+        int status = 0;
+
+        try {
+            con = DBConnection.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, t.getSupplierName());
+            ps.setString(2, t.getSupplierEmail());
+            ps.setString(3, t.getSupplierPhone());
+            ps.setString(4, t.getSupplierAddress());
+            ps.setString(5, t.getSupplierName());
+            status = ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(AddSupplierDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return status;
     }
 
     @Override

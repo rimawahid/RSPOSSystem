@@ -21,6 +21,7 @@ public class AddSuppliersApp extends javax.swing.JFrame {
      */
     public AddSuppliersApp() {
         initComponents();
+        
     }
 
     /**
@@ -601,6 +602,14 @@ public class AddSuppliersApp extends javax.swing.JFrame {
         supplierEmail.setText("");
         supplierPhone.setText("");
         supplierAddress.setText("");
+    }
+    
+     public void addValue(Supplier s){
+        supplierName.setText(s.getSupplierName());
+        supplierEmail.setText(s.getSupplierEmail());
+        supplierPhone.setText(s.getSupplierPhone());
+        supplierAddress.setText(s.getSupplierAddress());
+        
     }
 
     public static void main(String args[]) {

@@ -522,7 +522,8 @@ public class StoreApp extends javax.swing.JFrame {
                 s.setStorePhone(storeTable.getValueAt(storeTable.getSelectedRow(), 2).toString());
                 AddStoreApp ap = new AddStoreApp();
                 ap.setVisible(true);
-                ap.addValue(s);
+               ap.addValue(s);
+                
 
             }
         });

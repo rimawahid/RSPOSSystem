@@ -8,6 +8,8 @@ package com.rs.gui;
 import com.rs.dao.AddSupplierDAO;
 import com.rs.model.Supplier;
 import java.util.List;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -361,7 +363,7 @@ public class ListSuppliersApp extends javax.swing.JFrame {
         btnUpdateSupplier.setBackground(new java.awt.Color(54, 127, 169));
         btnUpdateSupplier.setFont(new java.awt.Font("Corbel", 1, 24)); // NOI18N
         btnUpdateSupplier.setForeground(new java.awt.Color(255, 255, 255));
-        btnUpdateSupplier.setText("Update Store");
+        btnUpdateSupplier.setText("Update Supplier");
         btnUpdateSupplier.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnUpdateSupplierActionPerformed(evt);
@@ -527,14 +529,13 @@ public class ListSuppliersApp extends javax.swing.JFrame {
         new AddSuppliersApp().setVisible(true);
     }//GEN-LAST:event_addSuppliersMouseClicked
 
-    private void getAllSupplier(){
+    private void getAllSupplier() {
         List<Supplier> suppliers = new AddSupplierDAO().getAll();
-        Supplier supplier = new Supplier();
-        
-         String[] columnNames = {"Name", "Email", "Phone", "Address"};
+        // Supplier supplier = new Supplier();
+
+        String[] columnNames = {"Name", "Email", "Phone", "Address"};
         Object[][] data = new Object[suppliers.size()][4];
         for (int i = 0; i < suppliers.size(); i++) {
-//            AddStore s = stores.get(i);
             Supplier s = suppliers.get(i);
             Object[] o = {s.getSupplierName(), s.getSupplierEmail(), s.getSupplierPhone(), s.getSupplierAddress()};
             for (int j = 0; j < 4; j++) {
@@ -544,22 +545,23 @@ public class ListSuppliersApp extends javax.swing.JFrame {
         DefaultTableModel model = new DefaultTableModel(data, columnNames);
         supplierTable.setModel(model);
     }
-    
+
     private void btnUpdateSupplierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateSupplierActionPerformed
-        //saiful vai
-//        storeTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-//            @Override
-//            public void valueChanged(ListSelectionEvent e) {
-//                Store s = new Store();
-//                s.setStoreName(storeTable.getValueAt(storeTable.getSelectedRow(), 0).toString());
-//                s.setStoreCode(storeTable.getValueAt(storeTable.getSelectedRow(), 1).toString());
-//                s.setStorePhone(storeTable.getValueAt(storeTable.getSelectedRow(), 2).toString());
-//                AddStoreApp ap = new AddStoreApp();
-//                ap.setVisible(true);
-//                ap.addValue(s);
-//
-//            }
-//        });
+
+        supplierTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                Supplier s = new Supplier();
+                s.setSupplierName(supplierTable.getValueAt(supplierTable.getSelectedRow(), 0).toString());
+                s.setSupplierEmail(supplierTable.getValueAt(supplierTable.getSelectedRow(), 1).toString());
+                s.setSupplierPhone(supplierTable.getValueAt(supplierTable.getSelectedRow(), 2).toString());
+                s.setSupplierAddress(supplierTable.getValueAt(supplierTable.getSelectedRow(), 3).toString());
+                AddSuppliersApp ap = new AddSuppliersApp();
+                ap.setVisible(true);
+                ap.addValue(s);
+
+            }
+        });
 
     }//GEN-LAST:event_btnUpdateSupplierActionPerformed
 
