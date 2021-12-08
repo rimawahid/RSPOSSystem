@@ -501,15 +501,25 @@ public class CategoryApp extends javax.swing.JFrame {
             int status = new CategoryDAO().delete(category);
             if (status > 0) {
                 JOptionPane.showMessageDialog(rootPane, "Category delete!");
-                getAllCategory();
+
             } else {
                 JOptionPane.showMessageDialog(rootPane, "Category Not delete!");
             }
         }
+        getAllCategory();
     }//GEN-LAST:event_btnDeleteCategoryActionPerformed
 
     private void btnUpdateCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateCategoryActionPerformed
         // TODO add your handling code here:
+
+        categoryTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                categoryCode.setText(categoryTable.getValueAt(categoryTable.getSelectedRow(), 0).toString());
+                categoryName.setText(categoryTable.getValueAt(categoryTable.getSelectedRow(), 1).toString());
+
+            }
+        });
         Category category = new Category();
         category.setCategoryCode(categoryCode.getText());
         category.setCategoryName(categoryName.getText());
@@ -521,7 +531,7 @@ public class CategoryApp extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(rootPane, "Category Not Update!");
         }
-
+        getAllCategory();
     }//GEN-LAST:event_btnUpdateCategoryActionPerformed
 
     private void getAllCategory() {
@@ -539,14 +549,14 @@ public class CategoryApp extends javax.swing.JFrame {
         categoryTable.setModel(model);
 
         //saiful vai
-        categoryTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-            @Override
-            public void valueChanged(ListSelectionEvent e) {
-                categoryCode.setText(categoryTable.getValueAt(categoryTable.getSelectedRow(), 0).toString());
-                categoryName.setText(categoryTable.getValueAt(categoryTable.getSelectedRow(), 1).toString());
-
-            }
-        });
+//        categoryTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+//            @Override
+//            public void valueChanged(ListSelectionEvent e) {
+//                categoryCode.setText(categoryTable.getValueAt(categoryTable.getSelectedRow(), 0).toString());
+//                categoryName.setText(categoryTable.getValueAt(categoryTable.getSelectedRow(), 1).toString());
+//
+//            }
+//        });
     }
 
     /**

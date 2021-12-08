@@ -8,11 +8,11 @@
             <file>file:/D:/IDB/Module-04/Project/RSPOSSystem/src/com/rs/dao/StoreDAO.java</file>
             <file>file:/D:/IDB/Module-04/Project/RSPOSSystem/src/com/rs/model/Store.java</file>
             <file>file:/D:/IDB/Module-04/Project/RSPOSSystem/src/com/rs/gui/AddSuppliersApp.java</file>
-            <file>file:/D:/IDB/Module-04/Project/RSPOSSystem/src/com/rs/gui/AddStoreApp.java</file>
             <file>file:/D:/IDB/Module-04/Project/RSPOSSystem/src/com/rs/dao/AddSupplierDAO.java</file>
-            <file>file:/D:/IDB/Module-04/Project/RSPOSSystem/src/com/rs/model/Category.java</file>
+            <file>file:/D:/IDB/Module-04/Project/RSPOSSystem/src/com/rs/gui/AddStoreApp.java</file>
             <file>file:/D:/IDB/Module-04/Project/RSPOSSystem/src/com/rs/model/Supplier.java</file>
             <file>file:/D:/IDB/Module-04/Project/RSPOSSystem/src/com/rs/dao/AddStoreDAO.java</file>
+            <file>file:/D:/IDB/Module-04/Project/RSPOSSystem/src/com/rs/gui/ListSuppliersApp.java</file>
             <file>file:/D:/IDB/Module-04/Project/RSPOSSystem/src/com/rs/gui/StoreApp.java</file>
             <file>file:/D:/IDB/Module-04/Project/RSPOSSystem/src/com/rs/model/AddStore.java</file>
         </group>

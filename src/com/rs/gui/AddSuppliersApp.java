@@ -67,6 +67,7 @@ public class AddSuppliersApp extends javax.swing.JFrame {
         supplierAddress = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         btnAddSupplier = new javax.swing.JButton();
+        btnUpdateSupplier = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -398,6 +399,16 @@ public class AddSuppliersApp extends javax.swing.JFrame {
             }
         });
 
+        btnUpdateSupplier.setBackground(new java.awt.Color(54, 127, 169));
+        btnUpdateSupplier.setFont(new java.awt.Font("Corbel", 1, 24)); // NOI18N
+        btnUpdateSupplier.setForeground(new java.awt.Color(255, 255, 255));
+        btnUpdateSupplier.setText("Update Supplier");
+        btnUpdateSupplier.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateSupplierActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -408,17 +419,21 @@ public class AddSuppliersApp extends javax.swing.JFrame {
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(31, 31, 31)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(supplierName, javax.swing.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(supplierEmail)
-                            .addComponent(supplierPhone)
-                            .addComponent(supplierAddress)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnAddSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(974, Short.MAX_VALUE))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(supplierName, javax.swing.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(supplierEmail)
+                                .addComponent(supplierPhone)
+                                .addComponent(supplierAddress)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(btnAddSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(122, 122, 122)
+                                .addComponent(btnUpdateSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(983, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -442,7 +457,9 @@ public class AddSuppliersApp extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(supplierAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(47, 47, 47)
-                .addComponent(btnAddSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAddSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnUpdateSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(59, Short.MAX_VALUE))
         );
 
@@ -597,6 +614,24 @@ public class AddSuppliersApp extends javax.swing.JFrame {
         clearFields();
     }//GEN-LAST:event_btnAddSupplierActionPerformed
 
+    private void btnUpdateSupplierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateSupplierActionPerformed
+        // TODO add your handling code here:
+        Supplier supplier = new Supplier();
+        supplier.setSupplierName(supplierName.getText());
+        supplier.setSupplierEmail(supplierEmail.getText());
+        supplier.setSupplierPhone(supplierPhone.getText());
+        supplier.setSupplierAddress(supplierAddress.getText());
+        int status = new AddSupplierDAO().update(supplier);
+        if (status > 0) {
+            JOptionPane.showMessageDialog(rootPane, "supplier Update!");
+
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "supplier Not Update!");
+        }
+       this.setVisible(false);
+       new ListSuppliersApp().setVisible(true);
+    }//GEN-LAST:event_btnUpdateSupplierActionPerformed
+
     private void clearFields() {
         supplierName.setText("");
         supplierEmail.setText("");
@@ -650,6 +685,7 @@ public class AddSuppliersApp extends javax.swing.JFrame {
     private javax.swing.JLabel addUsers;
     private javax.swing.JPanel bg;
     private javax.swing.JButton btnAddSupplier;
+    private javax.swing.JButton btnUpdateSupplier;
     private javax.swing.JLabel categoris;
     private javax.swing.JLabel dashboard;
     private javax.swing.JLabel giftCard;

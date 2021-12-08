@@ -555,20 +555,26 @@
                               <Component id="jTextField1" alignment="0" min="-2" pref="327" max="-2" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="supplierName" alignment="0" pref="533" max="32767" attributes="0"/>
-                                      <Component id="jLabel2" alignment="0" min="-2" pref="67" max="-2" attributes="0"/>
-                                      <Component id="supplierEmail" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="supplierPhone" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="supplierAddress" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jLabel4" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
-                                      <Component id="jLabel6" alignment="0" min="-2" pref="106" max="-2" attributes="0"/>
-                                      <Component id="jLabel9" alignment="0" min="-2" pref="92" max="-2" attributes="0"/>
-                                      <Component id="btnAddSupplier" alignment="0" min="-2" pref="201" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="supplierName" alignment="0" pref="533" max="32767" attributes="0"/>
+                                          <Component id="jLabel2" alignment="0" min="-2" pref="67" max="-2" attributes="0"/>
+                                          <Component id="supplierEmail" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="supplierPhone" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="supplierAddress" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="jLabel4" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
+                                          <Component id="jLabel6" alignment="0" min="-2" pref="106" max="-2" attributes="0"/>
+                                          <Component id="jLabel9" alignment="0" min="-2" pref="92" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="btnAddSupplier" min="-2" pref="201" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="122" max="-2" attributes="0"/>
+                                          <Component id="btnUpdateSupplier" min="-2" pref="245" max="-2" attributes="0"/>
+                                      </Group>
                                   </Group>
                               </Group>
                           </Group>
-                          <EmptySpace pref="974" max="32767" attributes="0"/>
+                          <EmptySpace pref="983" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -594,7 +600,10 @@
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="supplierAddress" min="-2" pref="42" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
-                          <Component id="btnAddSupplier" min="-2" pref="47" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="btnAddSupplier" alignment="3" min="-2" pref="47" max="-2" attributes="0"/>
+                              <Component id="btnUpdateSupplier" alignment="3" min="-2" pref="47" max="-2" attributes="0"/>
+                          </Group>
                           <EmptySpace pref="59" max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -706,6 +715,23 @@
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAddSupplierActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JButton" name="btnUpdateSupplier">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="a9" green="7f" red="36" type="rgb"/>
+                    </Property>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Corbel" size="24" style="1"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Update Supplier"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUpdateSupplierActionPerformed"/>
                   </Events>
                 </Component>
               </SubComponents>

@@ -8,6 +8,7 @@ package com.rs.gui;
 import com.rs.dao.AddSupplierDAO;
 import com.rs.model.Supplier;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
@@ -61,7 +62,8 @@ public class ListSuppliersApp extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         supplierTable = new javax.swing.JTable();
-        btnUpdateSupplier = new javax.swing.JButton();
+        btnEditSupplier = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -360,13 +362,23 @@ public class ListSuppliersApp extends javax.swing.JFrame {
         supplierTable.setRowHeight(28);
         jScrollPane1.setViewportView(supplierTable);
 
-        btnUpdateSupplier.setBackground(new java.awt.Color(54, 127, 169));
-        btnUpdateSupplier.setFont(new java.awt.Font("Corbel", 1, 24)); // NOI18N
-        btnUpdateSupplier.setForeground(new java.awt.Color(255, 255, 255));
-        btnUpdateSupplier.setText("Update Supplier");
-        btnUpdateSupplier.addActionListener(new java.awt.event.ActionListener() {
+        btnEditSupplier.setBackground(new java.awt.Color(54, 127, 169));
+        btnEditSupplier.setFont(new java.awt.Font("Corbel", 1, 24)); // NOI18N
+        btnEditSupplier.setForeground(new java.awt.Color(255, 255, 255));
+        btnEditSupplier.setText("Edit Supplier");
+        btnEditSupplier.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUpdateSupplierActionPerformed(evt);
+                btnEditSupplierActionPerformed(evt);
+            }
+        });
+
+        btnDelete.setBackground(new java.awt.Color(54, 127, 169));
+        btnDelete.setFont(new java.awt.Font("Corbel", 1, 24)); // NOI18N
+        btnDelete.setForeground(new java.awt.Color(255, 255, 255));
+        btnDelete.setText("Delete Supplier");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteActionPerformed(evt);
             }
         });
 
@@ -375,12 +387,15 @@ public class ListSuppliersApp extends javax.swing.JFrame {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(628, 628, 628)
-                        .addComponent(btnUpdateSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1499, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(30, 30, 30)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1499, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(362, 362, 362)
+                        .addComponent(btnEditSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(356, 356, 356)
+                        .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(31, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -388,9 +403,11 @@ public class ListSuppliersApp extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
-                .addComponent(btnUpdateSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(58, 58, 58))
+                .addGap(46, 46, 46)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnEditSupplier, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDelete, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(73, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -531,8 +548,6 @@ public class ListSuppliersApp extends javax.swing.JFrame {
 
     private void getAllSupplier() {
         List<Supplier> suppliers = new AddSupplierDAO().getAll();
-        // Supplier supplier = new Supplier();
-
         String[] columnNames = {"Name", "Email", "Phone", "Address"};
         Object[][] data = new Object[suppliers.size()][4];
         for (int i = 0; i < suppliers.size(); i++) {
@@ -546,7 +561,7 @@ public class ListSuppliersApp extends javax.swing.JFrame {
         supplierTable.setModel(model);
     }
 
-    private void btnUpdateSupplierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateSupplierActionPerformed
+    private void btnEditSupplierActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditSupplierActionPerformed
 
         supplierTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
@@ -556,18 +571,32 @@ public class ListSuppliersApp extends javax.swing.JFrame {
                 s.setSupplierEmail(supplierTable.getValueAt(supplierTable.getSelectedRow(), 1).toString());
                 s.setSupplierPhone(supplierTable.getValueAt(supplierTable.getSelectedRow(), 2).toString());
                 s.setSupplierAddress(supplierTable.getValueAt(supplierTable.getSelectedRow(), 3).toString());
+//                int status = new AddSupplierDAO().update(s);
                 AddSuppliersApp ap = new AddSuppliersApp();
                 ap.setVisible(true);
                 ap.addValue(s);
-
             }
         });
+        getAllSupplier();
 
-    }//GEN-LAST:event_btnUpdateSupplierActionPerformed
+    }//GEN-LAST:event_btnEditSupplierActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
+        // TODO add your handling code here:
+        Supplier supplier = new Supplier();
+        int option = JOptionPane.showConfirmDialog(rootPane, "Do you want to delete?", null, WIDTH);
+        if (option == 0) {
+            supplier.setSupplierName(supplierTable.getValueAt(supplierTable.getSelectedRow(), 0).toString());
+            int status = new AddSupplierDAO().delete(supplier);
+            if (status > 0) {
+                JOptionPane.showMessageDialog(rootPane, "Category delete!");
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Category Not delete!");
+            }
+        }getAllSupplier();
+        
+    }//GEN-LAST:event_btnDeleteActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -605,7 +634,8 @@ public class ListSuppliersApp extends javax.swing.JFrame {
     private javax.swing.JLabel addSuppliers;
     private javax.swing.JLabel addUsers;
     private javax.swing.JPanel bg;
-    private javax.swing.JButton btnUpdateSupplier;
+    private javax.swing.JButton btnDelete;
+    private javax.swing.JButton btnEditSupplier;
     private javax.swing.JLabel categoris;
     private javax.swing.JLabel dashboard;
     private javax.swing.JLabel giftCard;

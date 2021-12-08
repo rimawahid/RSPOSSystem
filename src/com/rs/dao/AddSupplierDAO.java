@@ -64,7 +64,19 @@ public class AddSupplierDAO implements ICommonInterface<Supplier> {
 
     @Override
     public int delete(Supplier t) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = "delete from supplier where supplier_name = ?";
+        int status = 0;
+
+        try {
+            con = DBConnection.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, t.getSupplierName());
+
+            status = ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(AddSupplierDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return status;
     }
 
     @Override
