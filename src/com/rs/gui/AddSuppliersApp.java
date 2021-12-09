@@ -567,7 +567,7 @@ public class AddSuppliersApp extends javax.swing.JFrame {
     private void addUsersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addUsersMouseClicked
         // TODO add your handling code here:
         this.setVisible(false);
-        new AddUsersApp().setVisible(true);
+        new AddUserApp().setVisible(true);
     }//GEN-LAST:event_addUsersMouseClicked
 
     private void listCustomersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listCustomersMouseClicked

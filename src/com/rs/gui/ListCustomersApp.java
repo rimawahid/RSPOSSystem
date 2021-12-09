@@ -5,6 +5,14 @@
  */
 package com.rs.gui;
 
+import com.rs.dao.AddCustomerDAO;
+import com.rs.model.Customer;
+import java.util.List;
+import javax.swing.JOptionPane;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author USER
@@ -16,6 +24,7 @@ public class ListCustomersApp extends javax.swing.JFrame {
      */
     public ListCustomersApp() {
         initComponents();
+        getAllCustomer();
     }
 
     /**
@@ -49,6 +58,11 @@ public class ListCustomersApp extends javax.swing.JFrame {
         listSuppliers = new javax.swing.JLabel();
         addSuppliers = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        customerTable = new javax.swing.JTable();
+        btnEditCustomer = new javax.swing.JButton();
+        btnDeleteCustomer = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -331,7 +345,70 @@ public class ListCustomersApp extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 36)); // NOI18N
         jLabel1.setText("listCustomer");
-        bg.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 340, -1, -1));
+        bg.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 240, -1, -1));
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+
+        customerTable.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
+        customerTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        customerTable.setRowHeight(28);
+        jScrollPane1.setViewportView(customerTable);
+
+        btnEditCustomer.setBackground(new java.awt.Color(54, 127, 169));
+        btnEditCustomer.setFont(new java.awt.Font("Corbel", 1, 24)); // NOI18N
+        btnEditCustomer.setForeground(new java.awt.Color(255, 255, 255));
+        btnEditCustomer.setText("Edit Customer");
+        btnEditCustomer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditCustomerActionPerformed(evt);
+            }
+        });
+
+        btnDeleteCustomer.setBackground(new java.awt.Color(54, 127, 169));
+        btnDeleteCustomer.setFont(new java.awt.Font("Corbel", 1, 24)); // NOI18N
+        btnDeleteCustomer.setForeground(new java.awt.Color(255, 255, 255));
+        btnDeleteCustomer.setText("Delete Customer");
+        btnDeleteCustomer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDeleteCustomerActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(132, 132, 132)
+                .addComponent(btnEditCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnDeleteCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 228, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(522, 522, 522))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(27, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1499, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 41, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnEditCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnDeleteCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27))
+        );
+
+        bg.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 290, 1550, 540));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -419,7 +496,7 @@ public class ListCustomersApp extends javax.swing.JFrame {
     private void addUsersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addUsersMouseClicked
         // TODO add your handling code here:
         this.setVisible(false);
-        new AddUsersApp().setVisible(true);
+        new AddUserApp().setVisible(true);
     }//GEN-LAST:event_addUsersMouseClicked
 
     private void listCustomersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listCustomersMouseClicked
@@ -445,6 +522,54 @@ public class ListCustomersApp extends javax.swing.JFrame {
         this.setVisible(false);
         new AddSuppliersApp().setVisible(true);
     }//GEN-LAST:event_addSuppliersMouseClicked
+
+    private void getAllCustomer() {
+        List<Customer> customers = new AddCustomerDAO().getAll();
+        String[] columnNames = {"Name", "Email", "Phone", "Address"};
+        Object[][] data = new Object[customers.size()][4];
+        for (int i = 0; i < customers.size(); i++) {
+            Customer s = customers.get(i);
+            Object[] o = {s.getCustomerName(), s.getCustomerEmail(), s.getCustomerPhone(), s.getCustomerAddress()};
+            for (int j = 0; j < 4; j++) {
+                data[i][j] = o[j];
+            }
+        }
+        DefaultTableModel model = new DefaultTableModel(data, columnNames);
+        customerTable.setModel(model);
+    }
+
+    private void btnEditCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditCustomerActionPerformed
+        // TODO add your handling code here:
+        customerTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                Customer s = new Customer();
+                s.setCustomerName(customerTable.getValueAt(customerTable.getSelectedRow(), 0).toString());
+                s.setCustomerEmail(customerTable.getValueAt(customerTable.getSelectedRow(), 1).toString());
+                s.setCustomerPhone(customerTable.getValueAt(customerTable.getSelectedRow(), 2).toString());
+                s.setCustomerAddress(customerTable.getValueAt(customerTable.getSelectedRow(), 3).toString());
+                AddCustomersApp ap = new AddCustomersApp();
+                ap.setVisible(true);
+                ap.addValue(s);
+            }
+        });
+        getAllCustomer();
+    }//GEN-LAST:event_btnEditCustomerActionPerformed
+
+    private void btnDeleteCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteCustomerActionPerformed
+        // TODO add your handling code here:
+        Customer customer = new Customer();
+        int option = JOptionPane.showConfirmDialog(rootPane, "Do you want to delete?", null, WIDTH);
+        if (option == 0) {
+            customer.setCustomerName(customerTable.getValueAt(customerTable.getSelectedRow(), 0).toString());
+            int status = new AddCustomerDAO().delete(customer);
+            if (status > 0) {
+                JOptionPane.showMessageDialog(rootPane, "Supplier delete!");
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Supplier Not delete!");
+            }
+        }getAllCustomer();
+    }//GEN-LAST:event_btnDeleteCustomerActionPerformed
 
     /**
      * @param args the command line arguments
@@ -486,11 +611,16 @@ public class ListCustomersApp extends javax.swing.JFrame {
     private javax.swing.JLabel addSuppliers;
     private javax.swing.JLabel addUsers;
     private javax.swing.JPanel bg;
+    private javax.swing.JButton btnDeleteCustomer;
+    private javax.swing.JButton btnEditCustomer;
     private javax.swing.JLabel categoris;
+    private javax.swing.JTable customerTable;
     private javax.swing.JLabel dashboard;
     private javax.swing.JLabel giftCard;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel listCustomers;
     private javax.swing.JLabel listSuppliers;
     private javax.swing.JLabel listUsers;

@@ -519,7 +519,7 @@ public class ListSuppliersApp extends javax.swing.JFrame {
     private void addUsersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addUsersMouseClicked
         // TODO add your handling code here:
         this.setVisible(false);
-        new AddUsersApp().setVisible(true);
+        new AddUserApp().setVisible(true);
     }//GEN-LAST:event_addUsersMouseClicked
 
     private void listCustomersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listCustomersMouseClicked
@@ -589,9 +589,9 @@ public class ListSuppliersApp extends javax.swing.JFrame {
             supplier.setSupplierName(supplierTable.getValueAt(supplierTable.getSelectedRow(), 0).toString());
             int status = new AddSupplierDAO().delete(supplier);
             if (status > 0) {
-                JOptionPane.showMessageDialog(rootPane, "Category delete!");
+                JOptionPane.showMessageDialog(rootPane, "Supplier delete!");
             } else {
-                JOptionPane.showMessageDialog(rootPane, "Category Not delete!");
+                JOptionPane.showMessageDialog(rootPane, "Supplier Not delete!");
             }
         }getAllSupplier();
         

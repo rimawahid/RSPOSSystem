@@ -474,9 +474,6 @@ public class CategoryApp extends javax.swing.JFrame {
         Category categories = new Category();
         categories.setCategoryCode(categoryCode.getText());
         categories.setCategoryName(categoryName.getText());
-//        System.out.println("db connec...");
-//        System.out.println(categoryCode.getText());
-//        System.out.println(categoryName.getText());
         int status = new CategoryDAO().save(categories);
         if (status > 0) {
             JOptionPane.showMessageDialog(rootPane, "Category Saved!");
@@ -492,9 +489,6 @@ public class CategoryApp extends javax.swing.JFrame {
     private void btnDeleteCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteCategoryActionPerformed
 
         Category category = new Category();
-
-        //System.out.println(categoryCode.getText());
-        // System.out.println(categoryName.getText());
         int option = JOptionPane.showConfirmDialog(rootPane, "Do you want to delete?", null, WIDTH);
         if (option == 0) {
             category.setCategoryCode(categoryCode.getText());
@@ -547,16 +541,6 @@ public class CategoryApp extends javax.swing.JFrame {
         }
         DefaultTableModel model = new DefaultTableModel(data, columnNames);
         categoryTable.setModel(model);
-
-        //saiful vai
-//        categoryTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-//            @Override
-//            public void valueChanged(ListSelectionEvent e) {
-//                categoryCode.setText(categoryTable.getValueAt(categoryTable.getSelectedRow(), 0).toString());
-//                categoryName.setText(categoryTable.getValueAt(categoryTable.getSelectedRow(), 1).toString());
-//
-//            }
-//        });
     }
 
     /**

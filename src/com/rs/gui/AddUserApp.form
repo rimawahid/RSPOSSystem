@@ -1,6 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
+  <NonVisualComponents>
+    <Container class="javax.swing.JPanel" name="jPanel1">
+
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <EmptySpace min="0" pref="100" max="32767" attributes="0"/>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <EmptySpace min="0" pref="100" max="32767" attributes="0"/>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+    </Container>
+  </NonVisualComponents>
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
   </Properties>
@@ -23,7 +40,7 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="1" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
               <Component id="bg" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
           </Group>
@@ -31,7 +48,7 @@
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="1" attributes="0">
+          <Group type="102" alignment="0" attributes="0">
               <Component id="bg" min="-2" max="-2" attributes="0"/>
               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
           </Group>
@@ -325,7 +342,7 @@
             </Component>
           </SubComponents>
         </Container>
-        <Container class="javax.swing.JPanel" name="jPanel1">
+        <Container class="javax.swing.JPanel" name="jPanel2">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="300" y="90" width="1620" height="140"/>
@@ -338,13 +355,13 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="37" pref="37" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="listUsers" alignment="0" max="32767" attributes="0"/>
-                          <Component id="addUsers" alignment="0" pref="337" max="32767" attributes="0"/>
+                          <Component id="listUser" alignment="0" max="32767" attributes="0"/>
+                          <Component id="addUsres" alignment="0" pref="337" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="241" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="addCustomers" alignment="1" pref="314" max="32767" attributes="0"/>
-                          <Component id="listCustomers" alignment="1" max="32767" attributes="0"/>
+                          <Component id="addCustomer" alignment="1" pref="314" max="32767" attributes="0"/>
+                          <Component id="listCustomer" alignment="1" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace pref="245" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -366,14 +383,14 @@
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="listUsers" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                                  <Component id="listCustomers" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                                  <Component id="listUser" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                                  <Component id="listCustomer" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                                   <Component id="listSuppliers" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
-                                  <Component id="addUsers" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
-                                  <Component id="addCustomers" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                                  <Component id="addUsres" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
+                                  <Component id="addCustomer" alignment="3" min="-2" pref="30" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -383,7 +400,7 @@
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JLabel" name="listUsers">
+            <Component class="javax.swing.JLabel" name="listUser">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Corbel" size="18" style="1"/>
@@ -399,10 +416,10 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="listUsersMouseClicked"/>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="listUserMouseClicked"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JLabel" name="addUsers">
+            <Component class="javax.swing.JLabel" name="addUsres">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Corbel" size="18" style="1"/>
@@ -418,10 +435,10 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="addUsersMouseClicked"/>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="addUsresMouseClicked"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JLabel" name="listCustomers">
+            <Component class="javax.swing.JLabel" name="listCustomer">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Corbel" size="18" style="1"/>
@@ -437,10 +454,10 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="listCustomersMouseClicked"/>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="listCustomerMouseClicked"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JLabel" name="addCustomers">
+            <Component class="javax.swing.JLabel" name="addCustomer">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Corbel" size="18" style="1"/>
@@ -456,7 +473,7 @@
                 </Property>
               </Properties>
               <Events>
-                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="addCustomersMouseClicked"/>
+                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="addCustomerMouseClicked"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="listSuppliers">
@@ -499,7 +516,7 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="javax.swing.JLabel" name="jLabel1">
+        <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
               <Font name="Corbel" size="36" style="0"/>
@@ -512,354 +529,384 @@
             </Constraint>
           </Constraints>
         </Component>
-        <Container class="javax.swing.JPanel" name="jPanel2">
-          <Properties>
-            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="ff" type="rgb"/>
-            </Property>
-          </Properties>
+        <Container class="javax.swing.JPanel" name="jPanel3">
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="340" y="280" width="1550" height="650"/>
+              <AbsoluteConstraints x="330" y="270" width="1560" height="730"/>
             </Constraint>
           </Constraints>
 
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jTextField1" alignment="0" min="-2" pref="327" max="-2" attributes="0"/>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jButton1" min="-2" pref="163" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="jTextField2" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jLabel2" alignment="0" min="-2" pref="67" max="-2" attributes="0"/>
-                                      <Component id="jTextField4" alignment="0" pref="533" max="32767" attributes="0"/>
-                                      <Component id="jTextField6" alignment="0" pref="533" max="32767" attributes="0"/>
-                                      <Component id="jTextField9" alignment="0" pref="533" max="32767" attributes="0"/>
-                                      <Component id="jLabel4" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
-                                      <Component id="jLabel6" alignment="0" min="-2" pref="106" max="-2" attributes="0"/>
-                                      <Component id="jLabel9" alignment="0" min="-2" pref="92" max="-2" attributes="0"/>
-                                      <Component id="jLabel12" alignment="0" min="-2" pref="92" max="-2" attributes="0"/>
-                                      <Component id="jComboBox2" alignment="0" max="32767" attributes="0"/>
-                                  </Group>
-                              </Group>
-                          </Group>
-                      </Group>
-                      <EmptySpace pref="275" max="32767" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jTextField3" max="32767" attributes="0"/>
-                          <Component id="jLabel3" min="-2" pref="76" max="-2" attributes="0"/>
-                          <Component id="jTextField5" pref="533" max="32767" attributes="0"/>
-                          <Component id="jTextField7" pref="533" max="32767" attributes="0"/>
-                          <Component id="jTextField8" pref="533" max="32767" attributes="0"/>
-                          <Component id="jLabel5" alignment="0" min="-2" pref="112" max="-2" attributes="0"/>
-                          <Component id="jLabel7" alignment="0" min="-2" pref="143" max="-2" attributes="0"/>
-                          <Component id="jLabel10" alignment="0" min="-2" pref="216" max="-2" attributes="0"/>
-                          <Component id="jLabel11" alignment="0" min="-2" pref="216" max="-2" attributes="0"/>
-                          <Component id="jComboBox1" alignment="0" max="32767" attributes="0"/>
-                      </Group>
-                      <EmptySpace min="-2" pref="166" max="-2" attributes="0"/>
+                      <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="jTextField1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="jLabel2" min="-2" pref="29" max="-2" attributes="0"/>
-                          <Component id="jLabel3" min="-2" pref="36" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="1" attributes="0">
-                          <Component id="jTextField3" min="-2" pref="42" max="-2" attributes="0"/>
-                          <Component id="jTextField2" min="-2" pref="42" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel4" min="-2" pref="29" max="-2" attributes="0"/>
-                          <Component id="jLabel5" min="-2" pref="36" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jTextField4" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
-                          <Component id="jTextField5" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel6" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
-                          <Component id="jLabel7" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jTextField6" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
-                          <Component id="jTextField7" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel9" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
-                          <Component id="jLabel10" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jTextField9" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
-                          <Component id="jTextField8" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel12" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
-                          <Component id="jLabel11" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jComboBox1" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
-                          <Component id="jComboBox2" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
-                      </Group>
-                      <EmptySpace pref="32" max="32767" attributes="0"/>
-                      <Component id="jButton1" min="-2" pref="47" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace pref="27" max="32767" attributes="0"/>
+                      <Component id="jPanel4" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Component class="javax.swing.JTextField" name="jTextField1">
-              <Properties>
-                <Property name="editable" type="boolean" value="false"/>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                </Property>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Corbel" size="20" style="0"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Please fill in the information below"/>
-                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                  <Border info="null"/>
-                </Property>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="jLabel2">
+            <Container class="javax.swing.JPanel" name="jPanel4">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="ff" green="ff" red="ff" type="rgb"/>
                 </Property>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Corbel" size="20" style="1"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Group"/>
               </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="jTextField2">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Corbel" size="20" style="1"/>
-                </Property>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="jTextField3">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Corbel" size="20" style="1"/>
-                </Property>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="jLabel3">
-              <Properties>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                </Property>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Corbel" size="20" style="1"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Email"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="jLabel4">
-              <Properties>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                </Property>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Corbel" size="20" style="1"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="First Name"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="jTextField4">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Corbel" size="20" style="1"/>
-                </Property>
-              </Properties>
-              <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jTextField4ActionPerformed"/>
-              </Events>
-            </Component>
-            <Component class="javax.swing.JLabel" name="jLabel5">
-              <Properties>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                </Property>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Corbel" size="20" style="1"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Username"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="jTextField5">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Corbel" size="20" style="1"/>
-                </Property>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="jTextField6">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Corbel" size="20" style="1"/>
-                </Property>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="jLabel6">
-              <Properties>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                </Property>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Corbel" size="20" style="1"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Last Name"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="jLabel7">
-              <Properties>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                </Property>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Corbel" size="20" style="1"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Password"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="jTextField7">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Corbel" size="20" style="1"/>
-                </Property>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="jTextField8">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Corbel" size="20" style="1"/>
-                </Property>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JTextField" name="jTextField9">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Corbel" size="20" style="1"/>
-                </Property>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="jLabel9">
-              <Properties>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                </Property>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Corbel" size="20" style="1"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Phone"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="jLabel10">
-              <Properties>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                </Property>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Corbel" size="20" style="1"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Confirm Password"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="jLabel11">
-              <Properties>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                </Property>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Corbel" size="20" style="1"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Store"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JLabel" name="jLabel12">
-              <Properties>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                </Property>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Corbel" size="20" style="1"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Gender"/>
-              </Properties>
-            </Component>
-            <Component class="javax.swing.JComboBox" name="jComboBox1">
-              <Properties>
-                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="4">
-                    <StringItem index="0" value="Item 1"/>
-                    <StringItem index="1" value="Item 2"/>
-                    <StringItem index="2" value="Item 3"/>
-                    <StringItem index="3" value="Item 4"/>
-                  </StringArray>
-                </Property>
-              </Properties>
-              <AuxValues>
-                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-              </AuxValues>
-            </Component>
-            <Component class="javax.swing.JComboBox" name="jComboBox2">
-              <Properties>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Corbel" size="20" style="0"/>
-                </Property>
-                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-                  <StringArray count="3">
-                    <StringItem index="0" value="Male"/>
-                    <StringItem index="1" value="Female"/>
-                    <StringItem index="2" value="Others"/>
-                  </StringArray>
-                </Property>
-              </Properties>
-              <AuxValues>
-                <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-              </AuxValues>
-            </Component>
-            <Component class="javax.swing.JButton" name="jButton1">
-              <Properties>
-                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="a9" green="7f" red="36" type="rgb"/>
-                </Property>
-                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                  <Font name="Corbel" size="24" style="1"/>
-                </Property>
-                <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                  <Color blue="ff" green="ff" red="ff" type="rgb"/>
-                </Property>
-                <Property name="text" type="java.lang.String" value="Add User"/>
-              </Properties>
-            </Component>
+
+              <Layout>
+                <DimensionLayout dim="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jTextField1" alignment="0" min="-2" pref="327" max="-2" attributes="0"/>
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="btnAddUser" min="-2" pref="223" max="-2" attributes="0"/>
+                                      <Component id="jLabel3" alignment="0" min="-2" pref="67" max="-2" attributes="0"/>
+                                      <Component id="lastName" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="phone" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="jLabel5" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
+                                      <Component id="jLabel7" alignment="0" min="-2" pref="106" max="-2" attributes="0"/>
+                                      <Component id="jLabel9" alignment="0" min="-2" pref="92" max="-2" attributes="0"/>
+                                      <Component id="jLabel12" alignment="0" min="-2" pref="92" max="-2" attributes="0"/>
+                                      <Component id="gender" alignment="0" pref="533" max="32767" attributes="0"/>
+                                      <Component id="userRole" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="firstName" alignment="0" max="32767" attributes="0"/>
+                                  </Group>
+                              </Group>
+                          </Group>
+                          <EmptySpace pref="275" max="32767" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="email" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jLabel4" alignment="0" min="-2" pref="76" max="-2" attributes="0"/>
+                              <Component id="uName" alignment="0" max="32767" attributes="0"/>
+                              <Component id="uPass" alignment="0" max="32767" attributes="0"/>
+                              <Component id="confPass" alignment="0" max="32767" attributes="0"/>
+                              <Component id="jLabel6" alignment="0" min="-2" pref="112" max="-2" attributes="0"/>
+                              <Component id="jLabel8" alignment="0" min="-2" pref="143" max="-2" attributes="0"/>
+                              <Component id="jLabel10" alignment="0" min="-2" pref="216" max="-2" attributes="0"/>
+                              <Component id="jLabel11" alignment="0" min="-2" pref="216" max="-2" attributes="0"/>
+                              <Component id="storeName" alignment="0" pref="533" max="32767" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="166" max="-2" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+                <DimensionLayout dim="1">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="jTextField1" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Component id="jLabel3" alignment="1" min="-2" pref="29" max="-2" attributes="0"/>
+                              <Component id="jLabel4" alignment="1" min="-2" pref="36" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="email" alignment="0" pref="42" max="32767" attributes="0"/>
+                              <Component id="userRole" alignment="0" max="32767" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="jLabel5" alignment="0" min="-2" pref="29" max="-2" attributes="0"/>
+                              <Component id="jLabel6" alignment="0" min="-2" pref="36" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                              <Component id="uName" pref="42" max="32767" attributes="0"/>
+                              <Component id="firstName" max="32767" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jLabel7" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
+                              <Component id="jLabel8" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="lastName" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
+                              <Component id="uPass" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jLabel9" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
+                              <Component id="jLabel10" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="phone" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
+                              <Component id="confPass" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="jLabel12" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
+                              <Component id="jLabel11" alignment="3" min="-2" pref="29" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="storeName" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
+                              <Component id="gender" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
+                          <Component id="btnAddUser" min="-2" pref="43" max="-2" attributes="0"/>
+                          <EmptySpace pref="36" max="32767" attributes="0"/>
+                      </Group>
+                  </Group>
+                </DimensionLayout>
+              </Layout>
+              <SubComponents>
+                <Component class="javax.swing.JTextField" name="jTextField1">
+                  <Properties>
+                    <Property name="editable" type="boolean" value="false"/>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                    </Property>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Corbel" size="20" style="0"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Please fill in the information below"/>
+                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                      <Border info="null"/>
+                    </Property>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabel3">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                    </Property>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Corbel" size="20" style="1"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Group"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="email">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Corbel" size="20" style="1"/>
+                    </Property>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabel4">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                    </Property>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Corbel" size="20" style="1"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Email"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabel5">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                    </Property>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Corbel" size="20" style="1"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="First Name"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabel6">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                    </Property>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Corbel" size="20" style="1"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Username"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="uName">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Corbel" size="20" style="1"/>
+                    </Property>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="lastName">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Corbel" size="20" style="1"/>
+                    </Property>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabel7">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                    </Property>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Corbel" size="20" style="1"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Last Name"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabel8">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                    </Property>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Corbel" size="20" style="1"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Password"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="uPass">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Corbel" size="20" style="1"/>
+                    </Property>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="confPass">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Corbel" size="20" style="1"/>
+                    </Property>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JTextField" name="phone">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Corbel" size="20" style="1"/>
+                    </Property>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabel9">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                    </Property>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Corbel" size="20" style="1"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Phone"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabel10">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                    </Property>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Corbel" size="20" style="1"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Confirm Password"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabel11">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                    </Property>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Corbel" size="20" style="1"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Store"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JLabel" name="jLabel12">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                    </Property>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Corbel" size="20" style="1"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Gender"/>
+                  </Properties>
+                </Component>
+                <Component class="javax.swing.JComboBox" name="storeName">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Corbel" size="20" style="0"/>
+                    </Property>
+                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                      <StringArray count="0"/>
+                    </Property>
+                  </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                  </AuxValues>
+                </Component>
+                <Component class="javax.swing.JComboBox" name="gender">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Corbel" size="20" style="0"/>
+                    </Property>
+                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                      <StringArray count="3">
+                        <StringItem index="0" value="Male"/>
+                        <StringItem index="1" value="Female"/>
+                        <StringItem index="2" value="Others"/>
+                      </StringArray>
+                    </Property>
+                  </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                  </AuxValues>
+                </Component>
+                <Component class="javax.swing.JComboBox" name="userRole">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Corbel" size="20" style="0"/>
+                    </Property>
+                    <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                      <StringArray count="2">
+                        <StringItem index="0" value="admin"/>
+                        <StringItem index="1" value="staff"/>
+                      </StringArray>
+                    </Property>
+                  </Properties>
+                  <AuxValues>
+                    <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
+                  </AuxValues>
+                </Component>
+                <Component class="javax.swing.JButton" name="btnAddUser">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="a9" green="7f" red="36" type="rgb"/>
+                    </Property>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Corbel" size="24" style="1"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Add User"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAddUserActionPerformed"/>
+                  </Events>
+                </Component>
+                <Component class="javax.swing.JTextField" name="firstName">
+                  <Properties>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Corbel" size="20" style="1"/>
+                    </Property>
+                  </Properties>
+                </Component>
+              </SubComponents>
+            </Container>
           </SubComponents>
         </Container>
       </SubComponents>

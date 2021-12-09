@@ -5,6 +5,13 @@
  */
 package com.rs.gui;
 
+import com.rs.dao.UserDAO;
+import com.rs.model.User;
+import java.util.List;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author USER
@@ -16,6 +23,7 @@ public class PeopleApp extends javax.swing.JFrame {
      */
     public PeopleApp() {
         initComponents();
+        getAllCustomer();
     }
 
     /**
@@ -43,12 +51,16 @@ public class PeopleApp extends javax.swing.JFrame {
         reports = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        addUsres = new javax.swing.JLabel();
+        addUser = new javax.swing.JLabel();
         listCustomer = new javax.swing.JLabel();
         addCustomer = new javax.swing.JLabel();
         listSuppliers = new javax.swing.JLabel();
         addSuppliers = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jPanel2 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        userTable = new javax.swing.JTable();
+        btnEditUser = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -233,13 +245,13 @@ public class PeopleApp extends javax.swing.JFrame {
         jLabel1.setText("List Users");
         jLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        addUsres.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
-        addUsres.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/addUsers.png"))); // NOI18N
-        addUsres.setText("Add Users");
-        addUsres.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        addUsres.addMouseListener(new java.awt.event.MouseAdapter() {
+        addUser.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
+        addUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/addUsers.png"))); // NOI18N
+        addUser.setText("Add Users");
+        addUser.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        addUser.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                addUsresMouseClicked(evt);
+                addUserMouseClicked(evt);
             }
         });
 
@@ -291,7 +303,7 @@ public class PeopleApp extends javax.swing.JFrame {
                 .addGap(37, 37, 37)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(addUsres, javax.swing.GroupLayout.DEFAULT_SIZE, 337, Short.MAX_VALUE))
+                    .addComponent(addUser, javax.swing.GroupLayout.DEFAULT_SIZE, 337, Short.MAX_VALUE))
                 .addGap(241, 241, 241)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(addCustomer, javax.swing.GroupLayout.DEFAULT_SIZE, 314, Short.MAX_VALUE)
@@ -317,7 +329,7 @@ public class PeopleApp extends javax.swing.JFrame {
                             .addComponent(listSuppliers, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(27, 27, 27)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(addUsres, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(addUser, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(addCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(26, Short.MAX_VALUE))
         );
@@ -326,7 +338,63 @@ public class PeopleApp extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
         jLabel2.setText("list users");
-        bg.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 400, -1, -1));
+        bg.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 220, -1, -1));
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
+
+        userTable.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
+        userTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        userTable.setRowHeight(28);
+        jScrollPane1.setViewportView(userTable);
+        if (userTable.getColumnModel().getColumnCount() > 0) {
+            userTable.getColumnModel().getColumn(0).setResizable(false);
+            userTable.getColumnModel().getColumn(1).setResizable(false);
+            userTable.getColumnModel().getColumn(2).setResizable(false);
+            userTable.getColumnModel().getColumn(3).setResizable(false);
+        }
+
+        btnEditUser.setBackground(new java.awt.Color(54, 127, 169));
+        btnEditUser.setFont(new java.awt.Font("Corbel", 1, 24)); // NOI18N
+        btnEditUser.setForeground(new java.awt.Color(255, 255, 255));
+        btnEditUser.setText("Edit User");
+        btnEditUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditUserActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1484, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(88, 88, 88)
+                        .addComponent(btnEditUser, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(36, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(32, 32, 32)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
+                .addComponent(btnEditUser, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(65, Short.MAX_VALUE))
+        );
+
+        bg.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 290, 1550, 570));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -405,11 +473,11 @@ public class PeopleApp extends javax.swing.JFrame {
         new DashboardApp().setVisible(true);
     }//GEN-LAST:event_dashboardMouseClicked
 
-    private void addUsresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addUsresMouseClicked
+    private void addUserMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addUserMouseClicked
         // TODO add your handling code here:
-         this.setVisible(false);
-        new AddUsersApp().setVisible(true);
-    }//GEN-LAST:event_addUsresMouseClicked
+        this.setVisible(false);
+        new AddUserApp().setVisible(true);
+    }//GEN-LAST:event_addUserMouseClicked
 
     private void listCustomerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listCustomerMouseClicked
         // TODO add your handling code here:
@@ -419,7 +487,7 @@ public class PeopleApp extends javax.swing.JFrame {
 
     private void addCustomerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addCustomerMouseClicked
         // TODO add your handling code here:
-         this.setVisible(false);
+        this.setVisible(false);
         new AddCustomersApp().setVisible(true);
     }//GEN-LAST:event_addCustomerMouseClicked
 
@@ -435,9 +503,25 @@ public class PeopleApp extends javax.swing.JFrame {
         new AddSuppliersApp().setVisible(true);
     }//GEN-LAST:event_addSuppliersMouseClicked
 
-    /**
-     * @param args the command line arguments
-     */
+    private void btnEditUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditUserActionPerformed
+        // TODO add your handling code here:
+        userTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                User s = new User();
+                s.setFirstName(userTable.getValueAt(userTable.getSelectedRow(), 0).toString());
+                s.setLastName(userTable.getValueAt(userTable.getSelectedRow(), 1).toString());
+                s.setEmail(userTable.getValueAt(userTable.getSelectedRow(), 2).toString());
+                s.setPhone(userTable.getValueAt(userTable.getSelectedRow(), 3).toString());
+                s.setUserRole(userTable.getValueAt(userTable.getSelectedRow(), 4).toString());
+                s.setStoreName(userTable.getValueAt(userTable.getSelectedRow(), 5).toString());
+                AddUserApp ap = new AddUserApp();
+                ap.setVisible(true);
+                ap.addValue(s);
+            }
+        });
+    }//GEN-LAST:event_btnEditUserActionPerformed
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -470,17 +554,35 @@ public class PeopleApp extends javax.swing.JFrame {
         });
     }
 
+    private void getAllCustomer() {
+        List<User> users = new UserDAO().getAll();
+        String[] columnNames = {"First Name", "Last Name", "Email", "Phone", "User Role", "Store Name"};
+        Object[][] data = new Object[users.size()][6];
+        for (int i = 0; i < users.size(); i++) {
+            User s = users.get(i);
+            Object[] o = {s.getFirstName(), s.getLastName(), s.getEmail(), s.getPhone(), s.getUserRole(), s.getStoreName()};
+            for (int j = 0; j < 6; j++) {
+                data[i][j] = o[j];
+            }
+        }
+        DefaultTableModel model = new DefaultTableModel(data, columnNames);
+        userTable.setModel(model);
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel addCustomer;
     private javax.swing.JLabel addSuppliers;
-    private javax.swing.JLabel addUsres;
+    private javax.swing.JLabel addUser;
     private javax.swing.JPanel bg;
+    private javax.swing.JButton btnEditUser;
     private javax.swing.JLabel categoris;
     private javax.swing.JLabel dashboard;
     private javax.swing.JLabel giftCard;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel listCustomer;
     private javax.swing.JLabel listSuppliers;
     private javax.swing.JLabel logo;
@@ -493,5 +595,6 @@ public class PeopleApp extends javax.swing.JFrame {
     private javax.swing.JLabel setting;
     private javax.swing.JPanel sidemenubar;
     private javax.swing.JPanel topbar;
+    private javax.swing.JTable userTable;
     // End of variables declaration//GEN-END:variables
 }

@@ -5,6 +5,10 @@
  */
 package com.rs.gui;
 
+import com.rs.dao.AddCustomerDAO;
+import com.rs.model.Customer;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author USER
@@ -53,14 +57,15 @@ public class AddCustomersApp extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jTextField1 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        customerName = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
+        customerEmail = new javax.swing.JTextField();
+        customerPhone = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jTextField9 = new javax.swing.JTextField();
+        customerAddress = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnAddCustomer = new javax.swing.JButton();
+        btnUpdateCustomer = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -357,38 +362,48 @@ public class AddCustomersApp extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
         jLabel2.setText("Nmae");
 
-        jTextField2.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
+        customerName.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
 
         jLabel4.setBackground(new java.awt.Color(255, 255, 255));
         jLabel4.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
         jLabel4.setText("Eamil");
 
-        jTextField4.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+        customerEmail.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
+        customerEmail.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
+                customerEmailActionPerformed(evt);
             }
         });
 
-        jTextField6.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
+        customerPhone.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
 
         jLabel6.setBackground(new java.awt.Color(255, 255, 255));
         jLabel6.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
         jLabel6.setText("Phone");
 
-        jTextField9.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
+        customerAddress.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
 
         jLabel9.setBackground(new java.awt.Color(255, 255, 255));
         jLabel9.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
         jLabel9.setText("Address");
 
-        jButton1.setBackground(new java.awt.Color(54, 127, 169));
-        jButton1.setFont(new java.awt.Font("Corbel", 1, 24)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Add Customer");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnAddCustomer.setBackground(new java.awt.Color(54, 127, 169));
+        btnAddCustomer.setFont(new java.awt.Font("Corbel", 1, 24)); // NOI18N
+        btnAddCustomer.setForeground(new java.awt.Color(255, 255, 255));
+        btnAddCustomer.setText("Add Customer");
+        btnAddCustomer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnAddCustomerActionPerformed(evt);
+            }
+        });
+
+        btnUpdateCustomer.setBackground(new java.awt.Color(54, 127, 169));
+        btnUpdateCustomer.setFont(new java.awt.Font("Corbel", 1, 24)); // NOI18N
+        btnUpdateCustomer.setForeground(new java.awt.Color(255, 255, 255));
+        btnUpdateCustomer.setText("Update Customer");
+        btnUpdateCustomer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateCustomerActionPerformed(evt);
             }
         });
 
@@ -403,15 +418,18 @@ public class AddCustomersApp extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(31, 31, 31)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE)
+                            .addComponent(customerName, javax.swing.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField4)
-                            .addComponent(jTextField6)
-                            .addComponent(jTextField9)
+                            .addComponent(customerEmail)
+                            .addComponent(customerPhone)
+                            .addComponent(customerAddress)
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(btnAddCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnUpdateCustomer)))))
                 .addContainerGap(974, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -422,21 +440,23 @@ public class AddCustomersApp extends javax.swing.JFrame {
                 .addGap(14, 14, 14)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(customerName, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(25, 25, 25)
-                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(customerEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(customerPhone, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(customerAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(47, 47, 47)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAddCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnUpdateCustomer, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(59, Short.MAX_VALUE))
         );
 
@@ -544,7 +564,7 @@ public class AddCustomersApp extends javax.swing.JFrame {
     private void addUsersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addUsersMouseClicked
         // TODO add your handling code here:
         this.setVisible(false);
-        new AddUsersApp().setVisible(true);
+        new AddUserApp().setVisible(true);
     }//GEN-LAST:event_addUsersMouseClicked
 
     private void listCustomersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listCustomersMouseClicked
@@ -571,17 +591,60 @@ public class AddCustomersApp extends javax.swing.JFrame {
         new AddSuppliersApp().setVisible(true);
     }//GEN-LAST:event_addSuppliersMouseClicked
 
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+    private void customerEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_customerEmailActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
+    }//GEN-LAST:event_customerEmailActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnAddCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddCustomerActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+        Customer customer = new Customer();
+        customer.setCustomerName(customerName.getText());
+        customer.setCustomerEmail(customerEmail.getText());
+        customer.setCustomerPhone(customerPhone.getText());
+        customer.setCustomerAddress(customerAddress.getText());
+        
+        int status = new AddCustomerDAO().save(customer);
+        if (status > 0) {
+            JOptionPane.showMessageDialog(rootPane, "supplier Saved!");
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "supplier Not Saved!");
+        }
+        clearFields();
+    }//GEN-LAST:event_btnAddCustomerActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
+    private void btnUpdateCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateCustomerActionPerformed
+        // TODO add your handling code here:
+        Customer customer = new Customer();
+        customer.setCustomerName(customerName.getText());
+        customer.setCustomerEmail(customerEmail.getText());
+        customer.setCustomerPhone(customerPhone.getText());
+        customer.setCustomerAddress(customerAddress.getText());
+        int status = new AddCustomerDAO().update(customer);
+        if (status > 0) {
+            JOptionPane.showMessageDialog(rootPane, "supplier Update!");
+
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "supplier Not Update!");
+        }
+       this.setVisible(false);
+       new ListCustomersApp().setVisible(true);
+    }//GEN-LAST:event_btnUpdateCustomerActionPerformed
+
+    
+    
+     private void clearFields() {
+        customerName.setText("");
+        customerEmail.setText("");
+        customerPhone.setText("");
+        customerAddress.setText("");
+    }
+     public void addValue(Customer s){
+        customerName.setText(s.getCustomerName());
+        customerEmail.setText(s.getCustomerEmail());
+        customerPhone.setText(s.getCustomerPhone());
+        customerAddress.setText(s.getCustomerAddress());
+        
+    }
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -619,10 +682,15 @@ public class AddCustomersApp extends javax.swing.JFrame {
     private javax.swing.JLabel addSuppliers;
     private javax.swing.JLabel addUsers;
     private javax.swing.JPanel bg;
+    private javax.swing.JButton btnAddCustomer;
+    private javax.swing.JButton btnUpdateCustomer;
     private javax.swing.JLabel categoris;
+    private javax.swing.JTextField customerAddress;
+    private javax.swing.JTextField customerEmail;
+    private javax.swing.JTextField customerName;
+    private javax.swing.JTextField customerPhone;
     private javax.swing.JLabel dashboard;
     private javax.swing.JLabel giftCard;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
@@ -632,10 +700,6 @@ public class AddCustomersApp extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField9;
     private javax.swing.JLabel listCustomers;
     private javax.swing.JLabel listSuppliers;
     private javax.swing.JLabel listUsers;
