@@ -25,6 +25,15 @@ public class AddUserApp extends javax.swing.JFrame {
         }
     }
 
+    AddUserApp(User s) {
+          initComponents();
+        stores = new StoreDAO().getAll();
+        for (int i = 0; i < stores.size(); i++) {
+            storeName.addItem(stores.get(i).getStoreName());
+        }
+        addValue(s);
+    }
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -61,7 +70,7 @@ public class AddUserApp extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         uName = new javax.swing.JTextField();
-        lastName = new javax.swing.JTextField();
+        userName = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         uPass = new javax.swing.JTextField();
@@ -75,7 +84,8 @@ public class AddUserApp extends javax.swing.JFrame {
         gender = new javax.swing.JComboBox<>();
         userRole = new javax.swing.JComboBox<>();
         btnAddUser = new javax.swing.JButton();
-        firstName = new javax.swing.JTextField();
+        userCode = new javax.swing.JTextField();
+        btnUpdateUser = new javax.swing.JButton();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -391,7 +401,7 @@ public class AddUserApp extends javax.swing.JFrame {
 
         jLabel5.setBackground(new java.awt.Color(255, 255, 255));
         jLabel5.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
-        jLabel5.setText("First Name");
+        jLabel5.setText("User Code");
 
         jLabel6.setBackground(new java.awt.Color(255, 255, 255));
         jLabel6.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
@@ -399,11 +409,11 @@ public class AddUserApp extends javax.swing.JFrame {
 
         uName.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
 
-        lastName.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
+        userName.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
 
         jLabel7.setBackground(new java.awt.Color(255, 255, 255));
         jLabel7.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
-        jLabel7.setText("Last Name");
+        jLabel7.setText("user Name");
 
         jLabel8.setBackground(new java.awt.Color(255, 255, 255));
         jLabel8.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
@@ -449,7 +459,17 @@ public class AddUserApp extends javax.swing.JFrame {
             }
         });
 
-        firstName.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
+        userCode.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
+
+        btnUpdateUser.setBackground(new java.awt.Color(54, 127, 169));
+        btnUpdateUser.setFont(new java.awt.Font("Corbel", 1, 24)); // NOI18N
+        btnUpdateUser.setForeground(new java.awt.Color(255, 255, 255));
+        btnUpdateUser.setText("Update User");
+        btnUpdateUser.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateUserActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -461,19 +481,23 @@ public class AddUserApp extends javax.swing.JFrame {
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGap(31, 31, 31)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnAddUser, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lastName)
-                            .addComponent(phone)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(gender, 0, 533, Short.MAX_VALUE)
-                            .addComponent(userRole, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(firstName))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 275, Short.MAX_VALUE)
+                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(userName)
+                                .addComponent(phone)
+                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(gender, 0, 533, Short.MAX_VALUE)
+                                .addComponent(userRole, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(userCode))
+                            .addGroup(jPanel4Layout.createSequentialGroup()
+                                .addComponent(btnAddUser, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 118, Short.MAX_VALUE)
+                                .addComponent(btnUpdateUser, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addGap(245, 245, 245)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(email)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -507,14 +531,14 @@ public class AddUserApp extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(uName, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
-                    .addComponent(firstName))
+                    .addComponent(userCode))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lastName, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(userName, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(uPass, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -533,7 +557,9 @@ public class AddUserApp extends javax.swing.JFrame {
                     .addComponent(storeName, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(gender, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(32, 32, 32)
-                .addComponent(btnAddUser, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAddUser, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnUpdateUser, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(36, Short.MAX_VALUE))
         );
 
@@ -673,8 +699,8 @@ public class AddUserApp extends javax.swing.JFrame {
         // TODO add your handling code here:
         User user = new User();
         user.setUserRole(userRole.getSelectedItem().toString());
-        user.setFirstName(firstName.getText());
-        user.setLastName(lastName.getText());
+        user.setUserCode(userCode.getText());
+        user.setUserName(userName.getText());
         user.setPhone(phone.getText());
         user.setGender(gender.getSelectedItem().toString());
         user.setEmail(email.getText());
@@ -692,13 +718,43 @@ public class AddUserApp extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnAddUserActionPerformed
 
-    public void addValue(User u) {
-        firstName.setText(u.getFirstName());
-        lastName.setText(u.getLastName());
+    private void btnUpdateUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateUserActionPerformed
+        // TODO add your handling code here:
+        User user = new User();
+        user.setUserRole(userRole.getSelectedItem().toString());
+        user.setUserCode(userCode.getText());
+        user.setUserName(userName.getText());
+        user.setPhone(phone.getText());
+        user.setGender(gender.getSelectedItem().toString());
+        user.setEmail(email.getText());
+        user.setuName(uName.getText());
+        user.setuPass(uPass.getText());
+        user.setConfPass(confPass.getText());
+        user.setStoreName(storeName.getSelectedItem().toString());
+        int status = new UserDAO().update(user);
+        if (status > 0) {
+            
+            JOptionPane.showMessageDialog(rootPane, "User Update!");
+
+        } else {
+            System.err.println(userCode.getText());
+            JOptionPane.showMessageDialog(rootPane, "USer Not Update!");
+        }
+        this.setVisible(false);
+       new PeopleApp().setVisible(true);
+    }//GEN-LAST:event_btnUpdateUserActionPerformed
+
+    public void addValue(User currentUser) {
+        User u = new UserDAO().getByID(currentUser.getId());
+//        
+
+        userCode.setText(u.getUserCode());
+        userName.setText(u.getUserName());
         email.setText(u.getEmail());
         phone.setText(u.getPhone());
         uName.setText(u.getuName());
         uPass.setText(u.getuPass());
+        System.out.println(u.getUserCode());
         confPass.setText(u.getConfPass());
         //userRole.setText(u.getUserRole());
         String ur = u.getUserRole();
@@ -774,11 +830,11 @@ public class AddUserApp extends javax.swing.JFrame {
     private javax.swing.JLabel addUsres;
     private javax.swing.JPanel bg;
     private javax.swing.JButton btnAddUser;
+    private javax.swing.JButton btnUpdateUser;
     private javax.swing.JLabel categoris;
     private javax.swing.JTextField confPass;
     private javax.swing.JLabel dashboard;
     private javax.swing.JTextField email;
-    private javax.swing.JTextField firstName;
     private javax.swing.JComboBox<String> gender;
     private javax.swing.JLabel giftCard;
     private javax.swing.JLabel jLabel10;
@@ -797,7 +853,6 @@ public class AddUserApp extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField lastName;
     private javax.swing.JLabel listCustomer;
     private javax.swing.JLabel listSuppliers;
     private javax.swing.JLabel listUser;
@@ -815,6 +870,8 @@ public class AddUserApp extends javax.swing.JFrame {
     private javax.swing.JPanel topbar;
     private javax.swing.JTextField uName;
     private javax.swing.JTextField uPass;
+    private javax.swing.JTextField userCode;
+    private javax.swing.JTextField userName;
     private javax.swing.JComboBox<String> userRole;
     // End of variables declaration//GEN-END:variables
 }

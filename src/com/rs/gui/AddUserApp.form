@@ -573,22 +573,28 @@
                               <Component id="jTextField1" alignment="0" min="-2" pref="327" max="-2" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="btnAddUser" min="-2" pref="223" max="-2" attributes="0"/>
-                                      <Component id="jLabel3" alignment="0" min="-2" pref="67" max="-2" attributes="0"/>
-                                      <Component id="lastName" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="phone" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jLabel5" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
-                                      <Component id="jLabel7" alignment="0" min="-2" pref="106" max="-2" attributes="0"/>
-                                      <Component id="jLabel9" alignment="0" min="-2" pref="92" max="-2" attributes="0"/>
-                                      <Component id="jLabel12" alignment="0" min="-2" pref="92" max="-2" attributes="0"/>
-                                      <Component id="gender" alignment="0" pref="533" max="32767" attributes="0"/>
-                                      <Component id="userRole" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="firstName" alignment="0" max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="jLabel3" alignment="0" min="-2" pref="67" max="-2" attributes="0"/>
+                                          <Component id="userName" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="phone" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="jLabel5" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
+                                          <Component id="jLabel7" alignment="0" min="-2" pref="106" max="-2" attributes="0"/>
+                                          <Component id="jLabel9" alignment="0" min="-2" pref="92" max="-2" attributes="0"/>
+                                          <Component id="jLabel12" alignment="0" min="-2" pref="92" max="-2" attributes="0"/>
+                                          <Component id="gender" alignment="0" pref="533" max="32767" attributes="0"/>
+                                          <Component id="userRole" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="userCode" alignment="0" max="32767" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="btnAddUser" min="-2" pref="223" max="-2" attributes="0"/>
+                                          <EmptySpace pref="118" max="32767" attributes="0"/>
+                                          <Component id="btnUpdateUser" min="-2" pref="222" max="-2" attributes="0"/>
+                                      </Group>
                                   </Group>
                               </Group>
                           </Group>
-                          <EmptySpace pref="275" max="32767" attributes="0"/>
+                          <EmptySpace min="-2" pref="245" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="email" alignment="0" max="32767" attributes="0"/>
                               <Component id="jLabel4" alignment="0" min="-2" pref="76" max="-2" attributes="0"/>
@@ -628,7 +634,7 @@
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Component id="uName" pref="42" max="32767" attributes="0"/>
-                              <Component id="firstName" max="32767" attributes="0"/>
+                              <Component id="userCode" max="32767" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -637,7 +643,7 @@
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="lastName" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
+                              <Component id="userName" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
                               <Component id="uPass" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
@@ -661,7 +667,10 @@
                               <Component id="gender" alignment="3" min="-2" pref="42" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
-                          <Component id="btnAddUser" min="-2" pref="43" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="btnAddUser" alignment="3" min="-2" pref="43" max="-2" attributes="0"/>
+                              <Component id="btnUpdateUser" alignment="3" min="-2" pref="43" max="-2" attributes="0"/>
+                          </Group>
                           <EmptySpace pref="36" max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -720,7 +729,7 @@
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Corbel" size="20" style="1"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="First Name"/>
+                    <Property name="text" type="java.lang.String" value="User Code"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel6">
@@ -741,7 +750,7 @@
                     </Property>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="lastName">
+                <Component class="javax.swing.JTextField" name="userName">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Corbel" size="20" style="1"/>
@@ -756,7 +765,7 @@
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Corbel" size="20" style="1"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Last Name"/>
+                    <Property name="text" type="java.lang.String" value="user Name"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel8">
@@ -898,12 +907,29 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAddUserActionPerformed"/>
                   </Events>
                 </Component>
-                <Component class="javax.swing.JTextField" name="firstName">
+                <Component class="javax.swing.JTextField" name="userCode">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Corbel" size="20" style="1"/>
                     </Property>
                   </Properties>
+                </Component>
+                <Component class="javax.swing.JButton" name="btnUpdateUser">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="a9" green="7f" red="36" type="rgb"/>
+                    </Property>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Corbel" size="24" style="1"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Update User"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUpdateUserActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>

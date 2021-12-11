@@ -4,8 +4,8 @@ package com.rs.model;
 public class User {
     private int id;
     private String userRole;
-    private String firstName;
-    private String lastName;
+    private String userCode;
+    private String userName;
     private String phone;
     private String gender;
     private String email;
@@ -30,20 +30,20 @@ public class User {
         this.userRole = userRole;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getUserCode() {
+        return userCode;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setUserCode(String userCode) {
+        this.userCode = userCode;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getPhone() {
@@ -103,6 +103,5 @@ public class User {
     }
 
     
-
     
 }

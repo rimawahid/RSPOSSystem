@@ -8,6 +8,7 @@ package com.rs.gui;
 import com.rs.dao.UserDAO;
 import com.rs.model.User;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
@@ -61,6 +62,7 @@ public class PeopleApp extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         userTable = new javax.swing.JTable();
         btnEditUser = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -352,13 +354,12 @@ public class PeopleApp extends javax.swing.JFrame {
             }
         ));
         userTable.setRowHeight(28);
+        userTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                userTableMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(userTable);
-        if (userTable.getColumnModel().getColumnCount() > 0) {
-            userTable.getColumnModel().getColumn(0).setResizable(false);
-            userTable.getColumnModel().getColumn(1).setResizable(false);
-            userTable.getColumnModel().getColumn(2).setResizable(false);
-            userTable.getColumnModel().getColumn(3).setResizable(false);
-        }
 
         btnEditUser.setBackground(new java.awt.Color(54, 127, 169));
         btnEditUser.setFont(new java.awt.Font("Corbel", 1, 24)); // NOI18N
@@ -367,6 +368,16 @@ public class PeopleApp extends javax.swing.JFrame {
         btnEditUser.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEditUserActionPerformed(evt);
+            }
+        });
+
+        jButton1.setBackground(new java.awt.Color(54, 127, 169));
+        jButton1.setFont(new java.awt.Font("Corbel", 1, 24)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("Delete User");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -381,7 +392,9 @@ public class PeopleApp extends javax.swing.JFrame {
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1484, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(88, 88, 88)
-                        .addComponent(btnEditUser, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnEditUser, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(308, 308, 308)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(36, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -390,7 +403,9 @@ public class PeopleApp extends javax.swing.JFrame {
                 .addGap(32, 32, 32)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(29, 29, 29)
-                .addComponent(btnEditUser, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnEditUser, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(65, Short.MAX_VALUE))
         );
 
@@ -502,25 +517,70 @@ public class PeopleApp extends javax.swing.JFrame {
         this.setVisible(false);
         new AddSuppliersApp().setVisible(true);
     }//GEN-LAST:event_addSuppliersMouseClicked
-
+    User s;
     private void btnEditUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditUserActionPerformed
-        // TODO add your handling code here:
-        userTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-            @Override
-            public void valueChanged(ListSelectionEvent e) {
-                User s = new User();
-                s.setFirstName(userTable.getValueAt(userTable.getSelectedRow(), 0).toString());
-                s.setLastName(userTable.getValueAt(userTable.getSelectedRow(), 1).toString());
-                s.setEmail(userTable.getValueAt(userTable.getSelectedRow(), 2).toString());
-                s.setPhone(userTable.getValueAt(userTable.getSelectedRow(), 3).toString());
-                s.setUserRole(userTable.getValueAt(userTable.getSelectedRow(), 4).toString());
-                s.setStoreName(userTable.getValueAt(userTable.getSelectedRow(), 5).toString());
-                AddUserApp ap = new AddUserApp();
-                ap.setVisible(true);
-                ap.addValue(s);
-            }
-        });
+       
+        new AddUserApp(s).setVisible(true);
+        
+//         AddUserApp ap = new AddUserApp();
+//         ap.addValue(s);
+//        ap.setVisible(true);
+//        System.out.println(".. " + s.getEmail());
+        
+//        
+//        userTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+//            @Override
+//            public void valueChanged(ListSelectionEvent e) {
+//User s = new User();
+//       
+//                s.setId(Integer.valueOf(userTable.getValueAt(userTable.getSelectedRow(), 0).toString()));
+//                s.setFirstName(userTable.getValueAt(userTable.getSelectedRow(), 1).toString());
+//                s.setLastName(userTable.getValueAt(userTable.getSelectedRow(), 2).toString());
+//                s.setEmail(userTable.getValueAt(userTable.getSelectedRow(), 3).toString());
+//                s.setPhone(userTable.getValueAt(userTable.getSelectedRow(), 4).toString());
+//                s.setUserRole(userTable.getValueAt(userTable.getSelectedRow(), 5).toString());
+//                s.setStoreName(userTable.getValueAt(userTable.getSelectedRow(), 6).toString());
+//                 AddUserApp ap = new AddUserApp();
+//                  ap.setVisible(true);
+//                System.out.println(".. " + s.getEmail());
+//                ap.addValue(s);
+//            }
+//        });
+
+
     }//GEN-LAST:event_btnEditUserActionPerformed
+
+    private void userTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userTableMouseClicked
+        // TODO add your handling code here
+        int row = userTable.rowAtPoint(evt.getPoint());
+        //int column = userTable.columnAtPoint(evt.getPoint());
+        s = new User();
+        s.setId(Integer.valueOf(userTable.getValueAt(row, 0).toString()));
+        s.setUserCode(userTable.getValueAt(row, 1).toString());
+        s.setUserName(userTable.getValueAt(row, 2).toString());
+        s.setEmail(userTable.getValueAt(row, 3).toString());
+        s.setPhone(userTable.getValueAt(row, 4).toString());
+        s.setUserRole(userTable.getValueAt(row, 5).toString());
+        s.setStoreName(userTable.getValueAt(row, 6).toString());
+
+
+    }//GEN-LAST:event_userTableMouseClicked
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        User user = new User();
+        int option = JOptionPane.showConfirmDialog(rootPane, "Do you want to delete?", null, WIDTH);
+        if (option == 0) {
+            user.setId(Integer.valueOf(userTable.getValueAt(userTable.getSelectedRow(), 0).toString()));
+            int status = new UserDAO().delete(user);
+            if (status > 0) {
+                JOptionPane.showMessageDialog(rootPane, "Supplier delete!");
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "Supplier Not delete!");
+            }
+        }
+        //getAllSupplier();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -556,12 +616,12 @@ public class PeopleApp extends javax.swing.JFrame {
 
     private void getAllCustomer() {
         List<User> users = new UserDAO().getAll();
-        String[] columnNames = {"First Name", "Last Name", "Email", "Phone", "User Role", "Store Name"};
-        Object[][] data = new Object[users.size()][6];
+        String[] columnNames = {"ID", "USer Code", "User Name", "Email", "Phone", "User Role", "Store Name"};
+        Object[][] data = new Object[users.size()][7];
         for (int i = 0; i < users.size(); i++) {
             User s = users.get(i);
-            Object[] o = {s.getFirstName(), s.getLastName(), s.getEmail(), s.getPhone(), s.getUserRole(), s.getStoreName()};
-            for (int j = 0; j < 6; j++) {
+            Object[] o = {s.getId(), s.getUserCode(), s.getUserName(), s.getEmail(), s.getPhone(), s.getUserRole(), s.getStoreName()};
+            for (int j = 0; j < 7; j++) {
                 data[i][j] = o[j];
             }
         }
@@ -578,6 +638,7 @@ public class PeopleApp extends javax.swing.JFrame {
     private javax.swing.JLabel categoris;
     private javax.swing.JLabel dashboard;
     private javax.swing.JLabel giftCard;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
