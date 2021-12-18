@@ -717,8 +717,8 @@ public class AddProducts extends javax.swing.JFrame {
         double bCost = Double.parseDouble(buyingCost);
         String othersCost = otherCost.getText();
         double oCost = Double.parseDouble(othersCost);
-        System.out.println(buyingCost);
-        System.out.println(othersCost);
+//        System.out.println(buyingCost);
+//        System.out.println(othersCost);
         double total = ((bCost) + (oCost / pQty));
         String val = String.valueOf(total);
         totalCost.setText(val);

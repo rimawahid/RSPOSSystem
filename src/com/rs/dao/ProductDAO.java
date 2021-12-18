@@ -119,8 +119,8 @@ public class ProductDAO implements ICommonInterface<Product> {
                 showProduct.setProductType(rs.getString("product_type"));
                 showProduct.setProductName(rs.getString("product_name"));
                 showProduct.setProductCode(rs.getString("product_code"));
-                showProduct.setProductCategory(rs.getString("product_barcode"));
-                showProduct.setProductBarCode(rs.getString("product_category"));
+                showProduct.setProductBarCode(rs.getString("product_barcode"));
+                showProduct.setProductCategory(rs.getString("product_category"));
                 showProduct.setQuantity(Integer.valueOf(rs.getString("product_qty")));
                 showProduct.setBuyingCost(Double.valueOf(rs.getString("buying_price")));
                 showProduct.setOthersCost(Double.valueOf(rs.getString("others_Cost")));
@@ -136,6 +136,51 @@ public class ProductDAO implements ICommonInterface<Product> {
             Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return products;
+    }
+    
+      public Product getByCode(String code) {
+        String sql = "select * from product where product_code = ?";
+        Product product = new Product();
+        try  {
+            con = DBConnection.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, code);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+             product.setId(rs.getInt("id"));
+//                product.setProductCode(rs.getString("product_code"));
+//                product.setProductName(rs.getString("product_name"));
+//                product.setBasePrice(rs.getDouble("base_price"));
+//                product.setSellingPrice(rs.getDouble("selling_price"));
+//                product.setBuyingPrice(rs.getDouble("buying_price"));
+//                product.setDiscountPercent(rs.getDouble("discount_percent"));
+//                product.setVatPercent(rs.getDouble("vat_percent"));
+//                System.out.println(product.getProductName());
+                
+               // product.setId(Integer.valueOf(rs.getString("id")));
+                product.setProductType(rs.getString("product_type"));
+                product.setProductName(rs.getString("product_name"));
+                product.setProductCode(rs.getString("product_code"));
+                product.setProductCategory(rs.getString("product_barcode"));
+                product.setProductBarCode(rs.getString("product_category"));
+                product.setQuantity(Integer.valueOf(rs.getString("product_qty")));
+                product.setBuyingCost(Double.valueOf(rs.getString("buying_price")));
+                product.setOthersCost(Double.valueOf(rs.getString("others_Cost")));
+                product.setToalPrice(Double.valueOf(rs.getString("total_price")));
+                product.setSellingCost(Double.valueOf(rs.getString("selling_price")));
+                product.setSupplier(rs.getString("supplier"));
+                product.setAlertQty(Integer.valueOf(rs.getString("alert_qty")));
+            }
+               
+        } catch (Exception e) {
+        }finally{
+            try {
+                ps.close();
+                con.close();
+            } catch (Exception e) {
+            }
+        }
+        return product;
     }
 
 }

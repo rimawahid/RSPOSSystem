@@ -10,6 +10,7 @@ import com.rs.dao.ProductDAO;
 import com.rs.model.Customer;
 import com.rs.model.Product;
 import java.util.List;
+import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -22,6 +23,7 @@ public class POSApp extends javax.swing.JFrame {
      * Creates new form POSApp
      */
     List<Customer> customer;
+
     public POSApp() {
         initComponents();
         getAllProduct();
@@ -59,10 +61,13 @@ public class POSApp extends javax.swing.JFrame {
         customerName = new javax.swing.JComboBox<>();
         addCustomer = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        search = new javax.swing.JLabel();
+        productCode = new javax.swing.JTextField();
+        qty = new javax.swing.JTextField();
+        btnaddQty = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        posTable = new javax.swing.JTable();
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -302,16 +307,31 @@ public class POSApp extends javax.swing.JFrame {
         });
         jPanel2.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 540, 42));
 
-        jTextField2.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
-        jTextField2.setForeground(new java.awt.Color(204, 204, 204));
-        jTextField2.setText("Search product by code or name, you can scan barcode too");
-        jPanel2.add(jTextField2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 540, 42));
+        search.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8-search-36.png"))); // NOI18N
+        search.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        search.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                searchMouseClicked(evt);
+            }
+        });
+        jPanel2.add(search, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 140, 40, 40));
+        jPanel2.add(productCode, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 380, 40));
+        jPanel2.add(qty, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 140, 70, 40));
+
+        btnaddQty.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/addCart.png"))); // NOI18N
+        btnaddQty.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        btnaddQty.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnaddQtyMouseClicked(evt);
+            }
+        });
+        jPanel2.add(btnaddQty, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 140, 40, 40));
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 640, 180));
 
-        jTable1.setBackground(new java.awt.Color(223, 240, 216));
-        jTable1.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        posTable.setBackground(new java.awt.Color(223, 240, 216));
+        posTable.setFont(new java.awt.Font("Calibri", 1, 20)); // NOI18N
+        posTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -327,8 +347,9 @@ public class POSApp extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jTable1.setGridColor(new java.awt.Color(255, 255, 255));
-        jScrollPane1.setViewportView(jTable1);
+        posTable.setGridColor(new java.awt.Color(255, 255, 255));
+        posTable.setRowHeight(28);
+        jScrollPane1.setViewportView(posTable);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -635,6 +656,7 @@ public class POSApp extends javax.swing.JFrame {
 
         bg.add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 940, 950, 50));
 
+        productTable.setFont(new java.awt.Font("Calibri", 1, 20)); // NOI18N
         productTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -643,9 +665,10 @@ public class POSApp extends javax.swing.JFrame {
 
             }
         ));
+        productTable.setRowHeight(28);
         jScrollPane2.setViewportView(productTable);
 
-        bg.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 150, 930, -1));
+        bg.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 150, 900, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -731,18 +754,37 @@ public class POSApp extends javax.swing.JFrame {
     private void addCustomerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addCustomerMouseClicked
         // TODO add your handling code here:
         new CustomerModal().setVisible(true);
-       
+
         //this.setVisible(true);
     }//GEN-LAST:event_addCustomerMouseClicked
+    Product p;
+    private void searchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchMouseClicked
+        // TODO add your handling code here:
+        String pCode = productCode.getText();
+        p = new ProductDAO().getByCode(pCode);
+    }//GEN-LAST:event_searchMouseClicked
 
-    
-     private void getAllProduct() {
+    private void btnaddQtyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnaddQtyMouseClicked
+        // TODO add your handling code here:
+        int pQuantity = Integer.valueOf(qty.getText());
+        DefaultTableModel model = (DefaultTableModel) posTable.getModel();
+        Vector v = new Vector();
+        v.add(p.getProductName());
+        v.add(p.getSellingCost());
+        v.add(pQuantity);
+        v.add((p.getSellingCost() * pQuantity));
+        model.addRow(v);
+        p = null;
+        qty.setText(null);
+    }//GEN-LAST:event_btnaddQtyMouseClicked
+
+    private void getAllProduct() {
         List<Product> products = new ProductDAO().getAll();
         String[] columnNames = {"Name", "Code", "Bar_Code", "Category", "Quantity", "Total price", "Selling Price", "Alert Qty"};
         Object[][] data = new Object[products.size()][8];
         for (int i = 0; i < products.size(); i++) {
             Product s = products.get(i);
-            Object[] o = {s.getProductName(), s.getProductCode(), s.getProductBarCode(), s.getProductCategory(), s.getQuantity(),s.getToalPrice(), s.getSellingCost(),s.getAlertQty()};
+            Object[] o = {s.getProductName(), s.getProductCode(), s.getProductBarCode(), s.getProductCategory(), s.getQuantity(), s.getToalPrice(), s.getSellingCost(), s.getAlertQty()};
             for (int j = 0; j < 8; j++) {
                 data[i][j] = o[j];
             }
@@ -789,6 +831,7 @@ public class POSApp extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel addCustomer;
     private javax.swing.JPanel bg;
+    private javax.swing.JLabel btnaddQty;
     private javax.swing.JLabel categoris;
     private javax.swing.JComboBox<String> customerName;
     private javax.swing.JLabel dashboard;
@@ -823,9 +866,7 @@ public class POSApp extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
     private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField6;
@@ -834,11 +875,15 @@ public class POSApp extends javax.swing.JFrame {
     private javax.swing.JLabel logo;
     private javax.swing.JLabel people;
     private javax.swing.JLabel pos;
+    private javax.swing.JTable posTable;
     private javax.swing.JLabel product;
+    private javax.swing.JTextField productCode;
     private javax.swing.JTable productTable;
     private javax.swing.JLabel purchases;
+    private javax.swing.JTextField qty;
     private javax.swing.JLabel reports;
     private javax.swing.JLabel sales;
+    private javax.swing.JLabel search;
     private javax.swing.JLabel setting;
     private javax.swing.JPanel sidemenubar;
     private javax.swing.JPanel topbar;
