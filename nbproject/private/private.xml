@@ -3,13 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/IDB/Module-04/Project/RSPOSSystem/src/com/rs/model/User.java</file>
-            <file>file:/D:/IDB/Module-04/Project/RSPOSSystem/src/com/rs/gui/AddSuppliersApp.java</file>
-            <file>file:/D:/IDB/Module-04/Project/RSPOSSystem/src/com/rs/dao/UserDAO.java</file>
-            <file>file:/D:/IDB/Module-04/Project/RSPOSSystem/src/com/rs/dao/AddSupplierDAO.java</file>
-            <file>file:/D:/IDB/Module-04/Project/RSPOSSystem/src/com/rs/gui/PeopleApp.java</file>
-            <file>file:/D:/IDB/Module-04/Project/RSPOSSystem/src/com/rs/gui/AddUserApp.java</file>
-            <file>file:/D:/IDB/Module-04/Project/RSPOSSystem/src/com/rs/gui/ListSuppliersApp.java</file>
+            <file>file:/D:/IDB/Module-04/Project/RSPOSSystem/src/com/rs/gui/CustomerModal.java</file>
+            <file>file:/D:/IDB/Module-04/Project/RSPOSSystem/src/com/rs/gui/ProductsApp.java</file>
+            <file>file:/D:/IDB/Module-04/Project/RSPOSSystem/src/com/rs/gui/POSApp.java</file>
         </group>
     </open-files>
 </project-private>

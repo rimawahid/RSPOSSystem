@@ -1,17 +1,19 @@
 
 package com.rs.model;
 
-public class AddProduct {
+public class Product {
     private int id;
     private String productType;
     private String productName;
     private String productCode;
     private String ProductBarCode;
     private String productCategory;
-    private double productCost;
-    private double productPrice;
-    private double productTax;
-    private String taxMethod;
+    private int quantity;
+    private double buyingCost;
+    private double othersCost;
+    private double toalPrice;
+    private double sellingCost;
+    private String supplier;
     private int alertQty;
 
     public int getId() {
@@ -62,36 +64,52 @@ public class AddProduct {
         this.productCategory = productCategory;
     }
 
-    public double getProductCost() {
-        return productCost;
+    public int getQuantity() {
+        return quantity;
     }
 
-    public void setProductCost(double productCost) {
-        this.productCost = productCost;
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
-    public double getProductPrice() {
-        return productPrice;
+    public double getBuyingCost() {
+        return buyingCost;
     }
 
-    public void setProductPrice(double productPrice) {
-        this.productPrice = productPrice;
+    public void setBuyingCost(double buyingCost) {
+        this.buyingCost = buyingCost;
     }
 
-    public double getProductTax() {
-        return productTax;
+    public double getOthersCost() {
+        return othersCost;
     }
 
-    public void setProductTax(double productTax) {
-        this.productTax = productTax;
+    public void setOthersCost(double othersCost) {
+        this.othersCost = othersCost;
     }
 
-    public String getTaxMethod() {
-        return taxMethod;
+    public double getToalPrice() {
+        return toalPrice;
     }
 
-    public void setTaxMethod(String taxMethod) {
-        this.taxMethod = taxMethod;
+    public void setToalPrice(double toalPrice) {
+        this.toalPrice = toalPrice;
+    }
+
+    public double getSellingCost() {
+        return sellingCost;
+    }
+
+    public void setSellingCost(double sellingCost) {
+        this.sellingCost = sellingCost;
+    }
+
+    public String getSupplier() {
+        return supplier;
+    }
+
+    public void setSupplier(String supplier) {
+        this.supplier = supplier;
     }
 
     public int getAlertQty() {
@@ -101,5 +119,8 @@ public class AddProduct {
     public void setAlertQty(int alertQty) {
         this.alertQty = alertQty;
     }
+    
+
+    
     
 }

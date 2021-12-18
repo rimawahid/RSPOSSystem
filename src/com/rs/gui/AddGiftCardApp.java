@@ -5,6 +5,17 @@
  */
 package com.rs.gui;
 
+import com.rs.dao.AddSupplierDAO;
+import com.rs.dao.GiftCardDAO;
+import com.rs.dao.UserDAO;
+import com.rs.model.GiftCard;
+import com.rs.model.Supplier;
+import com.rs.model.User;
+import java.util.Date;
+import java.util.List;
+import java.util.Random;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author USER
@@ -14,8 +25,23 @@ public class AddGiftCardApp extends javax.swing.JFrame {
     /**
      * Creates new form ListGiftCardApp
      */
+    List<Supplier> supplier;
+
     public AddGiftCardApp() {
         initComponents();
+        supplier = new AddSupplierDAO().getAll();
+        for (int i = 0; i < supplier.size(); i++) {
+            createdBy.addItem(supplier.get(i).getSupplierName());
+        }
+    }
+
+    AddGiftCardApp(GiftCard s) {
+        initComponents();
+        supplier = new AddSupplierDAO().getAll();
+        for (int i = 0; i < supplier.size(); i++) {
+            createdBy.addItem(supplier.get(i).getSupplierName());
+        }
+        addValue(s);
     }
 
     /**
@@ -49,12 +75,16 @@ public class AddGiftCardApp extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jTextField1 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        cardNo = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
+        value = new javax.swing.JTextField();
+        balance = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnAddGiftCard = new javax.swing.JButton();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        expiryDate = new com.toedter.calendar.JDateChooser();
+        createdBy = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -293,34 +323,57 @@ public class AddGiftCardApp extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
         jLabel2.setText("Card No");
 
-        jTextField2.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
+        cardNo.setFont(new java.awt.Font("Calibri", 1, 20)); // NOI18N
+        cardNo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cardNoMouseClicked(evt);
+            }
+        });
 
         jLabel4.setBackground(new java.awt.Color(255, 255, 255));
         jLabel4.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
         jLabel4.setText("Value");
 
-        jTextField4.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
-        jTextField4.addActionListener(new java.awt.event.ActionListener() {
+        value.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
+        value.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField4ActionPerformed(evt);
+                valueActionPerformed(evt);
             }
         });
 
-        jTextField6.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
+        balance.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
+        balance.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                balanceActionPerformed(evt);
+            }
+        });
 
         jLabel6.setBackground(new java.awt.Color(255, 255, 255));
         jLabel6.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
-        jLabel6.setText("Expiry Date");
+        jLabel6.setText("Balance");
 
-        jButton1.setBackground(new java.awt.Color(54, 127, 169));
-        jButton1.setFont(new java.awt.Font("Corbel", 1, 24)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Add Gift Card");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnAddGiftCard.setBackground(new java.awt.Color(54, 127, 169));
+        btnAddGiftCard.setFont(new java.awt.Font("Corbel", 1, 24)); // NOI18N
+        btnAddGiftCard.setForeground(new java.awt.Color(255, 255, 255));
+        btnAddGiftCard.setText("Add Gift Card");
+        btnAddGiftCard.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnAddGiftCardActionPerformed(evt);
             }
         });
+
+        jLabel7.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel7.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
+        jLabel7.setText("Expiry Date");
+
+        jLabel8.setBackground(new java.awt.Color(255, 255, 255));
+        jLabel8.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
+        jLabel8.setText("Created By");
+
+        expiryDate.setDateFormatString("d MMM yyy");
+        expiryDate.setFont(new java.awt.Font("Calibri", 1, 20)); // NOI18N
+
+        createdBy.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -333,13 +386,17 @@ public class AddGiftCardApp extends javax.swing.JFrame {
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(31, 31, 31)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE)
-                            .addComponent(jTextField4)
-                            .addComponent(jTextField6)
+                            .addComponent(cardNo, javax.swing.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE)
+                            .addComponent(value)
+                            .addComponent(balance)
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(btnAddGiftCard, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(expiryDate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(createdBy, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(974, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -350,18 +407,26 @@ public class AddGiftCardApp extends javax.swing.JFrame {
                 .addGap(14, 14, 14)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
+                .addComponent(cardNo, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(value, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(45, 45, 45)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(74, Short.MAX_VALUE))
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(balance, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(expiryDate, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(createdBy, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addComponent(btnAddGiftCard, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -377,7 +442,7 @@ public class AddGiftCardApp extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(241, 241, 241))
+                .addGap(382, 382, 382))
         );
 
         bg.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 290, 1580, -1));
@@ -473,17 +538,73 @@ public class AddGiftCardApp extends javax.swing.JFrame {
         new ListCustomersApp().setVisible(true);
     }//GEN-LAST:event_listCustomersMouseClicked
 
-    private void jTextField4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField4ActionPerformed
+    private void valueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_valueActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField4ActionPerformed
+    }//GEN-LAST:event_valueActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnAddGiftCardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddGiftCardActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+        GiftCard gift = new GiftCard();
+        gift.setCardNo(Integer.valueOf(cardNo.getText()));
+        gift.setValue(Integer.valueOf(value.getText()));
+        gift.setBalance(Double.valueOf(balance.getText()));
 
-    /**
-     * @param args the command line arguments
-     */
+        gift.setExpiryDate(expiryDate.getDate());
+        System.out.println(expiryDate.getDate());
+        gift.setCreatedBy(createdBy.getSelectedItem().toString());
+        int status = new GiftCardDAO().save(gift);
+
+        if (status > 0) {
+            JOptionPane.showMessageDialog(rootPane, "Gift Card Saved!");
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Gift Card NOT Saved!");
+        }
+        clearField();
+    }//GEN-LAST:event_btnAddGiftCardActionPerformed
+
+    private void clearField() {
+        cardNo.setText("");
+        value.setText("");
+        balance.setText("");
+        expiryDate.setDate(null);
+        // createdBy;
+
+    }
+    private void balanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_balanceActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_balanceActionPerformed
+
+    private void cardNoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cardNoMouseClicked
+        // TODO add your handling code here:
+        randomNumbers();
+    }//GEN-LAST:event_cardNoMouseClicked
+//for random number
+
+    public void randomNumbers() {
+        Random ran = new Random();
+        int n = ran.nextInt(100000000) + 1;
+        String val = String.valueOf(n);
+        cardNo.setText(val);
+    }
+
+    public void addValue(GiftCard s) {
+        cardNo.setText(Integer.valueOf(s.getCardNo()).toString());
+        value.setText(Integer.valueOf(s.getValue()).toString());
+        balance.setText(Double.valueOf(s.getBalance()).toString());
+        expiryDate.setDate(s.getExpiryDate());
+
+        String ur = s.getCreatedBy();
+        supplier = new AddSupplierDAO().getAll();
+        System.out.println(ur);
+        for (int i = 0; i < supplier.size(); i++) {
+            createdBy.addItem(supplier.get(i).getSupplierName());
+            if (supplier.get(i).getSupplierName().equals(ur)) {
+                createdBy.setSelectedItem(ur);
+            }
+
+        }
+    }
+
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -507,9 +628,7 @@ public class AddGiftCardApp extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(AddGiftCardApp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        //</editor-fold>
-
-        /* Create and display the form */
+        //</editocardNo      /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new AddGiftCardApp().setVisible(true);
@@ -518,22 +637,25 @@ public class AddGiftCardApp extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField balance;
     private javax.swing.JPanel bg;
+    private javax.swing.JButton btnAddGiftCard;
+    private javax.swing.JTextField cardNo;
     private javax.swing.JLabel categoris;
+    private javax.swing.JComboBox<String> createdBy;
     private javax.swing.JLabel dashboard;
+    private com.toedter.calendar.JDateChooser expiryDate;
     private javax.swing.JLabel giftCard;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField6;
     private javax.swing.JLabel listCustomers;
     private javax.swing.JLabel listGiftCard;
     private javax.swing.JLabel logo;
@@ -546,5 +668,6 @@ public class AddGiftCardApp extends javax.swing.JFrame {
     private javax.swing.JLabel setting;
     private javax.swing.JPanel sidemenubar;
     private javax.swing.JPanel topbar;
+    private javax.swing.JTextField value;
     // End of variables declaration//GEN-END:variables
 }

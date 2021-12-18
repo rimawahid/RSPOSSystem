@@ -5,10 +5,12 @@
  */
 package com.rs.gui;
 
-import com.rs.dao.AddProductDAO;
+import com.rs.dao.AddSupplierDAO;
 import com.rs.dao.CategoryDAO;
-import com.rs.model.AddProduct;
+import com.rs.dao.ProductDAO;
+import com.rs.model.Product;
 import com.rs.model.Category;
+import com.rs.model.Supplier;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -22,12 +24,33 @@ public class AddProducts extends javax.swing.JFrame {
      * Creates new form AddProducts
      */
     List<Category> cats;
+    List<Supplier> suppliers;
+    List<Product> products;
+    List<Category> Categories;
+
     public AddProducts() {
         initComponents();
         cats = new CategoryDAO().getAll();
         for (int i = 0; i < cats.size(); i++) {
             productCategory.addItem(cats.get(i).getCategoryName());
         }
+        suppliers = new AddSupplierDAO().getAll();
+        for (int i = 0; i < suppliers.size(); i++) {
+            supplier.addItem(suppliers.get(i).getSupplierName());
+        }
+    }
+
+    AddProducts(Product s) {
+        initComponents();
+        cats = new CategoryDAO().getAll();
+        for (int i = 0; i < cats.size(); i++) {
+            productCategory.addItem(cats.get(i).getCategoryName());
+        }
+        suppliers = new AddSupplierDAO().getAll();
+        for (int i = 0; i < suppliers.size(); i++) {
+            supplier.addItem(suppliers.get(i).getSupplierName());
+        }
+        addValue(s);
     }
 
     /**
@@ -65,25 +88,26 @@ public class AddProducts extends javax.swing.JFrame {
         ProductBarCode = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        productCost = new javax.swing.JTextField();
+        quantity = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
-        jLabel11 = new javax.swing.JLabel();
-        productTax = new javax.swing.JTextField();
+        sellingPrice = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
         alertQty = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
+        otherCost = new javax.swing.JTextField();
         jLabel15 = new javax.swing.JLabel();
-        jTextField9 = new javax.swing.JTextField();
-        jLabel16 = new javax.swing.JLabel();
-        taxMethod = new javax.swing.JComboBox<>();
+        totalCost = new javax.swing.JTextField();
+        jLabel11 = new javax.swing.JLabel();
+        supplier = new javax.swing.JComboBox<>();
         productCategory = new javax.swing.JComboBox<>();
         productType = new javax.swing.JComboBox<>();
         jLabel8 = new javax.swing.JLabel();
-        productPrice = new javax.swing.JTextField();
+        buyingPrice = new javax.swing.JTextField();
         btnAddProduct = new javax.swing.JButton();
+        btnAddProduct1 = new javax.swing.JButton();
+        btnUpdateProduct = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -308,39 +332,41 @@ public class AddProducts extends javax.swing.JFrame {
 
         jLabel7.setBackground(new java.awt.Color(255, 255, 255));
         jLabel7.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
-        jLabel7.setText("Cost");
+        jLabel7.setText("Quantity");
 
-        productCost.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
+        quantity.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
-        jLabel11.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
-        jLabel11.setText("Product Tax");
-
-        productTax.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
+        sellingPrice.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
 
         jLabel12.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
-        jLabel12.setText("Tax Method");
+        jLabel12.setText("Supplier");
 
         jLabel13.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
         jLabel13.setText("Alert Quantity");
 
         alertQty.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
 
-        jPanel3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(204, 204, 204), 1, true));
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel14.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
-        jLabel14.setText("Quantity");
+        jLabel14.setText("Others Cost");
 
-        jTextField8.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
+        otherCost.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
 
         jLabel15.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
-        jLabel15.setText("Price");
+        jLabel15.setText("Total Cost");
 
-        jTextField9.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
+        totalCost.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
+        totalCost.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                totalCostMouseClicked(evt);
+            }
+        });
 
-        jLabel16.setFont(new java.awt.Font("Corbel", 0, 22)); // NOI18N
-        jLabel16.setText("RS POS(POS)");
+        jLabel11.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
+        jLabel11.setText("Selling  Price");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -349,31 +375,29 @@ public class AddProducts extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 533, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 533, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(totalCost, javax.swing.GroupLayout.PREFERRED_SIZE, 533, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(otherCost, javax.swing.GroupLayout.PREFERRED_SIZE, 533, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(126, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(22, 22, 22)
                 .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15)
+                .addGap(18, 18, 18)
+                .addComponent(otherCost, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
                 .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField9, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(39, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(totalCost, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        taxMethod.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
-        taxMethod.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Inclusive", "Exclusive" }));
+        supplier.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -384,14 +408,13 @@ public class AddProducts extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(17, 17, 17)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(productTax, javax.swing.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE)
-                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(10, 10, 10)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(sellingPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 533, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(supplier, javax.swing.GroupLayout.PREFERRED_SIZE, 533, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(alertQty, javax.swing.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE)
-                            .addComponent(taxMethod, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(alertQty, javax.swing.GroupLayout.PREFERRED_SIZE, 533, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(53, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -399,17 +422,15 @@ public class AddProducts extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(48, 48, 48)
-                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(2, 2, 2)
-                .addComponent(productTax, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(sellingPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(taxMethod, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(supplier, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(13, 13, 13)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(alertQty, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -425,9 +446,9 @@ public class AddProducts extends javax.swing.JFrame {
 
         jLabel8.setBackground(new java.awt.Color(255, 255, 255));
         jLabel8.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
-        jLabel8.setText("Price");
+        jLabel8.setText("Buying Price");
 
-        productPrice.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
+        buyingPrice.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -446,7 +467,7 @@ public class AddProducts extends javax.swing.JFrame {
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(ProductBarCode, javax.swing.GroupLayout.DEFAULT_SIZE, 553, Short.MAX_VALUE)
-                            .addComponent(productCost, javax.swing.GroupLayout.DEFAULT_SIZE, 553, Short.MAX_VALUE)
+                            .addComponent(quantity, javax.swing.GroupLayout.DEFAULT_SIZE, 553, Short.MAX_VALUE)
                             .addComponent(productCode, javax.swing.GroupLayout.DEFAULT_SIZE, 553, Short.MAX_VALUE)
                             .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -454,9 +475,9 @@ public class AddProducts extends javax.swing.JFrame {
                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(productCategory, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(productType, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(productPrice, javax.swing.GroupLayout.DEFAULT_SIZE, 553, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 134, Short.MAX_VALUE)
+                            .addComponent(buyingPrice, javax.swing.GroupLayout.DEFAULT_SIZE, 553, Short.MAX_VALUE)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 166, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 136, Short.MAX_VALUE)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(81, 81, 81))))
         );
@@ -490,11 +511,11 @@ public class AddProducts extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(productCost, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(quantity, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(productPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(buyingPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(219, 219, 219))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -513,7 +534,30 @@ public class AddProducts extends javax.swing.JFrame {
                 btnAddProductActionPerformed(evt);
             }
         });
-        bg.add(btnAddProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 930, 210, 50));
+        bg.add(btnAddProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 930, 210, 50));
+
+        btnAddProduct1.setBackground(new java.awt.Color(54, 127, 169));
+        btnAddProduct1.setFont(new java.awt.Font("Corbel", 1, 24)); // NOI18N
+        btnAddProduct1.setForeground(new java.awt.Color(255, 255, 255));
+        btnAddProduct1.setText("Add Product");
+        btnAddProduct1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddProduct1ActionPerformed(evt);
+            }
+        });
+        bg.add(btnAddProduct1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 930, 210, 50));
+
+        btnUpdateProduct.setBackground(new java.awt.Color(54, 127, 169));
+        btnUpdateProduct.setFont(new java.awt.Font("Corbel", 1, 24)); // NOI18N
+        btnUpdateProduct.setForeground(new java.awt.Color(255, 255, 255));
+        btnUpdateProduct.setText("Update Product");
+        btnUpdateProduct.setToolTipText("");
+        btnUpdateProduct.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateProductActionPerformed(evt);
+            }
+        });
+        bg.add(btnUpdateProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(670, 929, 210, 50));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -604,36 +648,123 @@ public class AddProducts extends javax.swing.JFrame {
 
     private void btnAddProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddProductActionPerformed
         // TODO add your handling code here:
-        AddProduct products = new AddProduct();
+        Product products = new Product();
         products.setProductType(productType.getSelectedItem().toString());
         products.setProductName(productName.getText());
         products.setProductCode(productCode.getText());
         products.setProductBarCode(ProductBarCode.getText());
         products.setProductCategory(productCategory.getSelectedItem().toString());
-        products.setProductCost(Double.valueOf(productCost.getText()));
-        products.setProductPrice(Double.valueOf(productPrice.getText()));
-        products.setProductTax(Double.valueOf(productTax.getText()));
-        products.setTaxMethod(taxMethod.getSelectedItem().toString());
+        products.setQuantity(Integer.valueOf(quantity.getText()));
+        products.setBuyingCost(Double.valueOf(buyingPrice.getText()));
+        products.setOthersCost(Double.valueOf(otherCost.getText()));
+        products.setToalPrice(Double.valueOf(totalCost.getText()));
+        products.setSellingCost(Double.valueOf(sellingPrice.getText()));
+        products.setSupplier(supplier.getSelectedItem().toString());
         products.setAlertQty(Integer.valueOf(alertQty.getText()));
-        
-        
-//        System.out.println(productName.getText());
-//        System.out.println(productCode.getText());
-//        System.out.println(ProductBarCode.getText());
-//        System.out.println(productCategory.getSelectedItem().toString());
-//        System.out.println(productCost.getText().toString());
-//        System.out.println(productPrice.getText().toString());
-//        System.out.println(productTax.getText().toString());
-//        System.out.println(taxMethod.getSelectedItem().toString());
-//        System.out.println(alertQty.getText());
-        int status = new AddProductDAO().save(products);
-        if(status > 0){
+
+//        System.out.println(alertQty.getText().toString());
+//        System.out.println(otherCost.getText().toString());
+        int status = new ProductDAO().save(products);
+        if (status > 0) {
             JOptionPane.showMessageDialog(rootPane, "Product Saved!");
-        }else{
-             JOptionPane.showMessageDialog(rootPane, "Product NOT Saved!");
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Product NOT Saved!");
         }
-        
+
     }//GEN-LAST:event_btnAddProductActionPerformed
+
+    private void totalCostMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_totalCostMouseClicked
+        // TODO add your handling code here:
+        totalCOst();
+    }//GEN-LAST:event_totalCostMouseClicked
+
+    private void btnAddProduct1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddProduct1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnAddProduct1ActionPerformed
+
+    private void btnUpdateProductActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateProductActionPerformed
+        // TODO add your handling code here:
+        Product products = new Product();
+        products.setProductType(productType.getSelectedItem().toString());
+        products.setProductName(productName.getText());
+        products.setProductCode(productCode.getText());
+        products.setProductBarCode(ProductBarCode.getText());
+        products.setProductCategory(productCategory.getSelectedItem().toString());
+        products.setQuantity(Integer.valueOf(quantity.getText()));
+        products.setBuyingCost(Double.valueOf(buyingPrice.getText()));
+        products.setOthersCost(Double.valueOf(otherCost.getText()));
+        products.setToalPrice(Double.valueOf(totalCost.getText()));
+        products.setSellingCost(Double.valueOf(sellingPrice.getText()));
+        products.setSupplier(supplier.getSelectedItem().toString());
+         products.setAlertQty(Integer.valueOf(alertQty.getText()));
+        int status = new ProductDAO().update(products);
+        if (status > 0) {
+            
+            JOptionPane.showMessageDialog(rootPane, "Product Update!");
+
+        } else {
+            
+            JOptionPane.showMessageDialog(rootPane, "Product Not Update!");
+        }
+        this.setVisible(false);
+       new ProductsApp().setVisible(true);
+    }//GEN-LAST:event_btnUpdateProductActionPerformed
+
+    public void totalCOst() {
+        String qty = quantity.getText();
+        int pQty = Integer.parseInt(qty);
+        String buyingCost = buyingPrice.getText();
+        double bCost = Double.parseDouble(buyingCost);
+        String othersCost = otherCost.getText();
+        double oCost = Double.parseDouble(othersCost);
+        System.out.println(buyingCost);
+        System.out.println(othersCost);
+        double total = ((bCost) + (oCost / pQty));
+        String val = String.valueOf(total);
+        totalCost.setText(val);
+    }
+
+    public void addValue(Product s) {
+
+        String pt = s.getProductType();
+        products = new ProductDAO().getAll();
+        System.out.println(pt);
+        for (int i = 0; i < products.size(); i++) {
+            productType.addItem(products.get(i).getProductType());
+            if (products.get(i).getProductType().equals(pt)) {
+                productType.setSelectedItem(pt);
+            }
+
+        }
+        productName.setText(s.getProductName());
+        productCode.setText(s.getProductCode());
+        ProductBarCode.setText(s.getProductBarCode());
+
+        String pc = s.getProductCategory();
+        Categories = new CategoryDAO().getAll();
+        System.out.println(pc);
+        for (int i = 0; i < Categories.size(); i++) {
+            productCategory.addItem(Categories.get(i).getCategoryName());
+            if (Categories.get(i).getCategoryName().equals(pc)) {
+                productCategory.setSelectedItem(pc);
+            }
+        }
+        quantity.setText(Integer.valueOf(s.getQuantity()).toString());
+        buyingPrice.setText(Double.valueOf(s.getBuyingCost()).toString());
+        otherCost.setText(Double.valueOf(s.getOthersCost()).toString());
+        totalCost.setText(Double.valueOf(s.getToalPrice()).toString());
+        sellingPrice.setText(Double.valueOf(s.getSellingCost()).toString());
+        String sp = s.getSupplier();
+        suppliers = new AddSupplierDAO().getAll();
+        System.out.println(sp);
+        for (int i = 0; i < suppliers.size(); i++) {
+            supplier.addItem(suppliers.get(i).getSupplierName());
+            if (suppliers.get(i).getSupplierName().equals(sp)) {
+                supplier.setSelectedItem(sp);
+            }
+        }
+        alertQty.setText(Integer.valueOf(s.getAlertQty()).toString());
+    }
 
     /**
      * @param args the command line arguments
@@ -675,6 +806,9 @@ public class AddProducts extends javax.swing.JFrame {
     private javax.swing.JTextField alertQty;
     private javax.swing.JPanel bg;
     private javax.swing.JButton btnAddProduct;
+    private javax.swing.JButton btnAddProduct1;
+    private javax.swing.JButton btnUpdateProduct;
+    private javax.swing.JTextField buyingPrice;
     private javax.swing.JLabel categoris;
     private javax.swing.JLabel dashboard;
     private javax.swing.JLabel giftCard;
@@ -684,7 +818,6 @@ public class AddProducts extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -696,25 +829,24 @@ public class AddProducts extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField8;
-    private javax.swing.JTextField jTextField9;
     private javax.swing.JLabel logo;
+    private javax.swing.JTextField otherCost;
     private javax.swing.JLabel people;
     private javax.swing.JLabel pos;
     private javax.swing.JLabel product;
     private javax.swing.JComboBox<String> productCategory;
     private javax.swing.JTextField productCode;
-    private javax.swing.JTextField productCost;
     private javax.swing.JTextField productName;
-    private javax.swing.JTextField productPrice;
-    private javax.swing.JTextField productTax;
     private javax.swing.JComboBox<String> productType;
     private javax.swing.JLabel purchases;
+    private javax.swing.JTextField quantity;
     private javax.swing.JLabel reports;
     private javax.swing.JLabel sales;
+    private javax.swing.JTextField sellingPrice;
     private javax.swing.JLabel setting;
     private javax.swing.JPanel sidemenubar;
-    private javax.swing.JComboBox<String> taxMethod;
+    private javax.swing.JComboBox<String> supplier;
     private javax.swing.JPanel topbar;
+    private javax.swing.JTextField totalCost;
     // End of variables declaration//GEN-END:variables
 }

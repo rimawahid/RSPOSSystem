@@ -621,10 +621,10 @@ public class AddCustomersApp extends javax.swing.JFrame {
         customer.setCustomerAddress(customerAddress.getText());
         int status = new AddCustomerDAO().update(customer);
         if (status > 0) {
-            JOptionPane.showMessageDialog(rootPane, "supplier Update!");
+            JOptionPane.showMessageDialog(rootPane, "Customer Update!");
 
         } else {
-            JOptionPane.showMessageDialog(rootPane, "supplier Not Update!");
+            JOptionPane.showMessageDialog(rootPane, "Customer Not Update!");
         }
        this.setVisible(false);
        new ListCustomersApp().setVisible(true);

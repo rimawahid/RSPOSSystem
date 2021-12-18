@@ -1,21 +1,23 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.rs.gui;
 
-/**
- *
- * @author USER
- */
+import com.rs.dao.GiftCardDAO;
+import com.rs.model.GiftCard;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+
 public class GiftCardApp extends javax.swing.JFrame {
 
-    /**
-     * Creates new form GiftCardApp
-     */
     public GiftCardApp() {
         initComponents();
+        getAllGift();
     }
 
     /**
@@ -46,6 +48,11 @@ public class GiftCardApp extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         listGiftCard = new javax.swing.JLabel();
         addGiftCard = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        giftTable = new javax.swing.JTable();
+        btnEditGift = new javax.swing.JButton();
+        btndelete = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -293,6 +300,66 @@ public class GiftCardApp extends javax.swing.JFrame {
 
         bg.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 90, -1, -1));
 
+        jPanel3.setBackground(new java.awt.Color(255, 255, 255));
+
+        giftTable.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
+        giftTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        giftTable.setRowHeight(28);
+        giftTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                giftTableMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(giftTable);
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap(30, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1508, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(22, 22, 22))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 330, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(44, Short.MAX_VALUE))
+        );
+
+        bg.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 240, 1560, 400));
+
+        btnEditGift.setBackground(new java.awt.Color(54, 127, 169));
+        btnEditGift.setFont(new java.awt.Font("Corbel", 1, 24)); // NOI18N
+        btnEditGift.setForeground(new java.awt.Color(255, 255, 255));
+        btnEditGift.setText("Edit GiftCard");
+        btnEditGift.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditGiftActionPerformed(evt);
+            }
+        });
+        bg.add(btnEditGift, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 659, 170, 50));
+
+        btndelete.setBackground(new java.awt.Color(54, 127, 169));
+        btndelete.setFont(new java.awt.Font("Corbel", 1, 24)); // NOI18N
+        btndelete.setForeground(new java.awt.Color(255, 255, 255));
+        btndelete.setText("Delete GiftCard");
+        btndelete.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btndeleteActionPerformed(evt);
+            }
+        });
+        bg.add(btndelete, new org.netbeans.lib.awtextra.AbsoluteConstraints(920, 670, 240, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -381,6 +448,69 @@ public class GiftCardApp extends javax.swing.JFrame {
         this.setVisible(false);
         new AddGiftCardApp().setVisible(true);
     }//GEN-LAST:event_addGiftCardMouseClicked
+    GiftCard s;
+    private void btnEditGiftActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditGiftActionPerformed
+        // TODO add your handling code here:
+        new AddGiftCardApp(s).setVisible(true);
+
+    }//GEN-LAST:event_btnEditGiftActionPerformed
+
+    private void giftTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_giftTableMouseClicked
+        // TODO add your handling code here:
+        int row = giftTable.rowAtPoint(evt.getPoint());
+
+        s = new GiftCard();
+        s.setCardNo(Integer.valueOf(giftTable.getValueAt(row, 0).toString()));
+        s.setValue(Integer.valueOf(giftTable.getValueAt(row, 1).toString()));
+        s.setBalance(Double.valueOf(giftTable.getValueAt(row, 2).toString()));
+
+        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        Date date = null;
+        try {
+            date = sdf.parse(giftTable.getValueAt(row, 3).toString());
+        } catch (ParseException ex) {
+            Logger.getLogger(GiftCardApp.class.getName()).log(Level.SEVERE, null, ex);
+        }
+//        Calendar cal = Calendar.getInstance();
+//        cal.setTime(date);
+
+        s.setExpiryDate(date);
+
+        s.setCreatedBy(giftTable.getValueAt(row, 4).toString());
+
+    }//GEN-LAST:event_giftTableMouseClicked
+
+    private void btndeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndeleteActionPerformed
+        // TODO add your handling code here:
+        GiftCard giftCard = new GiftCard();
+        int option = JOptionPane.showConfirmDialog(rootPane, "Do you want to delete?", null, WIDTH);
+        if (option == 0) {
+            giftCard.setCardNo(Integer.valueOf(giftTable.getValueAt(giftTable.getSelectedRow(), 0).toString()));
+            int status = new GiftCardDAO().delete(giftCard);
+            if (status > 0) {
+                JOptionPane.showMessageDialog(rootPane, "GiftCard delete!");
+
+            } else {
+                JOptionPane.showMessageDialog(rootPane, "GiftCard Not delete!");
+            }
+        }
+        getAllGift();
+    }//GEN-LAST:event_btndeleteActionPerformed
+
+    private void getAllGift() {
+        List<GiftCard> gifts = new GiftCardDAO().getAll();
+        String[] columnNames = {"Card No", "Valuse", "Balance", "Expiry", "create by"};
+        Object[][] data = new Object[gifts.size()][5];
+        for (int i = 0; i < gifts.size(); i++) {
+            GiftCard s = gifts.get(i);
+            Object[] o = {s.getCardNo(), s.getValue(), s.getBalance(), s.getExpiryDate(), s.getCreatedBy()};
+            for (int j = 0; j < 5; j++) {
+                data[i][j] = o[j];
+            }
+        }
+        DefaultTableModel model = new DefaultTableModel(data, columnNames);
+        giftTable.setModel(model);
+    }
 
     /**
      * @param args the command line arguments
@@ -420,12 +550,17 @@ public class GiftCardApp extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel addGiftCard;
     private javax.swing.JPanel bg;
+    private javax.swing.JButton btnEditGift;
+    private javax.swing.JButton btndelete;
     private javax.swing.JLabel categoris;
     private javax.swing.JLabel dashboard;
     private javax.swing.JLabel giftCard;
+    private javax.swing.JTable giftTable;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel listGiftCard;
     private javax.swing.JLabel logo;
     private javax.swing.JLabel people;

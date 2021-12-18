@@ -5,6 +5,13 @@
  */
 package com.rs.gui;
 
+import com.rs.dao.AddCustomerDAO;
+import com.rs.dao.ProductDAO;
+import com.rs.model.Customer;
+import com.rs.model.Product;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author USER
@@ -14,8 +21,14 @@ public class POSApp extends javax.swing.JFrame {
     /**
      * Creates new form POSApp
      */
+    List<Customer> customer;
     public POSApp() {
         initComponents();
+        getAllProduct();
+        customer = new AddCustomerDAO().getAll();
+        for (int i = 0; i < customer.size(); i++) {
+            customerName.addItem(customer.get(i).getCustomerName());
+        }
     }
 
     /**
@@ -43,8 +56,8 @@ public class POSApp extends javax.swing.JFrame {
         reports = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jLabel1 = new javax.swing.JLabel();
+        customerName = new javax.swing.JComboBox<>();
+        addCustomer = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
@@ -80,6 +93,8 @@ public class POSApp extends javax.swing.JFrame {
         jPanel15 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        productTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -265,12 +280,17 @@ public class POSApp extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(245, 245, 245));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel2.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 500, 42));
+        customerName.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
+        jPanel2.add(customerName, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 500, 42));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/posicon.png"))); // NOI18N
-        jLabel1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 20, 40, 42));
+        addCustomer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/posicon.png"))); // NOI18N
+        addCustomer.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        addCustomer.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                addCustomerMouseClicked(evt);
+            }
+        });
+        jPanel2.add(addCustomer, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 20, 40, 42));
 
         jTextField1.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
         jTextField1.setForeground(new java.awt.Color(204, 204, 204));
@@ -615,6 +635,18 @@ public class POSApp extends javax.swing.JFrame {
 
         bg.add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 940, 950, 50));
 
+        productTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        jScrollPane2.setViewportView(productTable);
+
+        bg.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 150, 930, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -696,6 +728,29 @@ public class POSApp extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
 
+    private void addCustomerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addCustomerMouseClicked
+        // TODO add your handling code here:
+        new CustomerModal().setVisible(true);
+       
+        //this.setVisible(true);
+    }//GEN-LAST:event_addCustomerMouseClicked
+
+    
+     private void getAllProduct() {
+        List<Product> products = new ProductDAO().getAll();
+        String[] columnNames = {"Name", "Code", "Bar_Code", "Category", "Quantity", "Total price", "Selling Price", "Alert Qty"};
+        Object[][] data = new Object[products.size()][8];
+        for (int i = 0; i < products.size(); i++) {
+            Product s = products.get(i);
+            Object[] o = {s.getProductName(), s.getProductCode(), s.getProductBarCode(), s.getProductCategory(), s.getQuantity(),s.getToalPrice(), s.getSellingCost(),s.getAlertQty()};
+            for (int j = 0; j < 8; j++) {
+                data[i][j] = o[j];
+            }
+        }
+        DefaultTableModel model = new DefaultTableModel(data, columnNames);
+        productTable.setModel(model);
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -732,12 +787,12 @@ public class POSApp extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel addCustomer;
     private javax.swing.JPanel bg;
     private javax.swing.JLabel categoris;
+    private javax.swing.JComboBox<String> customerName;
     private javax.swing.JLabel dashboard;
     private javax.swing.JLabel giftCard;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
@@ -767,6 +822,7 @@ public class POSApp extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
@@ -779,6 +835,7 @@ public class POSApp extends javax.swing.JFrame {
     private javax.swing.JLabel people;
     private javax.swing.JLabel pos;
     private javax.swing.JLabel product;
+    private javax.swing.JTable productTable;
     private javax.swing.JLabel purchases;
     private javax.swing.JLabel reports;
     private javax.swing.JLabel sales;
