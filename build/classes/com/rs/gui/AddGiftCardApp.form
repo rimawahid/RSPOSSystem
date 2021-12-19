@@ -423,7 +423,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace min="0" pref="30" max="32767" attributes="0"/>
+                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -452,20 +452,26 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="jTextField1" alignment="0" min="-2" pref="327" max="-2" attributes="0"/>
-                              <Group type="102" alignment="0" attributes="0">
+                              <Group type="102" attributes="0">
                                   <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="cardNo" alignment="0" pref="533" max="32767" attributes="0"/>
-                                      <Component id="value" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="balance" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jLabel4" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
-                                      <Component id="jLabel6" alignment="0" min="-2" pref="106" max="-2" attributes="0"/>
-                                      <Component id="btnAddGiftCard" alignment="0" min="-2" pref="201" max="-2" attributes="0"/>
-                                      <Component id="jLabel2" alignment="0" min="-2" pref="127" max="-2" attributes="0"/>
-                                      <Component id="jLabel7" alignment="0" min="-2" pref="106" max="-2" attributes="0"/>
-                                      <Component id="jLabel8" alignment="0" min="-2" pref="106" max="-2" attributes="0"/>
-                                      <Component id="expiryDate" alignment="1" max="32767" attributes="0"/>
-                                      <Component id="createdBy" max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="cardNo" alignment="0" pref="533" max="32767" attributes="0"/>
+                                          <Component id="value" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="balance" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="jLabel4" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
+                                          <Component id="jLabel6" alignment="0" min="-2" pref="106" max="-2" attributes="0"/>
+                                          <Component id="jLabel2" alignment="0" min="-2" pref="127" max="-2" attributes="0"/>
+                                          <Component id="jLabel8" alignment="0" min="-2" pref="106" max="-2" attributes="0"/>
+                                          <Component id="createdBy" max="32767" attributes="0"/>
+                                          <Component id="jLabel7" alignment="0" min="-2" pref="106" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <Component id="btnAddGiftCard" min="-2" pref="201" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="295" max="-2" attributes="0"/>
+                                          <Component id="btnUpdate" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Component id="expiryDate" alignment="0" min="-2" pref="527" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                           </Group>
@@ -492,14 +498,17 @@
                           <Component id="balance" min="-2" pref="42" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="jLabel7" min="-2" pref="29" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="expiryDate" min="-2" pref="42" max="-2" attributes="0"/>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
+                          <Component id="expiryDate" min="-2" pref="42" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                           <Component id="jLabel8" min="-2" pref="29" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="createdBy" min="-2" pref="41" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-                          <Component id="btnAddGiftCard" min="-2" pref="47" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="3" attributes="0">
+                              <Component id="btnAddGiftCard" alignment="3" min="-2" pref="47" max="-2" attributes="0"/>
+                              <Component id="btnUpdate" alignment="3" min="-2" pref="47" max="-2" attributes="0"/>
+                          </Group>
                           <EmptySpace pref="34" max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -623,14 +632,6 @@
                     <Property name="text" type="java.lang.String" value="Created By"/>
                   </Properties>
                 </Component>
-                <Component class="com.toedter.calendar.JDateChooser" name="expiryDate">
-                  <Properties>
-                    <Property name="dateFormatString" type="java.lang.String" value="d MMM yyy"/>
-                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Calibri" size="20" style="1"/>
-                    </Property>
-                  </Properties>
-                </Component>
                 <Component class="javax.swing.JComboBox" name="createdBy">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -643,6 +644,25 @@
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                   </AuxValues>
+                </Component>
+                <Component class="com.toedter.calendar.JDateChooser" name="expiryDate">
+                </Component>
+                <Component class="javax.swing.JButton" name="btnUpdate">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="a9" green="7f" red="36" type="rgb"/>
+                    </Property>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Corbel" size="24" style="1"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Update Gift Card"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUpdateActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>

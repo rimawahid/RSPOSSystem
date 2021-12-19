@@ -9,6 +9,8 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,14 +27,14 @@ public class GiftCardDAO implements ICommonInterface<GiftCard> {
     public int save(GiftCard t) {
         String sql = "insert into gift (card_no, value, balance, expiry_date, created_by) values (?,?,?,?,?)";
         int status = 0;
-
+        
         try {
             con = DBConnection.getConnection();
             ps = con.prepareStatement(sql);
             ps.setString(1, Integer.valueOf(t.getCardNo()).toString());
             ps.setString(2, Integer.valueOf(t.getValue()).toString());
             ps.setString(3, Double.valueOf(t.getBalance()).toString());
-            ps.setDate(4, (Date) t.getExpiryDate());
+            ps.setDate(4, new Date(t.getExpiryDate().getTime()));
             //ps.setString(4, ((JTextField)Date.getDateEditor().getUiComponent()).getText());
             //ps.setString(4, ((JTextField)t.getExpiryDate().getDateEditor().getUiComponent()).getText());
             ps.setString(5, t.getCreatedBy());
@@ -59,8 +61,8 @@ public class GiftCardDAO implements ICommonInterface<GiftCard> {
             ps.setString(1, Integer.valueOf(t.getCardNo()).toString());
             ps.setString(2, Integer.valueOf(t.getValue()).toString());
             ps.setString(3, Double.valueOf(t.getBalance()).toString());
-            ps.setString(4, t.getCreatedBy());
-            ps.setDate(5, (Date) t.getExpiryDate());
+            ps.setDate(4, new Date(t.getExpiryDate().getTime()));
+             ps.setString(5, t.getCreatedBy());
             System.err.println(t.getExpiryDate());
             ps.setString(6, Integer.valueOf(t.getCardNo()).toString());
 
@@ -115,7 +117,7 @@ public class GiftCardDAO implements ICommonInterface<GiftCard> {
                 showGift.setCardNo(Integer.valueOf(rs.getString("card_no")));
                 showGift.setValue(Integer.valueOf(rs.getString("value")));
                 showGift.setBalance(Double.valueOf(rs.getString("balance")));
-                showGift.setExpiryDate(new Date(System.currentTimeMillis()));
+                showGift.setExpiryDate(rs.getDate("expiry_date"));
                 showGift.setCreatedBy(rs.getString("created_by"));
                 gift.add(showGift);
                 i++;

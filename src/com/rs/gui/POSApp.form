@@ -564,11 +564,11 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="jLabel2" min="-2" pref="102" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="97" max="-2" attributes="0"/>
-                              <Component id="jTextField3" min="-2" pref="48" max="-2" attributes="0"/>
+                              <Component id="totalQty" min="-2" pref="48" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
                               <Component id="jLabel3" min="-2" pref="63" max="-2" attributes="0"/>
                               <EmptySpace pref="105" max="32767" attributes="0"/>
-                              <Component id="jTextField4" min="-2" pref="67" max="-2" attributes="0"/>
+                              <Component id="totalPrice" min="-2" pref="67" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
@@ -579,9 +579,9 @@
                               <EmptySpace max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="3" attributes="0">
                                   <Component id="jLabel2" alignment="3" max="32767" attributes="0"/>
-                                  <Component id="jTextField3" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="totalQty" alignment="3" min="-2" max="-2" attributes="0"/>
                                   <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jTextField4" alignment="3" min="-2" max="-2" attributes="0"/>
+                                  <Component id="totalPrice" alignment="3" min="-2" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
@@ -597,7 +597,7 @@
                         <Property name="text" type="java.lang.String" value="Total Items"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="jTextField3">
+                    <Component class="javax.swing.JTextField" name="totalQty">
                       <Properties>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="f7" green="ed" red="d9" type="rgb"/>
@@ -622,15 +622,15 @@
                         <Property name="text" type="java.lang.String" value="Total"/>
                       </Properties>
                     </Component>
-                    <Component class="javax.swing.JTextField" name="jTextField4">
+                    <Component class="javax.swing.JTextField" name="totalPrice">
                       <Properties>
                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                           <Color blue="f7" green="ed" red="d9" type="rgb"/>
                         </Property>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Corbel" size="20" style="0"/>
+                          <Font name="Calibri" size="18" style="1"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="100.00"/>
+                        <Property name="text" type="java.lang.String" value="0.00"/>
                         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                           <Border info="null"/>
                         </Property>

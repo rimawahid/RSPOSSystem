@@ -11,9 +11,13 @@ import com.rs.dao.UserDAO;
 import com.rs.model.GiftCard;
 import com.rs.model.Supplier;
 import com.rs.model.User;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -83,8 +87,9 @@ public class AddGiftCardApp extends javax.swing.JFrame {
         btnAddGiftCard = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        expiryDate = new com.toedter.calendar.JDateChooser();
         createdBy = new javax.swing.JComboBox<>();
+        expiryDate = new com.toedter.calendar.JDateChooser();
+        btnUpdate = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -370,10 +375,17 @@ public class AddGiftCardApp extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
         jLabel8.setText("Created By");
 
-        expiryDate.setDateFormatString("d MMM yyy");
-        expiryDate.setFont(new java.awt.Font("Calibri", 1, 20)); // NOI18N
-
         createdBy.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
+
+        btnUpdate.setBackground(new java.awt.Color(54, 127, 169));
+        btnUpdate.setFont(new java.awt.Font("Corbel", 1, 24)); // NOI18N
+        btnUpdate.setForeground(new java.awt.Color(255, 255, 255));
+        btnUpdate.setText("Update Gift Card");
+        btnUpdate.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdateActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -385,18 +397,22 @@ public class AddGiftCardApp extends javax.swing.JFrame {
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(31, 31, 31)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(cardNo, javax.swing.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE)
-                            .addComponent(value)
-                            .addComponent(balance)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnAddGiftCard, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(expiryDate, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(createdBy, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(cardNo, javax.swing.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE)
+                                .addComponent(value)
+                                .addComponent(balance)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(createdBy, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(btnAddGiftCard, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(295, 295, 295)
+                                .addComponent(btnUpdate))
+                            .addComponent(expiryDate, javax.swing.GroupLayout.PREFERRED_SIZE, 527, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(974, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -418,14 +434,16 @@ public class AddGiftCardApp extends javax.swing.JFrame {
                 .addComponent(balance, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(expiryDate, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
+                .addComponent(expiryDate, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(createdBy, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(30, 30, 30)
-                .addComponent(btnAddGiftCard, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAddGiftCard, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(34, Short.MAX_VALUE))
         );
 
@@ -435,7 +453,7 @@ public class AddGiftCardApp extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 30, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -548,9 +566,8 @@ public class AddGiftCardApp extends javax.swing.JFrame {
         gift.setCardNo(Integer.valueOf(cardNo.getText()));
         gift.setValue(Integer.valueOf(value.getText()));
         gift.setBalance(Double.valueOf(balance.getText()));
-
         gift.setExpiryDate(expiryDate.getDate());
-        System.out.println(expiryDate.getDate());
+        //System.out.println(expiryDate.getDate());
         gift.setCreatedBy(createdBy.getSelectedItem().toString());
         int status = new GiftCardDAO().save(gift);
 
@@ -578,6 +595,25 @@ public class AddGiftCardApp extends javax.swing.JFrame {
         // TODO add your handling code here:
         randomNumbers();
     }//GEN-LAST:event_cardNoMouseClicked
+
+    private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
+        // TODO add your handling code here:
+        GiftCard gift = new GiftCard();
+        gift.setCardNo(Integer.valueOf(cardNo.getText()));
+        gift.setValue(Integer.valueOf(value.getText()));
+        gift.setBalance(Double.valueOf(balance.getText()));
+        gift.setExpiryDate(expiryDate.getDate());
+        //System.out.println(expiryDate.getDate());
+        gift.setCreatedBy(createdBy.getSelectedItem().toString());
+        int status = new GiftCardDAO().update(gift);
+
+        if (status > 0) {
+            JOptionPane.showMessageDialog(rootPane, "Gift Card Saved!");
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Gift Card NOT Saved!");
+        }
+        clearField();
+    }//GEN-LAST:event_btnUpdateActionPerformed
 //for random number
 
     public void randomNumbers() {
@@ -640,6 +676,7 @@ public class AddGiftCardApp extends javax.swing.JFrame {
     private javax.swing.JTextField balance;
     private javax.swing.JPanel bg;
     private javax.swing.JButton btnAddGiftCard;
+    private javax.swing.JButton btnUpdate;
     private javax.swing.JTextField cardNo;
     private javax.swing.JLabel categoris;
     private javax.swing.JComboBox<String> createdBy;

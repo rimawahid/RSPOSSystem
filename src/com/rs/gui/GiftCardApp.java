@@ -463,16 +463,14 @@ public class GiftCardApp extends javax.swing.JFrame {
         s.setCardNo(Integer.valueOf(giftTable.getValueAt(row, 0).toString()));
         s.setValue(Integer.valueOf(giftTable.getValueAt(row, 1).toString()));
         s.setBalance(Double.valueOf(giftTable.getValueAt(row, 2).toString()));
-
-        SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+        //s.setExpiryDate(Date.(giftTable.getValueAt(row, 2).toString()));  
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date date = null;
         try {
             date = sdf.parse(giftTable.getValueAt(row, 3).toString());
         } catch (ParseException ex) {
             Logger.getLogger(GiftCardApp.class.getName()).log(Level.SEVERE, null, ex);
         }
-//        Calendar cal = Calendar.getInstance();
-//        cal.setTime(date);
 
         s.setExpiryDate(date);
 

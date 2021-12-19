@@ -71,9 +71,9 @@ public class POSApp extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        totalQty = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        totalPrice = new javax.swing.JTextField();
         jPanel6 = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         jTextField6 = new javax.swing.JTextField();
@@ -372,19 +372,19 @@ public class POSApp extends javax.swing.JFrame {
         jLabel2.setFont(new java.awt.Font("Corbel", 0, 18)); // NOI18N
         jLabel2.setText("Total Items");
 
-        jTextField3.setBackground(new java.awt.Color(217, 237, 247));
-        jTextField3.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
-        jTextField3.setText("1");
-        jTextField3.setBorder(null);
+        totalQty.setBackground(new java.awt.Color(217, 237, 247));
+        totalQty.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
+        totalQty.setText("1");
+        totalQty.setBorder(null);
 
         jLabel3.setBackground(new java.awt.Color(217, 237, 247));
         jLabel3.setFont(new java.awt.Font("Corbel", 0, 18)); // NOI18N
         jLabel3.setText("Total");
 
-        jTextField4.setBackground(new java.awt.Color(217, 237, 247));
-        jTextField4.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
-        jTextField4.setText("100.00");
-        jTextField4.setBorder(null);
+        totalPrice.setBackground(new java.awt.Color(217, 237, 247));
+        totalPrice.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
+        totalPrice.setText("0.00");
+        totalPrice.setBorder(null);
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -394,11 +394,11 @@ public class POSApp extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(97, 97, 97)
-                .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(totalQty, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 105, Short.MAX_VALUE)
-                .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(totalPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
@@ -407,9 +407,9 @@ public class POSApp extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(totalQty, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(totalPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -758,6 +758,8 @@ public class POSApp extends javax.swing.JFrame {
         //this.setVisible(true);
     }//GEN-LAST:event_addCustomerMouseClicked
     Product p;
+    int tQty;
+    double tprice;
     private void searchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchMouseClicked
         // TODO add your handling code here:
         String pCode = productCode.getText();
@@ -772,8 +774,12 @@ public class POSApp extends javax.swing.JFrame {
         v.add(p.getProductName());
         v.add(p.getSellingCost());
         v.add(pQuantity);
+        tQty += pQuantity;
+        totalQty.setText(String.valueOf(tQty));
         v.add((p.getSellingCost() * pQuantity));
+        tprice += (p.getSellingCost() * pQuantity);
         model.addRow(v);
+        totalPrice.setText(String.valueOf(tprice));
         p = null;
         qty.setText(null);
     }//GEN-LAST:event_btnaddQtyMouseClicked
@@ -867,8 +873,6 @@ public class POSApp extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;
     private javax.swing.JTextField jTextField8;
@@ -887,5 +891,7 @@ public class POSApp extends javax.swing.JFrame {
     private javax.swing.JLabel setting;
     private javax.swing.JPanel sidemenubar;
     private javax.swing.JPanel topbar;
+    private javax.swing.JTextField totalPrice;
+    private javax.swing.JTextField totalQty;
     // End of variables declaration//GEN-END:variables
 }
