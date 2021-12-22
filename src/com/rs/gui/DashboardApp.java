@@ -662,7 +662,7 @@ public class DashboardApp extends javax.swing.JFrame {
     private void posMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_posMouseClicked
         // TODO add your handling code here:
         this.setVisible(false);
-        new POSApp().setVisible(true);
+        new POSApp2().setVisible(true);
     }//GEN-LAST:event_posMouseClicked
 
     private void productMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_productMouseClicked
@@ -714,7 +714,7 @@ public class DashboardApp extends javax.swing.JFrame {
     private void btnPOSMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPOSMouseClicked
         // TODO add your handling code here:
         this.setVisible(false);
-        new POSApp().setVisible(true);
+        new POSApp2().setVisible(true);
     }//GEN-LAST:event_btnPOSMouseClicked
 
     private void btnProductsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnProductsMouseClicked

@@ -5,9 +5,11 @@
  */
 package com.rs.gui;
 
-import com.rs.dao.AddStoreDAO;
+
+import com.rs.dao.StoreDAO;
 import com.rs.model.AddStore;
 import com.rs.model.Store;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,8 +21,13 @@ public class AddStoreApp extends javax.swing.JFrame {
     /**
      * Creates new form AddStoreApp
      */
+    List<Store> stores;
     public AddStoreApp() {
         initComponents();
+    }
+    AddStoreApp(Store s){
+        initComponents();
+        addValue(s);
     }
 
     /**
@@ -75,6 +82,7 @@ public class AddStoreApp extends javax.swing.JFrame {
         btnAddStore = new javax.swing.JButton();
         storeAddress = new javax.swing.JTextField();
         storeCity = new javax.swing.JComboBox<>();
+        btnUpdatestore = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -439,6 +447,16 @@ public class AddStoreApp extends javax.swing.JFrame {
         storeCity.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
         storeCity.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Dhaka", "Narayanganj" }));
 
+        btnUpdatestore.setBackground(new java.awt.Color(54, 127, 169));
+        btnUpdatestore.setFont(new java.awt.Font("Corbel", 1, 24)); // NOI18N
+        btnUpdatestore.setForeground(new java.awt.Color(255, 255, 255));
+        btnUpdatestore.setText("Update Store");
+        btnUpdatestore.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdatestoreActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -449,19 +467,24 @@ public class AddStoreApp extends javax.swing.JFrame {
                     .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 327, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addGap(31, 31, 31)
-                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnAddStore, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(storeName)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(storeCode)
-                            .addComponent(storeEmail)
-                            .addComponent(storePhone)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(storeAddress, javax.swing.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 275, Short.MAX_VALUE)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(storeName)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(storeCode)
+                                .addComponent(storeEmail)
+                                .addComponent(storePhone)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(storeAddress, javax.swing.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE))
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addGap(34, 34, 34)
+                                .addComponent(btnAddStore, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(308, 308, 308)
+                                .addComponent(btnUpdatestore, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 122, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -515,13 +538,16 @@ public class AddStoreApp extends javax.swing.JFrame {
                         .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(storeAddress, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(58, 58, 58)
-                        .addComponent(btnAddStore, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(45, 45, 45)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnAddStore, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnUpdatestore, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap(99, Short.MAX_VALUE))
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(storeCountry, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(32, 32, 32))
+                        .addComponent(storeCountry, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(32, 32, 32))))
         );
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -537,7 +563,7 @@ public class AddStoreApp extends javax.swing.JFrame {
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 703, Short.MAX_VALUE)
+            .addGap(0, 752, Short.MAX_VALUE)
             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel4Layout.createSequentialGroup()
                     .addGap(0, 0, Short.MAX_VALUE)
@@ -551,15 +577,17 @@ public class AddStoreApp extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(bg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(bg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -575,7 +603,7 @@ public class AddStoreApp extends javax.swing.JFrame {
     private void posMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_posMouseClicked
         // TODO add your handling code here:
         this.setVisible(false);
-        new POSApp().setVisible(true);
+        new POSApp2().setVisible(true);
     }//GEN-LAST:event_posMouseClicked
 
     private void productMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_productMouseClicked
@@ -625,9 +653,9 @@ public class AddStoreApp extends javax.swing.JFrame {
     }//GEN-LAST:event_reportsMouseClicked
 
     private void settingpageMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_settingpageMouseClicked
-       
-                this.setVisible(false);
-                new SettingApp().setVisible(true);
+
+        this.setVisible(false);
+        new SettingApp().setVisible(true);
     }//GEN-LAST:event_settingpageMouseClicked
 
     private void storeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_storeMouseClicked
@@ -638,37 +666,87 @@ public class AddStoreApp extends javax.swing.JFrame {
 
     private void addStoreMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addStoreMouseClicked
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_addStoreMouseClicked
 
     private void storeCodeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_storeCodeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_storeCodeActionPerformed
 
-    
-    public void addValue(Store s){
+    public void addValue(Store currentUser) {
+        Store s = new StoreDAO().getByID(currentUser.getId());
         storeName.setText(s.getStoreName());
+        storeCode.setText(s.getStoreCode());
+        storeEmail.setText(s.getStoreEmail());
+        storePhone.setText(s.getStorePhone());
+        storeAddress.setText(s.getStoreAddress());
+        String pt = s.getStoreCity();
+        stores = new StoreDAO().getAll();
+        System.out.println(pt);
+        for (int i = 0; i < stores.size(); i++) {
+            storeCity.addItem(stores.get(i).getStoreCity());
+            if (stores.get(i).getStoreCity().equals(pt)) {
+                storeCity.setSelectedItem(pt);
+            }
+
+        }
+        storeState.setText(s.getStoreState());
+        storePostalCode.setText(Integer.valueOf(s.getStorePostalCode()).toString());
+        storeCountry.setText(s.getStoreCountry());
     }
-    
+
     private void btnAddStoreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddStoreActionPerformed
-        AddStore store = new AddStore();
+        Store store = new Store();
         store.setStoreName(storeName.getText());
         store.setStoreCode(storeCode.getText());
         store.setStoreEmail(storeEmail.getText());
-        store.setstorePhone(storePhone.getText());
+        store.setStorePhone(storePhone.getText());
         store.setStoreAddress(storeAddress.getText());
         store.setStoreCity(storeCity.getSelectedItem().toString());
         store.setStoreState(storeState.getText());
         store.setStorePostalCode(Integer.valueOf(storePostalCode.getText()));
         store.setStoreCountry(storeCountry.getText());
-        int status = new AddStoreDAO().save(store);
-        if(status > 0){
+        int status = new StoreDAO().save(store);
+        if (status > 0) {
             JOptionPane.showMessageDialog(rootPane, "Store Saved!");
-        }else{
-             JOptionPane.showMessageDialog(rootPane, "Store Not Saved!");
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Store Not Saved!");
         }
-        
+
     }//GEN-LAST:event_btnAddStoreActionPerformed
+
+    private void btnUpdatestoreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdatestoreActionPerformed
+        // TODO add your handling code here:
+        Store store = new Store();
+        store.setStoreName(storeName.getText());
+        store.setStoreCode(storeCode.getText());
+        store.setStoreEmail(storeEmail.getText());
+        store.setStorePhone(storePhone.getText());
+        store.setStoreAddress(storeAddress.getText());
+        store.setStoreCity(storeCity.getSelectedItem().toString());
+        store.setStoreState(storeState.getText());
+        store.setStorePostalCode(Integer.valueOf(storePostalCode.getText()));
+        store.setStoreCountry(storeCountry.getText());
+        int status = new StoreDAO().update(store);
+        if (status > 0) {
+            JOptionPane.showMessageDialog(rootPane, "Store Update!");
+
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Store Not Update!");
+        }
+        this.setVisible(false);
+        new StoreApp().setVisible(true);
+    }//GEN-LAST:event_btnUpdatestoreActionPerformed
+
+    private void clearFields() {
+        storeName.setText("");
+        storeCode.setText("");
+        storeEmail.setText("");
+        storePhone.setText("");
+        storeAddress.setText("");
+    }
+
+   
 
     /**
      * @param args the command line arguments
@@ -709,6 +787,7 @@ public class AddStoreApp extends javax.swing.JFrame {
     private javax.swing.JLabel addStore;
     private javax.swing.JPanel bg;
     private javax.swing.JButton btnAddStore;
+    private javax.swing.JButton btnUpdatestore;
     private javax.swing.JLabel categoris;
     private javax.swing.JLabel dashboard;
     private javax.swing.JLabel giftCard;

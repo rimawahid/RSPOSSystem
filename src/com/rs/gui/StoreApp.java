@@ -5,7 +5,6 @@
  */
 package com.rs.gui;
 
-import com.rs.dao.AddStoreDAO;
 import com.rs.dao.StoreDAO;
 import com.rs.model.AddStore;
 import com.rs.model.Store;
@@ -63,7 +62,7 @@ public class StoreApp extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         storeTable = new javax.swing.JTable();
-        btnUpdateStore = new javax.swing.JButton();
+        btnEditStore = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -361,15 +360,20 @@ public class StoreApp extends javax.swing.JFrame {
             }
         ));
         storeTable.setRowHeight(28);
+        storeTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                storeTableMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(storeTable);
 
-        btnUpdateStore.setBackground(new java.awt.Color(54, 127, 169));
-        btnUpdateStore.setFont(new java.awt.Font("Corbel", 1, 24)); // NOI18N
-        btnUpdateStore.setForeground(new java.awt.Color(255, 255, 255));
-        btnUpdateStore.setText("Update Store");
-        btnUpdateStore.addActionListener(new java.awt.event.ActionListener() {
+        btnEditStore.setBackground(new java.awt.Color(54, 127, 169));
+        btnEditStore.setFont(new java.awt.Font("Corbel", 1, 24)); // NOI18N
+        btnEditStore.setForeground(new java.awt.Color(255, 255, 255));
+        btnEditStore.setText("Edit Store");
+        btnEditStore.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnUpdateStoreActionPerformed(evt);
+                btnEditStoreActionPerformed(evt);
             }
         });
 
@@ -378,12 +382,13 @@ public class StoreApp extends javax.swing.JFrame {
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(30, 30, 30)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGap(628, 628, 628)
-                        .addComponent(btnUpdateStore, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1499, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(30, 30, 30)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1499, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addGap(193, 193, 193)
+                        .addComponent(btnEditStore, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(31, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
@@ -391,9 +396,9 @@ public class StoreApp extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 61, Short.MAX_VALUE)
-                .addComponent(btnUpdateStore, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(58, 58, 58))
+                .addGap(56, 56, 56)
+                .addComponent(btnEditStore, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(63, Short.MAX_VALUE))
         );
 
         bg.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 260, 1560, 600));
@@ -426,7 +431,7 @@ public class StoreApp extends javax.swing.JFrame {
     private void posMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_posMouseClicked
         // TODO add your handling code here:
         this.setVisible(false);
-        new POSApp().setVisible(true);
+        new POSApp2().setVisible(true);
     }//GEN-LAST:event_posMouseClicked
 
     private void productMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_productMouseClicked
@@ -489,15 +494,12 @@ public class StoreApp extends javax.swing.JFrame {
         List<Store> stores = new StoreDAO().getAll();
         Store store = new Store();
 
-//        List<AddStore> stores = new AddStoreDAO().getAll();
-//        AddStore store = new AddStore();
-        String[] columnNames = {"Name", "Code", "Phone", "Email", "Address", "City"};
-        Object[][] data = new Object[stores.size()][6];
+        String[] columnNames = {"ID", "Name", "Code", "Phone", "Email", "Address", "City"};
+        Object[][] data = new Object[stores.size()][7];
         for (int i = 0; i < stores.size(); i++) {
-//            AddStore s = stores.get(i);
             Store s = stores.get(i);
-            Object[] o = {s.getStoreName(), s.getStoreCode(), s.getStorePhone(), s.getStoreEmail(), s.getStoreAddress(), s.getStoreCity(),};
-            for (int j = 0; j < 6; j++) {
+            Object[] o = {s.getId(), s.getStoreName(), s.getStoreCode(), s.getStorePhone(), s.getStoreEmail(), s.getStoreAddress(), s.getStoreCity(),};
+            for (int j = 0; j < 7; j++) {
                 data[i][j] = o[j];
             }
         }
@@ -510,26 +512,25 @@ public class StoreApp extends javax.swing.JFrame {
         this.setVisible(false);
         new AddStoreApp().setVisible(true);
     }//GEN-LAST:event_addStoreMouseClicked
+    Store s;
+    private void btnEditStoreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditStoreActionPerformed
+        new AddStoreApp(s).setVisible(true);
 
-    private void btnUpdateStoreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateStoreActionPerformed
-        //saiful vai
-        storeTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-            @Override
-            public void valueChanged(ListSelectionEvent e) {
-                Store s = new Store();
-                s.setStoreName(storeTable.getValueAt(storeTable.getSelectedRow(), 0).toString());
-                s.setStoreCode(storeTable.getValueAt(storeTable.getSelectedRow(), 1).toString());
-                s.setStorePhone(storeTable.getValueAt(storeTable.getSelectedRow(), 2).toString());
-                AddStoreApp ap = new AddStoreApp();
-                ap.setVisible(true);
-               ap.addValue(s);
-                
+    }//GEN-LAST:event_btnEditStoreActionPerformed
 
-            }
-        });
+    private void storeTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_storeTableMouseClicked
+        // TODO add your handling code here:
+        int row = storeTable.rowAtPoint(evt.getPoint());
+        s = new Store();
+        s.setId(Integer.valueOf(storeTable.getValueAt(row, 0).toString()));
+        s.setStoreName(storeTable.getValueAt(row, 1).toString());
+        s.setStoreCode(storeTable.getValueAt(row, 2).toString());
+        s.setStoreEmail(storeTable.getValueAt(row, 3).toString());
+        s.setStorePhone(storeTable.getValueAt(row, 4).toString());
+        s.setStoreAddress(storeTable.getValueAt(row, 5).toString());
+        s.setStoreCity(storeTable.getValueAt(row, 6).toString());
 
-
-    }//GEN-LAST:event_btnUpdateStoreActionPerformed
+    }//GEN-LAST:event_storeTableMouseClicked
 
     /**
      * @param args the command line arguments
@@ -570,7 +571,7 @@ public class StoreApp extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel addStore;
     private javax.swing.JPanel bg;
-    private javax.swing.JButton btnUpdateStore;
+    private javax.swing.JButton btnEditStore;
     private javax.swing.JLabel categoris;
     private javax.swing.JLabel dashboard;
     private javax.swing.JLabel giftCard;

@@ -34,9 +34,7 @@ public class GiftCardDAO implements ICommonInterface<GiftCard> {
             ps.setString(1, Integer.valueOf(t.getCardNo()).toString());
             ps.setString(2, Integer.valueOf(t.getValue()).toString());
             ps.setString(3, Double.valueOf(t.getBalance()).toString());
-            ps.setDate(4, new Date(t.getExpiryDate().getTime()));
-            //ps.setString(4, ((JTextField)Date.getDateEditor().getUiComponent()).getText());
-            //ps.setString(4, ((JTextField)t.getExpiryDate().getDateEditor().getUiComponent()).getText());
+            ps.setDate(4, new Date(t.getExpiryDate().getTime()));            
             ps.setString(5, t.getCreatedBy());
             status = ps.executeUpdate();
         } catch (SQLException ex) {

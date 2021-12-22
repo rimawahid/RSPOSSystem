@@ -56,8 +56,6 @@ public class CategoryApp extends javax.swing.JFrame {
         reports = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         categoriesTable = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        categoryTable = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
@@ -68,6 +66,8 @@ public class CategoryApp extends javax.swing.JFrame {
         btnDeleteCategory = new javax.swing.JButton();
         btnUpdateCategory = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        categoryTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -248,39 +248,8 @@ public class CategoryApp extends javax.swing.JFrame {
         bg.add(sidemenubar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 82, -1, 1000));
 
         jLabel1.setFont(new java.awt.Font("Corbel", 0, 36)); // NOI18N
-        jLabel1.setText(" AddCategories");
+        jLabel1.setText("Categories");
         bg.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 550, 270, 70));
-
-        categoryTable.setFont(new java.awt.Font("Calibri", 1, 20)); // NOI18N
-        categoryTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-
-            }
-        ));
-        categoryTable.setRowHeight(28);
-        jScrollPane1.setViewportView(categoryTable);
-
-        javax.swing.GroupLayout categoriesTableLayout = new javax.swing.GroupLayout(categoriesTable);
-        categoriesTable.setLayout(categoriesTableLayout);
-        categoriesTableLayout.setHorizontalGroup(
-            categoriesTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, categoriesTableLayout.createSequentialGroup()
-                .addContainerGap(32, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1558, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30))
-        );
-        categoriesTableLayout.setVerticalGroup(
-            categoriesTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(categoriesTableLayout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(34, Short.MAX_VALUE))
-        );
-
-        bg.add(categoriesTable, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 180, 1620, 350));
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -386,11 +355,42 @@ public class CategoryApp extends javax.swing.JFrame {
                     .addGap(23, 23, 23)))
         );
 
-        bg.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 630, 1560, 290));
+        javax.swing.GroupLayout categoriesTableLayout = new javax.swing.GroupLayout(categoriesTable);
+        categoriesTable.setLayout(categoriesTableLayout);
+        categoriesTableLayout.setHorizontalGroup(
+            categoriesTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, categoriesTableLayout.createSequentialGroup()
+                .addContainerGap(32, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28))
+        );
+        categoriesTableLayout.setVerticalGroup(
+            categoriesTableLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(categoriesTableLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(47, Short.MAX_VALUE))
+        );
+
+        bg.add(categoriesTable, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 180, 1620, 350));
 
         jLabel3.setFont(new java.awt.Font("Corbel", 0, 36)); // NOI18N
-        jLabel3.setText("Categories");
+        jLabel3.setText("Add Categories");
         bg.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 110, 270, 70));
+
+        categoryTable.setFont(new java.awt.Font("Calibri", 1, 20)); // NOI18N
+        categoryTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        categoryTable.setRowHeight(28);
+        jScrollPane1.setViewportView(categoryTable);
+
+        bg.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 650, 1558, 286));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -414,7 +414,7 @@ public class CategoryApp extends javax.swing.JFrame {
     private void posMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_posMouseClicked
         // TODO add your handling code here:
         this.setVisible(false);
-        new POSApp().setVisible(true);
+        new POSApp2().setVisible(true);
     }//GEN-LAST:event_posMouseClicked
 
     private void productMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_productMouseClicked

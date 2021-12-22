@@ -6,11 +6,19 @@
 package com.rs.gui;
 
 import com.rs.dao.AddCustomerDAO;
+import com.rs.dao.POSDAO;
 import com.rs.dao.ProductDAO;
 import com.rs.model.Customer;
+import com.rs.model.POS;
 import com.rs.model.Product;
+import java.awt.event.KeyEvent;
+import java.awt.print.PrinterException;
 import java.util.List;
+import java.util.Random;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -26,7 +34,7 @@ public class POSApp extends javax.swing.JFrame {
 
     public POSApp() {
         initComponents();
-        getAllProduct();
+       // getAllProduct();
         customer = new AddCustomerDAO().getAll();
         for (int i = 0; i < customer.size(); i++) {
             customerName.addItem(customer.get(i).getCustomerName());
@@ -56,50 +64,51 @@ public class POSApp extends javax.swing.JFrame {
         people = new javax.swing.JLabel();
         setting = new javax.swing.JLabel();
         reports = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
+        showPOS = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
-        customerName = new javax.swing.JComboBox<>();
-        addCustomer = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        search = new javax.swing.JLabel();
-        productCode = new javax.swing.JTextField();
-        qty = new javax.swing.JTextField();
-        btnaddQty = new javax.swing.JLabel();
-        jPanel3 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        posTable = new javax.swing.JTable();
-        jPanel4 = new javax.swing.JPanel();
-        jPanel5 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        totalQty = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        totalPrice = new javax.swing.JTextField();
-        jPanel6 = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
-        jPanel7 = new javax.swing.JPanel();
-        jLabel6 = new javax.swing.JLabel();
-        jTextField7 = new javax.swing.JTextField();
-        jLabel7 = new javax.swing.JLabel();
-        jTextField8 = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
+        invoice = new javax.swing.JTextField();
         jPanel8 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
         jPanel9 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jPanel10 = new javax.swing.JPanel();
-        jLabel10 = new javax.swing.JLabel();
+        btnpayment = new javax.swing.JLabel();
         jPanel11 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jPanel12 = new javax.swing.JPanel();
-        jLabel12 = new javax.swing.JLabel();
+        printBill = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        productTable = new javax.swing.JTable();
+        productCode = new javax.swing.JTextField();
+        search = new javax.swing.JLabel();
         jPanel13 = new javax.swing.JPanel();
         jPanel14 = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
         jPanel15 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jLabel13 = new javax.swing.JLabel();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        productTable = new javax.swing.JTable();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        posTable = new javax.swing.JTable();
+        jPanel5 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        totalQty = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        totalPrice = new javax.swing.JTextField();
+        jPanel7 = new javax.swing.JPanel();
+        discount = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        vat = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        jPanel6 = new javax.swing.JPanel();
+        totalPayable = new javax.swing.JLabel();
+        totalPayAmountVlaue = new javax.swing.JTextField();
+        customerName = new javax.swing.JComboBox<>();
+        addCustomer = new javax.swing.JLabel();
+        btnRemove = new javax.swing.JButton();
+        qty = new javax.swing.JTextField();
+        btnaddQty = new javax.swing.JLabel();
+        btnAdd = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -279,228 +288,24 @@ public class POSApp extends javax.swing.JFrame {
 
         bg.add(sidemenubar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 82, -1, 1000));
 
-        jPanel1.setBackground(new java.awt.Color(245, 245, 245));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        showPOS.setBackground(new java.awt.Color(245, 245, 245));
+        showPOS.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBackground(new java.awt.Color(245, 245, 245));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        customerName.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
-        jPanel2.add(customerName, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 500, 42));
+        jLabel1.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
+        jLabel1.setText("Invoice");
+        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, -1, -1));
 
-        addCustomer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/posicon.png"))); // NOI18N
-        addCustomer.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
-        addCustomer.addMouseListener(new java.awt.event.MouseAdapter() {
+        invoice.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                addCustomerMouseClicked(evt);
+                invoiceMouseClicked(evt);
             }
         });
-        jPanel2.add(addCustomer, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 20, 40, 42));
+        jPanel2.add(invoice, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 40, 190, 30));
 
-        jTextField1.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
-        jTextField1.setForeground(new java.awt.Color(204, 204, 204));
-        jTextField1.setText("Reference Note");
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
-            }
-        });
-        jPanel2.add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 80, 540, 42));
-
-        search.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8-search-36.png"))); // NOI18N
-        search.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
-        search.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                searchMouseClicked(evt);
-            }
-        });
-        jPanel2.add(search, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 140, 40, 40));
-        jPanel2.add(productCode, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 140, 380, 40));
-        jPanel2.add(qty, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 140, 70, 40));
-
-        btnaddQty.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/addCart.png"))); // NOI18N
-        btnaddQty.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
-        btnaddQty.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                btnaddQtyMouseClicked(evt);
-            }
-        });
-        jPanel2.add(btnaddQty, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 140, 40, 40));
-
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 640, 180));
-
-        posTable.setBackground(new java.awt.Color(223, 240, 216));
-        posTable.setFont(new java.awt.Font("Calibri", 1, 20)); // NOI18N
-        posTable.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Product", "Price", "Qty", "Subtotal"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, true, true, true
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        posTable.setGridColor(new java.awt.Color(255, 255, 255));
-        posTable.setRowHeight(28);
-        jScrollPane1.setViewportView(posTable);
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 540, Short.MAX_VALUE)
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
-        );
-
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 210, 540, 320));
-
-        jPanel4.setBackground(new java.awt.Color(255, 255, 255));
-        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jPanel5.setBackground(new java.awt.Color(217, 237, 247));
-
-        jLabel2.setFont(new java.awt.Font("Corbel", 0, 18)); // NOI18N
-        jLabel2.setText("Total Items");
-
-        totalQty.setBackground(new java.awt.Color(217, 237, 247));
-        totalQty.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
-        totalQty.setText("1");
-        totalQty.setBorder(null);
-
-        jLabel3.setBackground(new java.awt.Color(217, 237, 247));
-        jLabel3.setFont(new java.awt.Font("Corbel", 0, 18)); // NOI18N
-        jLabel3.setText("Total");
-
-        totalPrice.setBackground(new java.awt.Color(217, 237, 247));
-        totalPrice.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
-        totalPrice.setText("0.00");
-        totalPrice.setBorder(null);
-
-        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
-        jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(97, 97, 97)
-                .addComponent(totalQty, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
-                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 105, Short.MAX_VALUE)
-                .addComponent(totalPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(totalQty, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3)
-                    .addComponent(totalPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
-        );
-
-        jPanel4.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 540, 50));
-
-        jPanel6.setBackground(new java.awt.Color(223, 240, 216));
-
-        jLabel4.setBackground(new java.awt.Color(114, 175, 210));
-        jLabel4.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
-        jLabel4.setText("Total Payable");
-
-        jTextField6.setBackground(new java.awt.Color(223, 240, 216));
-        jTextField6.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
-        jTextField6.setText("100.00");
-        jTextField6.setBorder(null);
-
-        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
-        jPanel6.setLayout(jPanel6Layout);
-        jPanel6Layout.setHorizontalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel6Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 296, Short.MAX_VALUE)
-                .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        jPanel6Layout.setVerticalGroup(
-            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
-                .addGap(6, 6, 6)
-                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
-        );
-
-        jPanel4.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 110, 540, 42));
-
-        jPanel7.setBackground(new java.awt.Color(217, 237, 247));
-
-        jLabel6.setBackground(new java.awt.Color(114, 175, 210));
-        jLabel6.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(114, 175, 210));
-        jLabel6.setText("Discount");
-
-        jTextField7.setBackground(new java.awt.Color(217, 237, 247));
-        jTextField7.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
-        jTextField7.setText("1");
-        jTextField7.setBorder(null);
-
-        jLabel7.setBackground(new java.awt.Color(217, 237, 247));
-        jLabel7.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(114, 175, 210));
-        jLabel7.setText("Order Tax");
-
-        jTextField8.setBackground(new java.awt.Color(217, 237, 247));
-        jTextField8.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
-        jTextField8.setText("100.00");
-        jTextField8.setBorder(null);
-
-        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
-        jPanel7.setLayout(jPanel7Layout);
-        jPanel7Layout.setHorizontalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel7Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(98, 98, 98)
-                .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 83, Short.MAX_VALUE)
-                .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        jPanel7Layout.setVerticalGroup(
-            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                .addGap(6, 6, 6)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
-                    .addComponent(jTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7)
-                    .addComponent(jTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
-        );
-
-        jPanel4.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 60, 540, 42));
-
-        jPanel1.add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 550, 540, 150));
+        showPOS.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 630, 90));
 
         jPanel8.setBackground(new java.awt.Color(224, 142, 11));
         jPanel8.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -510,7 +315,7 @@ public class POSApp extends javax.swing.JFrame {
         jLabel11.setText("Hold");
         jPanel8.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 10, -1, -1));
 
-        jPanel1.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 730, 170, 50));
+        showPOS.add(jPanel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 730, 170, 50));
 
         jPanel9.setBackground(new java.awt.Color(215, 57, 37));
 
@@ -535,32 +340,37 @@ public class POSApp extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 780, 170, 50));
+        showPOS.add(jPanel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 780, 170, 50));
 
         jPanel10.setBackground(new java.awt.Color(0, 166, 90));
 
-        jLabel10.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel10.setText("Payment");
+        btnpayment.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
+        btnpayment.setForeground(new java.awt.Color(255, 255, 255));
+        btnpayment.setText("Payment");
+        btnpayment.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnpaymentMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel10Layout = new javax.swing.GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
         jPanel10Layout.setHorizontalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel10Layout.createSequentialGroup()
-                .addGap(43, 43, 43)
-                .addComponent(jLabel10)
-                .addContainerGap(59, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel10Layout.createSequentialGroup()
+                .addContainerGap(54, Short.MAX_VALUE)
+                .addComponent(btnpayment)
+                .addGap(48, 48, 48))
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addGap(37, 37, 37)
-                .addComponent(jLabel10)
+                .addComponent(btnpayment)
                 .addContainerGap(38, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 730, 180, 100));
+        showPOS.add(jPanel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 730, 180, 100));
 
         jPanel11.setBackground(new java.awt.Color(96, 92, 168));
         jPanel11.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -570,13 +380,18 @@ public class POSApp extends javax.swing.JFrame {
         jLabel8.setText("Print Order");
         jPanel11.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, -1, -1));
 
-        jPanel1.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 730, 170, 50));
+        showPOS.add(jPanel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 730, 170, 50));
 
         jPanel12.setBackground(new java.awt.Color(0, 26, 53));
 
-        jLabel12.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
-        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel12.setText("Print Bill");
+        printBill.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
+        printBill.setForeground(new java.awt.Color(255, 255, 255));
+        printBill.setText("Print Bill");
+        printBill.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                printBillMouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
         jPanel12.setLayout(jPanel12Layout);
@@ -584,20 +399,56 @@ public class POSApp extends javax.swing.JFrame {
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel12Layout.createSequentialGroup()
                 .addGap(45, 45, 45)
-                .addComponent(jLabel12)
+                .addComponent(printBill)
                 .addContainerGap(51, Short.MAX_VALUE))
         );
         jPanel12Layout.setVerticalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel12Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel12)
+                .addComponent(printBill)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 780, 170, 50));
+        showPOS.add(jPanel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 780, 170, 50));
 
-        bg.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 120, 610, 870));
+        productTable.setFont(new java.awt.Font("Calibri", 1, 20)); // NOI18N
+        productTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        productTable.setRowHeight(28);
+        jScrollPane2.setViewportView(productTable);
+
+        showPOS.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 160, 560, 350));
+
+        productCode.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                productCodeKeyPressed(evt);
+            }
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                productCodeKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                productCodeKeyTyped(evt);
+            }
+        });
+        showPOS.add(productCode, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, 340, 40));
+
+        search.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8-search-36.png"))); // NOI18N
+        search.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        search.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                searchMouseClicked(evt);
+            }
+        });
+        showPOS.add(search, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 100, 40, 40));
+
+        bg.add(showPOS, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 120, 610, 870));
 
         jPanel13.setBackground(new java.awt.Color(239, 197, 137));
         jPanel13.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -656,19 +507,203 @@ public class POSApp extends javax.swing.JFrame {
 
         bg.add(jPanel13, new org.netbeans.lib.awtextra.AbsoluteConstraints(950, 940, 950, 50));
 
-        productTable.setFont(new java.awt.Font("Calibri", 1, 20)); // NOI18N
-        productTable.setModel(new javax.swing.table.DefaultTableModel(
+        posTable.setBackground(new java.awt.Color(223, 240, 216));
+        posTable.setFont(new java.awt.Font("Calibri", 1, 20)); // NOI18N
+        posTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-
+                "Product", "Price", "Qty", "Subtotal"
             }
-        ));
-        productTable.setRowHeight(28);
-        jScrollPane2.setViewportView(productTable);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, true, true, true
+            };
 
-        bg.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(970, 150, 900, -1));
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        posTable.setGridColor(new java.awt.Color(255, 255, 255));
+        posTable.setRowHeight(28);
+        jScrollPane1.setViewportView(posTable);
+
+        bg.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 300, 540, 320));
+
+        jPanel5.setBackground(new java.awt.Color(217, 237, 247));
+
+        jLabel2.setFont(new java.awt.Font("Corbel", 0, 18)); // NOI18N
+        jLabel2.setText("Total Items");
+
+        totalQty.setBackground(new java.awt.Color(217, 237, 247));
+        totalQty.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
+        totalQty.setText("0");
+        totalQty.setBorder(null);
+
+        jLabel3.setBackground(new java.awt.Color(217, 237, 247));
+        jLabel3.setFont(new java.awt.Font("Corbel", 0, 18)); // NOI18N
+        jLabel3.setText("Total");
+
+        totalPrice.setBackground(new java.awt.Color(217, 237, 247));
+        totalPrice.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
+        totalPrice.setText("0.00");
+        totalPrice.setBorder(null);
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(97, 97, 97)
+                .addComponent(totalQty, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(34, 34, 34)
+                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 105, Short.MAX_VALUE)
+                .addComponent(totalPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(totalQty, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel3)
+                    .addComponent(totalPrice, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+
+        bg.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 640, -1, 50));
+
+        jPanel7.setBackground(new java.awt.Color(217, 237, 247));
+
+        discount.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
+        discount.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        discount.setPreferredSize(new java.awt.Dimension(6, 29));
+
+        jLabel7.setBackground(new java.awt.Color(217, 237, 247));
+        jLabel7.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(114, 175, 210));
+        jLabel7.setText("Order Vat");
+
+        vat.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
+
+        jLabel12.setBackground(new java.awt.Color(217, 237, 247));
+        jLabel12.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(114, 175, 210));
+        jLabel12.setText("Discount");
+
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(107, 107, 107)
+                .addComponent(discount, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(51, 51, 51)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
+                .addComponent(vat, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31))
+        );
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGap(6, 6, 6)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(discount, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel7)
+                        .addComponent(jLabel12))
+                    .addComponent(vat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+
+        bg.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 720, -1, 42));
+
+        jPanel6.setBackground(new java.awt.Color(223, 240, 216));
+
+        totalPayable.setBackground(new java.awt.Color(114, 175, 210));
+        totalPayable.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
+        totalPayable.setText("Total Payable");
+        totalPayable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                totalPayableMouseClicked(evt);
+            }
+        });
+
+        totalPayAmountVlaue.setBackground(new java.awt.Color(223, 240, 216));
+        totalPayAmountVlaue.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
+        totalPayAmountVlaue.setText("0.00");
+        totalPayAmountVlaue.setBorder(null);
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(totalPayable, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 296, Short.MAX_VALUE)
+                .addComponent(totalPayAmountVlaue, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
+                .addGap(6, 6, 6)
+                .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(totalPayable, javax.swing.GroupLayout.DEFAULT_SIZE, 27, Short.MAX_VALUE)
+                    .addComponent(totalPayAmountVlaue, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+
+        bg.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 790, -1, 42));
+
+        customerName.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
+        bg.add(customerName, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 150, 500, 42));
+
+        addCustomer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/posicon.png"))); // NOI18N
+        addCustomer.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        addCustomer.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                addCustomerMouseClicked(evt);
+            }
+        });
+        bg.add(addCustomer, new org.netbeans.lib.awtextra.AbsoluteConstraints(1570, 150, 40, 42));
+
+        btnRemove.setBackground(new java.awt.Color(255, 255, 255));
+        btnRemove.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8-delete-36.png"))); // NOI18N
+        btnRemove.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemoveActionPerformed(evt);
+            }
+        });
+        bg.add(btnRemove, new org.netbeans.lib.awtextra.AbsoluteConstraints(1570, 230, 40, -1));
+        bg.add(qty, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 230, 60, 40));
+
+        btnaddQty.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/addCart.png"))); // NOI18N
+        btnaddQty.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+        btnaddQty.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnaddQtyMouseClicked(evt);
+            }
+        });
+        bg.add(btnaddQty, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 230, 40, 40));
+
+        btnAdd.setText("add");
+        btnAdd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAddActionPerformed(evt);
+            }
+        });
+        bg.add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 870, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -747,10 +782,6 @@ public class POSApp extends javax.swing.JFrame {
         new DashboardApp().setVisible(true);
     }//GEN-LAST:event_dashboardMouseClicked
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
-
     private void addCustomerMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addCustomerMouseClicked
         // TODO add your handling code here:
         new CustomerModal().setVisible(true);
@@ -762,27 +793,155 @@ public class POSApp extends javax.swing.JFrame {
     double tprice;
     private void searchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchMouseClicked
         // TODO add your handling code here:
-        String pCode = productCode.getText();
-        p = new ProductDAO().getByCode(pCode);
+//         String pCode = productCode.getText();
+//        p = new ProductDAO().getByCode(pCode);
+// TODO add your handling code here:
+     
     }//GEN-LAST:event_searchMouseClicked
 
     private void btnaddQtyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnaddQtyMouseClicked
-        // TODO add your handling code here:
-        int pQuantity = Integer.valueOf(qty.getText());
-        DefaultTableModel model = (DefaultTableModel) posTable.getModel();
-        Vector v = new Vector();
-        v.add(p.getProductName());
-        v.add(p.getSellingCost());
-        v.add(pQuantity);
-        tQty += pQuantity;
-        totalQty.setText(String.valueOf(tQty));
-        v.add((p.getSellingCost() * pQuantity));
-        tprice += (p.getSellingCost() * pQuantity);
-        model.addRow(v);
-        totalPrice.setText(String.valueOf(tprice));
-        p = null;
-        qty.setText(null);
+        // TODO add your handling code here://     
+        String pCode = productCode.getText();
+        p = new Product();
+         int row = productTable.rowAtPoint(evt.getPoint());
+         p.setProductCode(productTable.getValueAt(productTable.getSelectedRow(), 1).toString());
+         p.setProductName(productTable.getValueAt(productTable.getSelectedRow(), 0).toString());
+         p.setSellingCost(Double.valueOf(productTable.getValueAt(productTable.getSelectedRow(), 6).toString()));
+       
+        
+        if (p.getProductCode() != null) {
+            int pQuantity = Integer.valueOf(qty.getText());
+            DefaultTableModel model = (DefaultTableModel) posTable.getModel();
+            Vector v = new Vector();
+            v.add(p.getProductName());
+            v.add(p.getSellingCost());
+            v.add(pQuantity);
+            tQty += pQuantity;
+            totalQty.setText(String.valueOf(tQty));
+            v.add((p.getSellingCost() * pQuantity));
+            tprice += (p.getSellingCost() * pQuantity);
+            model.addRow(v);
+            totalPrice.setText(String.valueOf(tprice));
+            p = null;
+            qty.setText(null);
+        } else {
+            System.out.println("NOT null");
+            JOptionPane.showMessageDialog(rootPane, "NOT Found");
+        }
     }//GEN-LAST:event_btnaddQtyMouseClicked
+
+    private void printBillMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_printBillMouseClicked
+        try {
+            // TODO add your handling code here:
+            posTable.print();
+        } catch (PrinterException ex) {
+            Logger.getLogger(POSApp.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_printBillMouseClicked
+    int row;
+    private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveActionPerformed
+        // TODO add your handling code here:
+        // System.err.println(posTable.getRowCount());
+        int totalQuantity = Integer.valueOf(posTable.getValueAt(row, 2).toString());
+        // System.out.println(totalAmount);
+        int qtyAfterDeduction = Integer.valueOf(totalQty.getText()) - totalQuantity;
+        tQty = tQty - totalQuantity;
+        totalQty.setText(String.valueOf(qtyAfterDeduction));
+        
+        double totalAmount = Double.valueOf(posTable.getValueAt(row, 3).toString());
+        double amoutAfterDeduction = Double.valueOf(totalPrice.getText()) - totalAmount;
+        tprice = tprice - totalAmount;
+        totalPrice.setText(String.valueOf(amoutAfterDeduction));
+
+        if (posTable.getRowCount() == 1) {
+            totalPrice.setText(String.valueOf(0.00));
+            tprice = 0.0;  
+        }
+        if (posTable.getRowCount() == 1) {
+            totalQty.setText(String.valueOf(0));
+            tQty = 0;
+            
+            
+        }
+        ((DefaultTableModel) posTable.getModel()).removeRow(row);
+    }//GEN-LAST:event_btnRemoveActionPerformed
+
+    private void totalPayableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_totalPayableMouseClicked
+        // TODO add your handling code here:
+         double totalAmount = Double.valueOf(totalPrice.getText());
+        double dcount = Double.valueOf(discount.getText()) / 100;
+        double sellingvat = Double.valueOf(vat.getText()) / 100;
+//        System.out.println(discount);
+//        System.out.println(vat);
+        totalAmount = totalAmount - (totalAmount * dcount);
+        totalAmount = totalAmount + (totalAmount * sellingvat);
+        // totalAmount *= vat;
+        totalPayAmountVlaue.setText(String.valueOf(totalAmount));
+    }//GEN-LAST:event_totalPayableMouseClicked
+
+    private void btnpaymentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnpaymentMouseClicked
+        // TODO add your handling code here:
+        new PayMethod().setVisible(true);
+    }//GEN-LAST:event_btnpaymentMouseClicked
+
+    private void productCodeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_productCodeKeyTyped
+        // TODO add your handling code here:
+        
+        //code
+        
+        
+        
+    }//GEN-LAST:event_productCodeKeyTyped
+
+    private void productCodeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_productCodeKeyReleased
+  
+    }//GEN-LAST:event_productCodeKeyReleased
+
+    private void productCodeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_productCodeKeyPressed
+        // TODO add your handling code here:
+        
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            String pName = productCode.getText();
+         List<Product> products = new ProductDAO().getByName(pName);
+        String[] columnNames = {"Name", "Code", "Bar_Code", "Category", "Quantity", "Total price", "Selling Price", "Alert Qty"};
+        Object[][] data = new Object[products.size()][8];
+        for (int i = 0; i < products.size(); i++) {
+            Product s = products.get(i);
+            Object[] o = {s.getProductName(), s.getProductCode(), s.getProductBarCode(), s.getProductCategory(), s.getQuantity(), s.getToalPrice(), s.getSellingCost(), s.getAlertQty()};
+            for (int j = 0; j < 8; j++) {
+                data[i][j] = o[j];
+            }
+        }
+        DefaultTableModel model = new DefaultTableModel(data, columnNames);
+        productTable.setModel(model);
+        }
+      
+    }//GEN-LAST:event_productCodeKeyPressed
+
+    private void invoiceMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_invoiceMouseClicked
+        // TODO add your handling code here:
+         Random ran = new Random();
+        int n = ran.nextInt(10000) + 1;
+        String val = String.valueOf(n);
+        invoice.setText(val);
+    }//GEN-LAST:event_invoiceMouseClicked
+
+    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
+        // TODO add your handling code here:
+        POS pos = new POS();
+        pos.setInvoice(Integer.valueOf(invoice.getText()));
+        pos.setTotalQty(Integer.valueOf(totalQty.getText()));
+        pos.setTotalPrice(Double.valueOf(totalPrice.getText()));
+        pos.setDiscount(Double.valueOf(discount.getText()));
+        pos.setVat(Double.valueOf(vat.getText()));
+        pos.setTotalPayAmountVlaue(Double.valueOf(totalPayAmountVlaue.getText()));
+        int status = new POSDAO().save(pos);
+        if (status > 0) {
+            JOptionPane.showMessageDialog(rootPane, "pos Saved!");
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "pos NOT Saved!");
+        }
+    }//GEN-LAST:event_btnAddActionPerformed
 
     private void getAllProduct() {
         List<Product> products = new ProductDAO().getAll();
@@ -825,6 +984,9 @@ public class POSApp extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(POSApp.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -837,25 +999,27 @@ public class POSApp extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel addCustomer;
     private javax.swing.JPanel bg;
+    private javax.swing.JButton btnAdd;
+    private javax.swing.JButton btnRemove;
     private javax.swing.JLabel btnaddQty;
+    private javax.swing.JLabel btnpayment;
     private javax.swing.JLabel categoris;
     private javax.swing.JComboBox<String> customerName;
     private javax.swing.JLabel dashboard;
+    private javax.swing.JTextField discount;
     private javax.swing.JLabel giftCard;
-    private javax.swing.JLabel jLabel10;
+    private javax.swing.JTextField invoice;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
@@ -863,8 +1027,6 @@ public class POSApp extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
@@ -872,14 +1034,11 @@ public class POSApp extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JTextField jTextField8;
     private javax.swing.JLabel logo;
     private javax.swing.JLabel people;
     private javax.swing.JLabel pos;
     private javax.swing.JTable posTable;
+    private javax.swing.JLabel printBill;
     private javax.swing.JLabel product;
     private javax.swing.JTextField productCode;
     private javax.swing.JTable productTable;
@@ -889,9 +1048,13 @@ public class POSApp extends javax.swing.JFrame {
     private javax.swing.JLabel sales;
     private javax.swing.JLabel search;
     private javax.swing.JLabel setting;
+    private javax.swing.JPanel showPOS;
     private javax.swing.JPanel sidemenubar;
     private javax.swing.JPanel topbar;
+    private javax.swing.JTextField totalPayAmountVlaue;
+    private javax.swing.JLabel totalPayable;
     private javax.swing.JTextField totalPrice;
     private javax.swing.JTextField totalQty;
+    private javax.swing.JTextField vat;
     // End of variables declaration//GEN-END:variables
 }

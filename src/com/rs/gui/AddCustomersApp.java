@@ -7,6 +7,7 @@ package com.rs.gui;
 
 import com.rs.dao.AddCustomerDAO;
 import com.rs.model.Customer;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 /**
@@ -18,8 +19,13 @@ public class AddCustomersApp extends javax.swing.JFrame {
     /**
      * Creates new form AddCustomersApp
      */
+    List<Customer> Customer;
     public AddCustomersApp() {
         initComponents();
+    }
+    AddCustomersApp(Customer s){
+        initComponents();
+        addValue(s);
     }
 
     /**
@@ -506,7 +512,7 @@ public class AddCustomersApp extends javax.swing.JFrame {
     private void posMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_posMouseClicked
         // TODO add your handling code here:
         this.setVisible(false);
-        new POSApp().setVisible(true);
+        new POSApp2().setVisible(true);
     }//GEN-LAST:event_posMouseClicked
 
     private void productMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_productMouseClicked

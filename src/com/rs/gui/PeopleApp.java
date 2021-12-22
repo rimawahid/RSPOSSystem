@@ -9,8 +9,6 @@ import com.rs.dao.UserDAO;
 import com.rs.model.User;
 import java.util.List;
 import javax.swing.JOptionPane;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -433,7 +431,7 @@ public class PeopleApp extends javax.swing.JFrame {
     private void posMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_posMouseClicked
         // TODO add your handling code here:
         this.setVisible(false);
-        new POSApp().setVisible(true);
+        new POSApp2().setVisible(true);
     }//GEN-LAST:event_posMouseClicked
 
     private void productMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_productMouseClicked
@@ -519,35 +517,8 @@ public class PeopleApp extends javax.swing.JFrame {
     }//GEN-LAST:event_addSuppliersMouseClicked
     User s;
     private void btnEditUserActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditUserActionPerformed
-       
+    
         new AddUserApp(s).setVisible(true);
-        
-//         AddUserApp ap = new AddUserApp();
-//         ap.addValue(s);
-//        ap.setVisible(true);
-//        System.out.println(".. " + s.getEmail());
-        
-//        
-//        userTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-//            @Override
-//            public void valueChanged(ListSelectionEvent e) {
-//User s = new User();
-//       
-//                s.setId(Integer.valueOf(userTable.getValueAt(userTable.getSelectedRow(), 0).toString()));
-//                s.setFirstName(userTable.getValueAt(userTable.getSelectedRow(), 1).toString());
-//                s.setLastName(userTable.getValueAt(userTable.getSelectedRow(), 2).toString());
-//                s.setEmail(userTable.getValueAt(userTable.getSelectedRow(), 3).toString());
-//                s.setPhone(userTable.getValueAt(userTable.getSelectedRow(), 4).toString());
-//                s.setUserRole(userTable.getValueAt(userTable.getSelectedRow(), 5).toString());
-//                s.setStoreName(userTable.getValueAt(userTable.getSelectedRow(), 6).toString());
-//                 AddUserApp ap = new AddUserApp();
-//                  ap.setVisible(true);
-//                System.out.println(".. " + s.getEmail());
-//                ap.addValue(s);
-//            }
-//        });
-
-
     }//GEN-LAST:event_btnEditUserActionPerformed
 
     private void userTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_userTableMouseClicked

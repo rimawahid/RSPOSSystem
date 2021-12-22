@@ -2,12 +2,25 @@ package com.rs.model;
 
 public class Store {
 
+    private int id;
+
     private String storeName;
     private String storeCode;
     private String storePhone;
     private String storeEmail;
     private String storeAddress;
     private String storeCity;
+    private String storeState;
+    private int storePostalCode;
+    private String storeCountry;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getStoreName() {
         return storeName;
@@ -57,6 +70,28 @@ public class Store {
         this.storeCity = storeCity;
     }
 
-    
+    public String getStoreState() {
+        return storeState;
+    }
+
+    public void setStoreState(String storeState) {
+        this.storeState = storeState;
+    }
+
+    public int getStorePostalCode() {
+        return storePostalCode;
+    }
+
+    public void setStorePostalCode(int storePostalCode) {
+        this.storePostalCode = storePostalCode;
+    }
+
+    public String getStoreCountry() {
+        return storeCountry;
+    }
+
+    public void setStoreCountry(String storeCountry) {
+        this.storeCountry = storeCountry;
+    }
 
 }

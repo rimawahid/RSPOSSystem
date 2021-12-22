@@ -1,12 +1,9 @@
 package com.rs.gui;
-
 import com.rs.dao.GiftCardDAO;
 import com.rs.model.GiftCard;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
-
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -382,7 +379,7 @@ public class GiftCardApp extends javax.swing.JFrame {
     private void posMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_posMouseClicked
         // TODO add your handling code here:
         this.setVisible(false);
-        new POSApp().setVisible(true);
+        new POSApp2().setVisible(true);
     }//GEN-LAST:event_posMouseClicked
 
     private void productMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_productMouseClicked

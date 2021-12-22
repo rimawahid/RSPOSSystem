@@ -359,6 +359,11 @@ public class ListCustomersApp extends javax.swing.JFrame {
             }
         ));
         customerTable.setRowHeight(28);
+        customerTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                customerTableMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(customerTable);
 
         btnEditCustomer.setBackground(new java.awt.Color(54, 127, 169));
@@ -438,7 +443,7 @@ public class ListCustomersApp extends javax.swing.JFrame {
     private void posMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_posMouseClicked
         // TODO add your handling code here:
         this.setVisible(false);
-        new POSApp().setVisible(true);
+        new POSApp2().setVisible(true);
     }//GEN-LAST:event_posMouseClicked
 
     private void productMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_productMouseClicked
@@ -537,23 +542,24 @@ public class ListCustomersApp extends javax.swing.JFrame {
         DefaultTableModel model = new DefaultTableModel(data, columnNames);
         customerTable.setModel(model);
     }
-
+Customer s;
     private void btnEditCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditCustomerActionPerformed
         // TODO add your handling code here:
-        customerTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-            @Override
-            public void valueChanged(ListSelectionEvent e) {
-                Customer s = new Customer();
-                s.setCustomerName(customerTable.getValueAt(customerTable.getSelectedRow(), 0).toString());
-                s.setCustomerEmail(customerTable.getValueAt(customerTable.getSelectedRow(), 1).toString());
-                s.setCustomerPhone(customerTable.getValueAt(customerTable.getSelectedRow(), 2).toString());
-                s.setCustomerAddress(customerTable.getValueAt(customerTable.getSelectedRow(), 3).toString());
-                AddCustomersApp ap = new AddCustomersApp();
-                ap.setVisible(true);
-                ap.addValue(s);
-            }
-        });
-        getAllCustomer();
+        new AddCustomersApp(s).setVisible(true);
+//        customerTable.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+//            @Override
+//            public void valueChanged(ListSelectionEvent e) {
+//                Customer s = new Customer();
+//                s.setCustomerName(customerTable.getValueAt(customerTable.getSelectedRow(), 0).toString());
+//                s.setCustomerEmail(customerTable.getValueAt(customerTable.getSelectedRow(), 1).toString());
+//                s.setCustomerPhone(customerTable.getValueAt(customerTable.getSelectedRow(), 2).toString());
+//                s.setCustomerAddress(customerTable.getValueAt(customerTable.getSelectedRow(), 3).toString());
+//                AddCustomersApp ap = new AddCustomersApp();
+//                ap.setVisible(true);
+//                ap.addValue(s);
+//            }
+//        });
+//        getAllCustomer();
     }//GEN-LAST:event_btnEditCustomerActionPerformed
 
     private void btnDeleteCustomerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteCustomerActionPerformed
@@ -568,8 +574,20 @@ public class ListCustomersApp extends javax.swing.JFrame {
             } else {
                 JOptionPane.showMessageDialog(rootPane, "Supplier Not delete!");
             }
-        }getAllCustomer();
+        }
+        getAllCustomer();
     }//GEN-LAST:event_btnDeleteCustomerActionPerformed
+
+    private void customerTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_customerTableMouseClicked
+        // TODO add your handling code here:
+        int row = customerTable.rowAtPoint(evt.getPoint());
+         s = new Customer();
+       // s.setCustomerName(Integer.valueOf(customerTable.getValueAt(row, 0).toString()));
+        s.setCustomerName(customerTable.getValueAt(row, 0).toString());
+        s.setCustomerEmail(customerTable.getValueAt(row, 1).toString());
+        s.setCustomerPhone(customerTable.getValueAt(row, 2).toString());
+        s.setCustomerAddress(customerTable.getValueAt(row, 3).toString());
+    }//GEN-LAST:event_customerTableMouseClicked
 
     /**
      * @param args the command line arguments

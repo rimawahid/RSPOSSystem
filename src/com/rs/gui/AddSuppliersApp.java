@@ -5,7 +5,7 @@
  */
 package com.rs.gui;
 
-import com.rs.dao.AddStoreDAO;
+import com.rs.dao.StoreDAO;
 import com.rs.dao.AddSupplierDAO;
 import com.rs.model.Supplier;
 import javax.swing.JOptionPane;
@@ -509,7 +509,7 @@ public class AddSuppliersApp extends javax.swing.JFrame {
     private void posMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_posMouseClicked
         // TODO add your handling code here:
         this.setVisible(false);
-        new POSApp().setVisible(true);
+        new POSApp2().setVisible(true);
     }//GEN-LAST:event_posMouseClicked
 
     private void productMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_productMouseClicked

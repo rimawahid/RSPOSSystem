@@ -23,17 +23,19 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="32767" attributes="0"/>
               <Component id="bg" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="32767" attributes="0"/>
               <Component id="bg" min="-2" max="-2" attributes="0"/>
-              <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -520,7 +522,7 @@
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="703" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="752" max="32767" attributes="0"/>
                   <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -548,22 +550,29 @@
                               <Component id="jTextField1" alignment="0" min="-2" pref="327" max="-2" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="31" max="-2" attributes="0"/>
-                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                      <Component id="btnAddStore" alignment="0" min="-2" pref="163" max="-2" attributes="0"/>
-                                      <Component id="storeName" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jLabel2" alignment="0" min="-2" pref="67" max="-2" attributes="0"/>
-                                      <Component id="storeCode" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="storeEmail" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="storePhone" alignment="0" max="32767" attributes="0"/>
-                                      <Component id="jLabel4" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
-                                      <Component id="jLabel6" alignment="0" min="-2" pref="106" max="-2" attributes="0"/>
-                                      <Component id="jLabel9" alignment="0" min="-2" pref="92" max="-2" attributes="0"/>
-                                      <Component id="jLabel12" alignment="0" min="-2" pref="92" max="-2" attributes="0"/>
-                                      <Component id="storeAddress" alignment="0" pref="533" max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
+                                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                          <Component id="storeName" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="jLabel2" alignment="0" min="-2" pref="67" max="-2" attributes="0"/>
+                                          <Component id="storeCode" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="storeEmail" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="storePhone" alignment="0" max="32767" attributes="0"/>
+                                          <Component id="jLabel4" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
+                                          <Component id="jLabel6" alignment="0" min="-2" pref="106" max="-2" attributes="0"/>
+                                          <Component id="jLabel9" alignment="0" min="-2" pref="92" max="-2" attributes="0"/>
+                                          <Component id="jLabel12" alignment="0" min="-2" pref="92" max="-2" attributes="0"/>
+                                          <Component id="storeAddress" alignment="0" pref="533" max="32767" attributes="0"/>
+                                      </Group>
+                                      <Group type="102" alignment="0" attributes="0">
+                                          <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
+                                          <Component id="btnAddStore" min="-2" pref="163" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="308" max="-2" attributes="0"/>
+                                          <Component id="btnUpdatestore" min="-2" pref="181" max="-2" attributes="0"/>
+                                      </Group>
                                   </Group>
                               </Group>
                           </Group>
-                          <EmptySpace pref="275" max="32767" attributes="0"/>
+                          <EmptySpace pref="122" max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
                                   <Component id="jLabel3" alignment="0" min="-2" pref="76" max="-2" attributes="0"/>
@@ -628,16 +637,20 @@
                                   <Component id="jLabel12" min="-2" pref="29" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Component id="storeAddress" min="-2" pref="42" max="-2" attributes="0"/>
-                                  <EmptySpace min="-2" pref="58" max="-2" attributes="0"/>
-                                  <Component id="btnAddStore" min="-2" pref="47" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="3" attributes="0">
+                                      <Component id="btnAddStore" alignment="3" min="-2" pref="47" max="-2" attributes="0"/>
+                                      <Component id="btnUpdatestore" alignment="3" max="32767" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace pref="99" max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jLabel10" min="-2" pref="29" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="storeCountry" min="-2" pref="42" max="-2" attributes="0"/>
+                                  <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -848,6 +861,23 @@
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                   </AuxValues>
+                </Component>
+                <Component class="javax.swing.JButton" name="btnUpdatestore">
+                  <Properties>
+                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="a9" green="7f" red="36" type="rgb"/>
+                    </Property>
+                    <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                      <Font name="Corbel" size="24" style="1"/>
+                    </Property>
+                    <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                      <Color blue="ff" green="ff" red="ff" type="rgb"/>
+                    </Property>
+                    <Property name="text" type="java.lang.String" value="Update Store"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnUpdatestoreActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
