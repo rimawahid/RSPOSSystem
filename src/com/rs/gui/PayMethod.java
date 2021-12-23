@@ -18,11 +18,11 @@ public class PayMethod extends javax.swing.JFrame {
      */
     public PayMethod() {
         initComponents();
-        new POSApp2();
+        new POSApp();
     }
-     public  PayMethod(POSApp2 p){
+     public  PayMethod(POSApp p){
          initComponents();
-        new POSApp2();
+        new POSApp();
         
      }
 
@@ -52,7 +52,7 @@ public class PayMethod extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jTextField8 = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        payMethod = new javax.swing.JComboBox<>();
         jPanel8 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
@@ -187,8 +187,8 @@ public class PayMethod extends javax.swing.JFrame {
         jPanel7.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, 140, -1));
         jPanel7.add(jTextField8, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 350, 550, 50));
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "  ", "Cash", "Credit Card", "Cheque", "Gift Card", "Other" }));
-        jPanel7.add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 270, 260, 40));
+        payMethod.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "  ", "Cash", "Credit Card", "Cheque", "Gift Card", "Other" }));
+        jPanel7.add(payMethod, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 270, 260, 40));
 
         jPanel8.setBackground(new java.awt.Color(0, 204, 102));
 
@@ -360,7 +360,6 @@ public class PayMethod extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClose;
     private javax.swing.JButton jButton3;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -383,6 +382,7 @@ public class PayMethod extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField8;
+    private javax.swing.JComboBox<String> payMethod;
     private javax.swing.JTextField totalPrice;
     private javax.swing.JTextField totalPrice1;
     private javax.swing.JTextField totalQty;

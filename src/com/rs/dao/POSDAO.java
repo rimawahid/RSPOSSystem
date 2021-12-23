@@ -29,6 +29,7 @@ public class POSDAO implements ICommonInterface<POS> {
             ps.setString(4, Double.valueOf(t.getDiscount()).toString());
             ps.setString(5, Double.valueOf(t.getVat()).toString());
             ps.setString(6, Double.valueOf(t.getTotalPayAmountVlaue()).toString());
+            //ps.setString(7, t.getPayMethod());
             status = ps.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(POSDAO.class.getName()).log(Level.SEVERE, null, ex);

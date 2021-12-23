@@ -9,6 +9,7 @@ public class POS {
     private double discount;
     private double vat;
     private double totalPayAmountVlaue;
+    private String payMethod;
 
     public int getId() {
         return id;
@@ -64,6 +65,14 @@ public class POS {
 
     public void setTotalPayAmountVlaue(double totalPayAmountVlaue) {
         this.totalPayAmountVlaue = totalPayAmountVlaue;
+    }
+
+    public String getPayMethod() {
+        return payMethod;
+    }
+
+    public void setPayMethod(String payMethod) {
+        this.payMethod = payMethod;
     }
     
 }

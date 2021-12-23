@@ -268,9 +268,9 @@ public class POSApp extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pos, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(product, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(categoris, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(product, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(sales, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -929,12 +929,14 @@ public class POSApp extends javax.swing.JFrame {
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
         POS pos = new POS();
+        
         pos.setInvoice(Integer.valueOf(invoice.getText()));
         pos.setTotalQty(Integer.valueOf(totalQty.getText()));
         pos.setTotalPrice(Double.valueOf(totalPrice.getText()));
         pos.setDiscount(Double.valueOf(discount.getText()));
         pos.setVat(Double.valueOf(vat.getText()));
         pos.setTotalPayAmountVlaue(Double.valueOf(totalPayAmountVlaue.getText()));
+        
         int status = new POSDAO().save(pos);
         if (status > 0) {
             JOptionPane.showMessageDialog(rootPane, "pos Saved!");

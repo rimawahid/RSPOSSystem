@@ -126,6 +126,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="28" pref="28" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
+                          <Component id="reports" min="-2" pref="176" max="-2" attributes="0"/>
                           <Component id="dashboard" alignment="0" min="-2" pref="176" max="-2" attributes="0"/>
                           <Component id="pos" alignment="0" min="-2" pref="176" max="-2" attributes="0"/>
                           <Component id="product" alignment="0" min="-2" pref="176" max="-2" attributes="0"/>
@@ -135,7 +136,6 @@
                           <Component id="giftCard" alignment="0" min="-2" pref="176" max="-2" attributes="0"/>
                           <Component id="people" alignment="0" min="-2" pref="176" max="-2" attributes="0"/>
                           <Component id="setting" alignment="0" min="-2" pref="176" max="-2" attributes="0"/>
-                          <Component id="reports" alignment="0" min="-2" pref="176" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace pref="96" max="32767" attributes="0"/>
                   </Group>
@@ -148,10 +148,10 @@
                       <Component id="dashboard" min="-2" pref="53" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="pos" min="-2" pref="53" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="13" max="-2" attributes="0"/>
+                      <Component id="categoris" min="-2" pref="53" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="product" min="-2" pref="53" max="-2" attributes="0"/>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Component id="categoris" min="-2" pref="53" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="sales" min="-2" pref="53" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
@@ -164,7 +164,7 @@
                       <Component id="setting" min="-2" pref="53" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="reports" min="-2" pref="53" max="-2" attributes="0"/>
-                      <EmptySpace pref="346" max="32767" attributes="0"/>
+                      <EmptySpace pref="340" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
