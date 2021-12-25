@@ -5,6 +5,9 @@
  */
 package com.rs.gui;
 
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+
 /**
  *
  * @author USER
@@ -16,6 +19,20 @@ public class DashboardApp extends javax.swing.JFrame {
      */
     public DashboardApp() {
         initComponents();
+        currentdate();
+    }
+    
+    public void currentdate(){
+        Calendar cal = new GregorianCalendar();
+        int month = cal.get(Calendar.MONTH);
+        int year = cal.get(Calendar.YEAR);
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+        date.setText((month+1)+"/"+ day + "/"+ year);
+        
+        //int second = cal.get(Calendar.SECOND);
+        int minute = cal.get(Calendar.MINUTE);
+        int hour = cal.get(Calendar.HOUR);
+        time.setText(hour+":"+ minute);
     }
 
     /**
@@ -30,6 +47,8 @@ public class DashboardApp extends javax.swing.JFrame {
         bg = new javax.swing.JPanel();
         topbar = new javax.swing.JPanel();
         logo = new javax.swing.JLabel();
+        date = new javax.swing.JLabel();
+        time = new javax.swing.JLabel();
         sidemenubar = new javax.swing.JPanel();
         dashboard = new javax.swing.JLabel();
         pos = new javax.swing.JLabel();
@@ -85,6 +104,14 @@ public class DashboardApp extends javax.swing.JFrame {
         logo.setForeground(new java.awt.Color(255, 255, 255));
         logo.setText("RS POS");
 
+        date.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
+        date.setForeground(new java.awt.Color(255, 255, 255));
+        date.setText("date");
+
+        time.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
+        time.setForeground(new java.awt.Color(255, 255, 255));
+        time.setText("time");
+
         javax.swing.GroupLayout topbarLayout = new javax.swing.GroupLayout(topbar);
         topbar.setLayout(topbarLayout);
         topbarLayout.setHorizontalGroup(
@@ -92,13 +119,21 @@ public class DashboardApp extends javax.swing.JFrame {
             .addGroup(topbarLayout.createSequentialGroup()
                 .addGap(69, 69, 69)
                 .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(1692, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1134, Short.MAX_VALUE)
+                .addComponent(date)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(time)
+                .addGap(460, 460, 460))
         );
         topbarLayout.setVerticalGroup(
             topbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(topbarLayout.createSequentialGroup()
                 .addGap(26, 26, 26)
-                .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(topbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(topbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(date)
+                        .addComponent(time))
+                    .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(26, Short.MAX_VALUE))
         );
 
@@ -813,6 +848,7 @@ public class DashboardApp extends javax.swing.JFrame {
     private javax.swing.JPanel btnUsers;
     private javax.swing.JLabel categoris;
     private javax.swing.JLabel dashboard;
+    private javax.swing.JLabel date;
     private javax.swing.JLabel giftCard;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -847,6 +883,7 @@ public class DashboardApp extends javax.swing.JFrame {
     private javax.swing.JLabel sales;
     private javax.swing.JLabel setting;
     private javax.swing.JPanel sidemenubar;
+    private javax.swing.JLabel time;
     private javax.swing.JPanel topbar;
     // End of variables declaration//GEN-END:variables
 }

@@ -5,6 +5,11 @@
  */
 package com.rs.gui;
 
+import com.rs.dao.PurchaseDAO;
+import com.rs.model.Purchase;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author USER
@@ -16,6 +21,7 @@ public class PurchasesApp extends javax.swing.JFrame {
      */
     public PurchasesApp() {
         initComponents();
+        getAllPurchase();
     }
 
     /**
@@ -42,6 +48,19 @@ public class PurchasesApp extends javax.swing.JFrame {
         setting = new javax.swing.JLabel();
         reports = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        addPurchase = new javax.swing.JLabel();
+        listExpenses = new javax.swing.JLabel();
+        addExpenses = new javax.swing.JLabel();
+        listPurchase = new javax.swing.JPanel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        showItem = new javax.swing.JComboBox<>();
+        jLabel5 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        purchasesTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -221,23 +240,170 @@ public class PurchasesApp extends javax.swing.JFrame {
 
         bg.add(sidemenubar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 82, -1, 1000));
 
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 48)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Corbel", 0, 36)); // NOI18N
         jLabel1.setText("Purchases");
-        bg.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 140, 270, -1));
+        bg.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 170, 270, -1));
+
+        jLabel2.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/listUsers.png"))); // NOI18N
+        jLabel2.setText("List Purchases");
+        jLabel2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        addPurchase.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
+        addPurchase.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/addUsers.png"))); // NOI18N
+        addPurchase.setText("Add Purchase");
+        addPurchase.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        addPurchase.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                addPurchaseMouseClicked(evt);
+            }
+        });
+
+        listExpenses.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
+        listExpenses.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/listCustomer.png"))); // NOI18N
+        listExpenses.setText("List Expenses");
+        listExpenses.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        listExpenses.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                listExpensesMouseClicked(evt);
+            }
+        });
+
+        addExpenses.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
+        addExpenses.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/addCustomer.png"))); // NOI18N
+        addExpenses.setText("Add Expense");
+        addExpenses.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        addExpenses.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                addExpensesMouseClicked(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(26, 26, 26)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(78, 78, 78)
+                .addComponent(addPurchase, javax.swing.GroupLayout.PREFERRED_SIZE, 337, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(74, 74, 74)
+                .addComponent(listExpenses, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 86, Short.MAX_VALUE)
+                .addComponent(addExpenses, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(54, 54, 54))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(listExpenses, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addPurchase, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(addExpenses, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(33, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1644, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 116, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+        );
+
+        bg.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 90, 1620, 110));
+
+        listPurchase.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel3.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(51, 51, 51));
+        jLabel3.setText("Please use the table below to navigate or filter the results.");
+
+        jLabel4.setFont(new java.awt.Font("Corbel", 0, 18)); // NOI18N
+        jLabel4.setText("Show");
+
+        showItem.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "10", "25", "30" }));
+
+        jLabel5.setFont(new java.awt.Font("Corbel", 0, 18)); // NOI18N
+        jLabel5.setText("entries");
+
+        purchasesTable.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        purchasesTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        purchasesTable.setRowHeight(28);
+        jScrollPane1.setViewportView(purchasesTable);
+
+        javax.swing.GroupLayout listPurchaseLayout = new javax.swing.GroupLayout(listPurchase);
+        listPurchase.setLayout(listPurchaseLayout);
+        listPurchaseLayout.setHorizontalGroup(
+            listPurchaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(listPurchaseLayout.createSequentialGroup()
+                .addGroup(listPurchaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(listPurchaseLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(listPurchaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 649, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(listPurchaseLayout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(showItem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel5))))
+                    .addGroup(listPurchaseLayout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1494, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(36, Short.MAX_VALUE))
+        );
+        listPurchaseLayout.setVerticalGroup(
+            listPurchaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(listPurchaseLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(listPurchaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4)
+                    .addComponent(showItem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(71, Short.MAX_VALUE))
+        );
+
+        bg.add(listPurchase, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 220, 1560, 560));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(bg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(bg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(bg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addComponent(bg, javax.swing.GroupLayout.PREFERRED_SIZE, 1095, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 13, Short.MAX_VALUE))
         );
 
         pack();
@@ -302,6 +468,40 @@ public class PurchasesApp extends javax.swing.JFrame {
         new DashboardApp().setVisible(true);
     }//GEN-LAST:event_dashboardMouseClicked
 
+    private void addPurchaseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addPurchaseMouseClicked
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new AddPurchaseApp().setVisible(true);
+    }//GEN-LAST:event_addPurchaseMouseClicked
+
+    private void listExpensesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listExpensesMouseClicked
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new ListExpensesApp().setVisible(true);
+    }//GEN-LAST:event_listExpensesMouseClicked
+
+    private void addExpensesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_addExpensesMouseClicked
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new AddExpenseApp().setVisible(true);
+    }//GEN-LAST:event_addExpensesMouseClicked
+
+    
+    private void getAllPurchase() {
+        List<Purchase> purchase = new PurchaseDAO().getAll();
+        String[] columnNames = {"Date", "Reference", "Total", "Note"};
+        Object[][] data = new Object[purchase.size()][4];
+        for (int i = 0; i < purchase.size(); i++) {
+            Purchase s = purchase.get(i);
+            Object[] o = {s.getPurchaseDate(), s.getReference(), s.getTotal(), s.getNote()};
+            for (int j = 0; j < 4; j++) {
+                data[i][j] = o[j];
+            }
+        }
+        DefaultTableModel model = new DefaultTableModel(data, columnNames);
+        purchasesTable.setModel(model);
+       
+    }
     /**
      * @param args the command line arguments
      */
@@ -338,19 +538,32 @@ public class PurchasesApp extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel addExpenses;
+    private javax.swing.JLabel addPurchase;
     private javax.swing.JPanel bg;
     private javax.swing.JLabel categoris;
     private javax.swing.JLabel dashboard;
     private javax.swing.JLabel giftCard;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel listExpenses;
+    private javax.swing.JPanel listPurchase;
     private javax.swing.JLabel logo;
     private javax.swing.JLabel people;
     private javax.swing.JLabel pos;
     private javax.swing.JLabel product;
     private javax.swing.JLabel purchases;
+    private javax.swing.JTable purchasesTable;
     private javax.swing.JLabel reports;
     private javax.swing.JLabel sales;
     private javax.swing.JLabel setting;
+    private javax.swing.JComboBox<String> showItem;
     private javax.swing.JPanel sidemenubar;
     private javax.swing.JPanel topbar;
     // End of variables declaration//GEN-END:variables

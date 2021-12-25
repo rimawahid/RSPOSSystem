@@ -43,7 +43,7 @@ public class PayMethod extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JSeparator();
         jPanel4 = new javax.swing.JPanel();
         btnClose = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
+        btnSubmit = new javax.swing.JButton();
         jPanel7 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jTextField5 = new javax.swing.JTextField();
@@ -133,10 +133,15 @@ public class PayMethod extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setBackground(new java.awt.Color(54, 127, 169));
-        jButton3.setFont(new java.awt.Font("Corbel", 1, 24)); // NOI18N
-        jButton3.setForeground(new java.awt.Color(255, 255, 255));
-        jButton3.setText("Submit");
+        btnSubmit.setBackground(new java.awt.Color(54, 127, 169));
+        btnSubmit.setFont(new java.awt.Font("Corbel", 1, 24)); // NOI18N
+        btnSubmit.setForeground(new java.awt.Color(255, 255, 255));
+        btnSubmit.setText("Submit");
+        btnSubmit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSubmitActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -146,7 +151,7 @@ public class PayMethod extends javax.swing.JFrame {
                 .addGap(27, 27, 27)
                 .addComponent(btnClose, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 289, Short.MAX_VALUE)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnSubmit, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(21, 21, 21))
         );
         jPanel4Layout.setVerticalGroup(
@@ -155,7 +160,7 @@ public class PayMethod extends javax.swing.JFrame {
                 .addContainerGap(18, Short.MAX_VALUE)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnClose)
-                    .addComponent(jButton3))
+                    .addComponent(btnSubmit))
                 .addContainerGap())
         );
 
@@ -322,6 +327,12 @@ public class PayMethod extends javax.swing.JFrame {
         dispose();
     }//GEN-LAST:event_jLabel10MouseClicked
 
+    private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new RSPOSApp().setVisible(true);
+    }//GEN-LAST:event_btnSubmitActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -359,7 +370,7 @@ public class PayMethod extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnClose;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JButton btnSubmit;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;

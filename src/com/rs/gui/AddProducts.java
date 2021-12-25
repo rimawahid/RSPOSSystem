@@ -42,14 +42,14 @@ public class AddProducts extends javax.swing.JFrame {
 
     AddProducts(Product s) {
         initComponents();
-        cats = new CategoryDAO().getAll();
-        for (int i = 0; i < cats.size(); i++) {
-            productCategory.addItem(cats.get(i).getCategoryName());
-        }
-        suppliers = new AddSupplierDAO().getAll();
-        for (int i = 0; i < suppliers.size(); i++) {
-            supplier.addItem(suppliers.get(i).getSupplierName());
-        }
+//        cats = new CategoryDAO().getAll();
+//        for (int i = 0; i < cats.size(); i++) {
+//            productCategory.addItem(cats.get(i).getCategoryName());
+//        }
+//        suppliers = new AddSupplierDAO().getAll();
+//        for (int i = 0; i < suppliers.size(); i++) {
+//            supplier.addItem(suppliers.get(i).getSupplierName());
+//        }
         addValue(s);
     }
 

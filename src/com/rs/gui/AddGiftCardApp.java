@@ -26,10 +26,10 @@ public class AddGiftCardApp extends javax.swing.JFrame {
 
     public AddGiftCardApp() {
         initComponents();
-        supplier = new AddSupplierDAO().getAll();
-        for (int i = 0; i < supplier.size(); i++) {
-            createdBy.addItem(supplier.get(i).getSupplierName());
-        }
+//        supplier = new AddSupplierDAO().getAll();
+//        for (int i = 0; i < supplier.size(); i++) {
+//            createdBy.addItem(supplier.get(i).getSupplierName());
+//        }
     }
 
     AddGiftCardApp(GiftCard s) {
