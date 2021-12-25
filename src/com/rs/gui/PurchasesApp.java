@@ -61,6 +61,7 @@ public class PurchasesApp extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         purchasesTable = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -353,6 +354,11 @@ public class PurchasesApp extends javax.swing.JFrame {
             }
         ));
         purchasesTable.setRowHeight(28);
+        purchasesTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                purchasesTableMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(purchasesTable);
 
         javax.swing.GroupLayout listPurchaseLayout = new javax.swing.GroupLayout(listPurchase);
@@ -388,10 +394,21 @@ public class PurchasesApp extends javax.swing.JFrame {
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(71, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
-        bg.add(listPurchase, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 220, 1560, 560));
+        bg.add(listPurchase, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 220, 1560, 520));
+
+        jButton1.setBackground(new java.awt.Color(54, 127, 169));
+        jButton1.setFont(new java.awt.Font("Corbel", 1, 24)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setText("Edit ");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        bg.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 780, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -464,7 +481,7 @@ public class PurchasesApp extends javax.swing.JFrame {
 
     private void dashboardMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dashboardMouseClicked
         // TODO add your handling code here:
-         this.setVisible(false);
+        this.setVisible(false);
         new DashboardApp().setVisible(true);
     }//GEN-LAST:event_dashboardMouseClicked
 
@@ -485,8 +502,24 @@ public class PurchasesApp extends javax.swing.JFrame {
         this.setVisible(false);
         new AddExpenseApp().setVisible(true);
     }//GEN-LAST:event_addExpensesMouseClicked
+    Purchase s;
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        new AddPurchaseApp(s).setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
-    
+    private void purchasesTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_purchasesTableMouseClicked
+        // TODO add your handling code here:
+        int row = purchasesTable.rowAtPoint(evt.getPoint());
+
+        s = new Purchase();
+        s.setPurchaseDate(purchasesTable.getValueAt(row, 0).toString());
+        s.setReference(purchasesTable.getValueAt(row, 1).toString());
+        s.setTotal(Double.valueOf(purchasesTable.getValueAt(row, 2).toString()));
+        s.setNote(purchasesTable.getValueAt(row, 3).toString());
+    }//GEN-LAST:event_purchasesTableMouseClicked
+
+     
     private void getAllPurchase() {
         List<Purchase> purchase = new PurchaseDAO().getAll();
         String[] columnNames = {"Date", "Reference", "Total", "Note"};
@@ -500,8 +533,9 @@ public class PurchasesApp extends javax.swing.JFrame {
         }
         DefaultTableModel model = new DefaultTableModel(data, columnNames);
         purchasesTable.setModel(model);
-       
+
     }
+
     /**
      * @param args the command line arguments
      */
@@ -544,6 +578,7 @@ public class PurchasesApp extends javax.swing.JFrame {
     private javax.swing.JLabel categoris;
     private javax.swing.JLabel dashboard;
     private javax.swing.JLabel giftCard;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

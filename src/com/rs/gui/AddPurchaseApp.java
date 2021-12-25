@@ -36,7 +36,24 @@ public class AddPurchaseApp extends javax.swing.JFrame {
         for (int i = 0; i < suppliers.size(); i++) {
             supplierName.addItem(suppliers.get(i).getSupplierName());
         }
+        
         //today.setText(new Date().toString());
+    }
+    AddPurchaseApp(Purchase s) {
+        initComponents();
+//        showDate();
+//        suppliers = new AddSupplierDAO().getAll();
+//        for (int i = 0; i < suppliers.size(); i++) {
+//            supplierName.addItem(suppliers.get(i).getSupplierName());
+//        }
+        addValue(s);
+        //today.setText(new Date().toString());
+    }
+    public void addValue(Purchase s){
+        purchaseDate.setText(s.getPurchaseDate());
+        reference.setText(s.getReference());
+        totalPrice.setText(Double.valueOf(s.getTotal()).toString());
+        note.setText(s.getNote());
     }
 
     /**
@@ -432,6 +449,11 @@ public class AddPurchaseApp extends javax.swing.JFrame {
         btnReset.setFont(new java.awt.Font("Corbel", 1, 24)); // NOI18N
         btnReset.setForeground(new java.awt.Color(255, 255, 255));
         btnReset.setText("Reset");
+        btnReset.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnResetActionPerformed(evt);
+            }
+        });
         inputF.add(btnReset, new org.netbeans.lib.awtextra.AbsoluteConstraints(247, 637, 97, 40));
 
         search.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8-search-36.png"))); // NOI18N
@@ -684,10 +706,10 @@ public class AddPurchaseApp extends javax.swing.JFrame {
         purchase.setReference(reference.getText());
         purchase.setTotal(Double.valueOf(totalPrice.getText()));
         purchase.setNote(note.getText());
-        System.out.println(purchaseDate.getText());
-        System.out.println(reference.getText());
-        System.out.println(Double.valueOf(totalPrice.getText()));
-        System.out.println(note.getText());
+//        System.out.println(purchaseDate.getText());
+//        System.out.println(reference.getText());
+//        System.out.println(Double.valueOf(totalPrice.getText()));
+//        System.out.println(note.getText());
         int status = new PurchaseDAO().save(purchase);
         if (status > 0) {
             JOptionPane.showMessageDialog(rootPane, "Purchase Saved!");
@@ -714,6 +736,22 @@ public class AddPurchaseApp extends javax.swing.JFrame {
         p = null;
         qty.setText(null);
     }//GEN-LAST:event_btnaddQtyMouseClicked
+
+    private void btnResetActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnResetActionPerformed
+        // TODO add your handling code here:
+        Purchase purchase = new Purchase();
+        
+        purchase.setPurchaseDate(purchaseDate.getText());
+        purchase.setReference(reference.getText());
+        purchase.setTotal(Double.valueOf(totalPrice.getText()));
+        purchase.setNote(note.getText());
+        int status = new PurchaseDAO().update(purchase);
+        if (status > 0) {
+            JOptionPane.showMessageDialog(rootPane, "Purchase update!");
+        } else {
+            JOptionPane.showMessageDialog(rootPane, "Purchase NOT update!");
+        }
+    }//GEN-LAST:event_btnResetActionPerformed
 
     /**
      * @param args the command line arguments

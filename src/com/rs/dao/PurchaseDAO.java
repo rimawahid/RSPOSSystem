@@ -45,7 +45,22 @@ public class PurchaseDAO implements ICommonInterface<Purchase> {
 
     @Override
     public int update(Purchase t) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        String sql = "update purchase set purchase_date = ?,reference =?, total_price = ?, note =? where reference = ?";
+        int status = 0;
+
+        try {
+            con = DBConnection.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, t.getPurchaseDate());
+            ps.setString(2, t.getReference());
+            ps.setString(3, Double.valueOf(t.getTotal()).toString());
+            ps.setString(4, t.getNote());
+            ps.setString(5, t.getReference());
+            status = ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(PurchaseDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return status;
     }
 
     @Override
