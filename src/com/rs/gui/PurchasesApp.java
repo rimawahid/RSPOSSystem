@@ -62,6 +62,7 @@ public class PurchasesApp extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         purchasesTable = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
+        jButton2 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -410,6 +411,12 @@ public class PurchasesApp extends javax.swing.JFrame {
         });
         bg.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 780, -1, -1));
 
+        jButton2.setBackground(new java.awt.Color(54, 127, 169));
+        jButton2.setFont(new java.awt.Font("Corbel", 1, 24)); // NOI18N
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
+        jButton2.setText("Delete");
+        bg.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 780, -1, -1));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -579,6 +586,7 @@ public class PurchasesApp extends javax.swing.JFrame {
     private javax.swing.JLabel dashboard;
     private javax.swing.JLabel giftCard;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

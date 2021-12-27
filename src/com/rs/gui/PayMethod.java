@@ -18,12 +18,15 @@ public class PayMethod extends javax.swing.JFrame {
      */
     public PayMethod() {
         initComponents();
-        new POSApp();
+       // new POSApp();
+       // totalQty.setText(string);
     }
-     public  PayMethod(POSApp p){
+       PayMethod(POSApp p){
          initComponents();
         new POSApp();
-        
+        totalQty.setText(Integer.valueOf(p.tQty).toString());
+        totalPrice.setText(Double.valueOf(p.totalAmounts).toString());
+           //System.out.println(p.totalAmounts);
      }
 
     /**
@@ -48,7 +51,7 @@ public class PayMethod extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jTextField5 = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jTextField6 = new javax.swing.JTextField();
+        amount = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jTextField8 = new javax.swing.JTextField();
@@ -61,9 +64,9 @@ public class PayMethod extends javax.swing.JFrame {
         totalPrice = new javax.swing.JTextField();
         jPanel9 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        totalQty1 = new javax.swing.JTextField();
+        totalPaying = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        totalPrice1 = new javax.swing.JTextField();
+        balance = new javax.swing.JTextField();
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -179,7 +182,7 @@ public class PayMethod extends javax.swing.JFrame {
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Amount");
         jPanel7.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 240, -1, -1));
-        jPanel7.add(jTextField6, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, 260, 40));
+        jPanel7.add(amount, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 270, 260, 40));
 
         jLabel8.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
@@ -203,7 +206,7 @@ public class PayMethod extends javax.swing.JFrame {
         jLabel3.setText("Total Items");
 
         totalQty.setBackground(new java.awt.Color(217, 237, 247));
-        totalQty.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
+        totalQty.setFont(new java.awt.Font("Calibri", 0, 20)); // NOI18N
         totalQty.setText("0");
         totalQty.setBorder(null);
 
@@ -247,20 +250,30 @@ public class PayMethod extends javax.swing.JFrame {
 
         jLabel5.setFont(new java.awt.Font("Corbel", 0, 18)); // NOI18N
         jLabel5.setText("Total Paying");
+        jLabel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel5MouseClicked(evt);
+            }
+        });
 
-        totalQty1.setBackground(new java.awt.Color(217, 237, 247));
-        totalQty1.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
-        totalQty1.setText("0");
-        totalQty1.setBorder(null);
+        totalPaying.setBackground(new java.awt.Color(217, 237, 247));
+        totalPaying.setFont(new java.awt.Font("Calibri", 1, 20)); // NOI18N
+        totalPaying.setText("0");
+        totalPaying.setBorder(null);
 
         jLabel11.setBackground(new java.awt.Color(217, 237, 247));
         jLabel11.setFont(new java.awt.Font("Corbel", 0, 18)); // NOI18N
         jLabel11.setText("Balance");
+        jLabel11.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel11MouseClicked(evt);
+            }
+        });
 
-        totalPrice1.setBackground(new java.awt.Color(217, 237, 247));
-        totalPrice1.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
-        totalPrice1.setText("0.00");
-        totalPrice1.setBorder(null);
+        balance.setBackground(new java.awt.Color(217, 237, 247));
+        balance.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
+        balance.setText("0.00");
+        balance.setBorder(null);
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -270,11 +283,11 @@ public class PayMethod extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(83, 83, 83)
-                .addComponent(totalQty1, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(totalPaying, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34)
                 .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(totalPrice1, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(balance, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel9Layout.setVerticalGroup(
@@ -283,9 +296,9 @@ public class PayMethod extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(totalQty1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(totalPaying, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11)
-                    .addComponent(totalPrice1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(balance, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -333,6 +346,19 @@ public class PayMethod extends javax.swing.JFrame {
         new RSPOSApp().setVisible(true);
     }//GEN-LAST:event_btnSubmitActionPerformed
 
+    private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
+        // TODO add your handling code here:
+        totalPaying.setText(amount.getText());
+    }//GEN-LAST:event_jLabel5MouseClicked
+
+    private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
+        // TODO add your handling code here:
+          double tPaying = Double.valueOf(totalPaying.getText());
+        double tPayable = Double.valueOf(totalPrice.getText());
+        double tbalance = tPaying-tPayable;
+        balance.setText(String.valueOf(tbalance));
+    }//GEN-LAST:event_jLabel11MouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -369,6 +395,8 @@ public class PayMethod extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField amount;
+    private javax.swing.JTextField balance;
     private javax.swing.JButton btnClose;
     private javax.swing.JButton btnSubmit;
     private javax.swing.JLabel jLabel1;
@@ -391,12 +419,10 @@ public class PayMethod extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField8;
     private javax.swing.JComboBox<String> payMethod;
+    private javax.swing.JTextField totalPaying;
     private javax.swing.JTextField totalPrice;
-    private javax.swing.JTextField totalPrice1;
     private javax.swing.JTextField totalQty;
-    private javax.swing.JTextField totalQty1;
     // End of variables declaration//GEN-END:variables
 }

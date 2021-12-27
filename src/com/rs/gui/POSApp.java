@@ -650,8 +650,8 @@ public class POSApp extends javax.swing.JFrame {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(totalPayable, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 296, Short.MAX_VALUE)
-                .addComponent(totalPayAmountVlaue, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 262, Short.MAX_VALUE)
+                .addComponent(totalPayAmountVlaue, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel6Layout.setVerticalGroup(
@@ -791,6 +791,7 @@ public class POSApp extends javax.swing.JFrame {
     Product p;
     int tQty;
     double tprice;
+    double totalAmounts;
     private void searchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchMouseClicked
         // TODO add your handling code here:
 //         String pCode = productCode.getText();
@@ -874,14 +875,14 @@ public class POSApp extends javax.swing.JFrame {
 //        System.out.println(discount);
 //        System.out.println(vat);
         totalAmount = totalAmount - (totalAmount * dcount);
-        totalAmount = totalAmount + (totalAmount * sellingvat);
+        totalAmounts = Math.round(totalAmount + (totalAmount * sellingvat));
         // totalAmount *= vat;
-        totalPayAmountVlaue.setText(String.valueOf(totalAmount));
+        totalPayAmountVlaue.setText(String.valueOf(totalAmounts));
     }//GEN-LAST:event_totalPayableMouseClicked
 
     private void btnpaymentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnpaymentMouseClicked
         // TODO add your handling code here:
-        new PayMethod().setVisible(true);
+        new PayMethod(this).setVisible(true);
     }//GEN-LAST:event_btnpaymentMouseClicked
 
     private void productCodeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_productCodeKeyTyped
