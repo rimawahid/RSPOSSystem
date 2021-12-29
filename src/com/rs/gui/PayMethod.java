@@ -5,6 +5,8 @@
  */
 package com.rs.gui;
 
+import com.rs.model.POS;
+import java.util.List;
 import javax.swing.JFrame;
 
 /**
@@ -16,18 +18,30 @@ public class PayMethod extends javax.swing.JFrame {
     /**
      * Creates new form PayMethod
      */
+//    List <POSApp> discount;
     public PayMethod() {
         initComponents();
-       // new POSApp();
-       // totalQty.setText(string);
+        // new POSApp();
+        // totalQty.setText(string);
     }
-       PayMethod(POSApp p){
-         initComponents();
+    double showInvoiceDcount;
+    double showInvoiceVat;
+    double showInvoiceAmount;
+
+    PayMethod(POSApp p) {
+        initComponents();
         new POSApp();
+        new POS();
         totalQty.setText(Integer.valueOf(p.tQty).toString());
         totalPrice.setText(Double.valueOf(p.totalAmounts).toString());
-           //System.out.println(p.totalAmounts);
-     }
+       
+        System.out.println(p.pdiscont + "fdgfdhfh");
+        String showDiscount = Double.valueOf(p.pdiscont).toString();
+        showInvoiceDcount = Double.parseDouble(showDiscount);
+        System.out.println(p.pvat + "fdgfdhfh");
+        String showVat = Double.valueOf(p.pvat).toString();
+        showInvoiceVat = Double.parseDouble(showVat);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -332,7 +346,7 @@ public class PayMethod extends javax.swing.JFrame {
 
     private void btnCloseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCloseActionPerformed
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_btnCloseActionPerformed
 
     private void jLabel10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel10MouseClicked
@@ -343,7 +357,7 @@ public class PayMethod extends javax.swing.JFrame {
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        new RSPOSApp().setVisible(true);
+        new RSPOSApp(this).setVisible(true);
     }//GEN-LAST:event_btnSubmitActionPerformed
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
@@ -353,9 +367,9 @@ public class PayMethod extends javax.swing.JFrame {
 
     private void jLabel11MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel11MouseClicked
         // TODO add your handling code here:
-          double tPaying = Double.valueOf(totalPaying.getText());
+        double tPaying = Double.valueOf(totalPaying.getText());
         double tPayable = Double.valueOf(totalPrice.getText());
-        double tbalance = tPaying-tPayable;
+        double tbalance = tPaying - tPayable;
         balance.setText(String.valueOf(tbalance));
     }//GEN-LAST:event_jLabel11MouseClicked
 

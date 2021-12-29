@@ -116,7 +116,7 @@ public class ReportsApp extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jLabel19 = new javax.swing.JLabel();
+        monthlySales = new javax.swing.JLabel();
         jLabel20 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
@@ -1280,11 +1280,16 @@ public class ReportsApp extends javax.swing.JFrame {
         jLabel10.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         bg6.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 160, 280, 30));
 
-        jLabel19.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
-        jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/blackcart.png"))); // NOI18N
-        jLabel19.setText("Monthly Sales");
-        jLabel19.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        bg6.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 160, 280, 30));
+        monthlySales.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
+        monthlySales.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/blackcart.png"))); // NOI18N
+        monthlySales.setText("Monthly Sales");
+        monthlySales.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        monthlySales.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                monthlySalesMouseClicked(evt);
+            }
+        });
+        bg6.add(monthlySales, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 160, 280, 30));
 
         jLabel20.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
         jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/blackreport.png"))); // NOI18N
@@ -2328,6 +2333,12 @@ public class ReportsApp extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_dashboard6MouseClicked
 
+    private void monthlySalesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_monthlySalesMouseClicked
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new MonthlySales().setVisible(true);
+    }//GEN-LAST:event_monthlySalesMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -2406,7 +2417,6 @@ public class ReportsApp extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel17;
     private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
@@ -2448,6 +2458,7 @@ public class ReportsApp extends javax.swing.JFrame {
     private javax.swing.JLabel logo5;
     private javax.swing.JLabel logo6;
     private javax.swing.JLabel logo7;
+    private javax.swing.JLabel monthlySales;
     private javax.swing.JLabel people;
     private javax.swing.JLabel people1;
     private javax.swing.JLabel people2;

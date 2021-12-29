@@ -5,6 +5,8 @@
  */
 package com.rs.gui;
 
+import com.rs.model.POS;
+
 /**
  *
  * @author USER
@@ -16,6 +18,21 @@ public class RSPOSApp extends javax.swing.JFrame {
      */
     public RSPOSApp() {
         initComponents();
+        new PayMethod();
+        System.out.println("");
+    }
+
+    RSPOSApp(PayMethod p) {
+        initComponents();
+        new PayMethod();
+        new POSApp();
+        new POS();
+        invoiceDiscount.setText(Double.valueOf(p.showInvoiceDcount).toString());
+        invoiceVat.setText(Double.valueOf(p.showInvoiceVat).toString());
+        invoiceAmount.setText(Double.valueOf(p.showInvoiceAmount).toString());
+        
+        //invoiceAmount.setText(Double.valueOf(p.totalAmounts).toString());
+        //System.out.println(Double.valueOf(p.showDcount).toString()+ "invoice");
     }
 
     /**
@@ -42,13 +59,11 @@ public class RSPOSApp extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel9 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        invoiceAmount = new javax.swing.JTextField();
         jLabel10 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        invoiceDiscount = new javax.swing.JTextField();
         jLabel11 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jLabel12 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        invoiceVat = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         jTextField5 = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
@@ -143,35 +158,28 @@ public class RSPOSApp extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
         jLabel9.setText("Total");
 
-        jTextField1.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
-        jTextField1.setText("0.00");
-        jTextField1.setBorder(null);
+        invoiceAmount.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
+        invoiceAmount.setText("0.00");
+        invoiceAmount.setBorder(null);
 
         jLabel10.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
         jLabel10.setText("Discount");
 
-        jTextField2.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
-        jTextField2.setText("0.00");
-        jTextField2.setBorder(null);
+        invoiceDiscount.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
+        invoiceDiscount.setText("0.00");
+        invoiceDiscount.setBorder(null);
 
         jLabel11.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
         jLabel11.setText("Vat");
 
-        jTextField3.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
-        jTextField3.setText("0.00");
-        jTextField3.setBorder(null);
-        jTextField3.addActionListener(new java.awt.event.ActionListener() {
+        invoiceVat.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
+        invoiceVat.setText("0.00");
+        invoiceVat.setBorder(null);
+        invoiceVat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField3ActionPerformed(evt);
+                invoiceVatActionPerformed(evt);
             }
         });
-
-        jLabel12.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
-        jLabel12.setText("Rounding");
-
-        jTextField4.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
-        jTextField4.setText("0.00");
-        jTextField4.setBorder(null);
 
         jLabel13.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
         jLabel13.setText("Grand Total");
@@ -262,16 +270,14 @@ public class RSPOSApp extends javax.swing.JFrame {
                             .addGap(37, 37, 37)
                             .addGroup(rsposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(jLabel13)
-                                .addComponent(jLabel12)
                                 .addComponent(jLabel11)
                                 .addComponent(jLabel10)
                                 .addComponent(jLabel9))
                             .addGap(124, 124, 124)
                             .addGroup(rsposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jTextField2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jTextField3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jTextField4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(invoiceAmount, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(invoiceDiscount, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(invoiceVat, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jTextField5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, rsposLayout.createSequentialGroup()
                             .addGap(28, 28, 28)
@@ -312,25 +318,22 @@ public class RSPOSApp extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(rsposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(invoiceAmount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(rsposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(rsposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel10)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(invoiceDiscount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(rsposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(rsposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel11)
-                    .addComponent(jTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(rsposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel12)
-                    .addComponent(jTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(rsposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel13)
-                    .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(invoiceVat, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(rsposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(rsposLayout.createSequentialGroup()
+                        .addComponent(jTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(38, 38, 38)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel13))
                 .addContainerGap(140, Short.MAX_VALUE))
         );
 
@@ -349,13 +352,13 @@ public class RSPOSApp extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField3ActionPerformed
+    private void invoiceVatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_invoiceVatActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField3ActionPerformed
+    }//GEN-LAST:event_invoiceVatActionPerformed
 
     private void btnCloseMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCloseMouseClicked
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_btnCloseMouseClicked
 
     /**
@@ -395,10 +398,12 @@ public class RSPOSApp extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnClose;
+    private javax.swing.JTextField invoiceAmount;
+    private javax.swing.JTextField invoiceDiscount;
+    private javax.swing.JTextField invoiceVat;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
@@ -415,10 +420,6 @@ public class RSPOSApp extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField7;

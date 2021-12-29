@@ -34,7 +34,7 @@ public class POSApp extends javax.swing.JFrame {
 
     public POSApp() {
         initComponents();
-       // getAllProduct();
+        // getAllProduct();
         customer = new AddCustomerDAO().getAll();
         for (int i = 0; i < customer.size(); i++) {
             customerName.addItem(customer.get(i).getCustomerName());
@@ -792,24 +792,25 @@ public class POSApp extends javax.swing.JFrame {
     int tQty;
     double tprice;
     double totalAmounts;
+    double pdiscont;
+    double pvat;
     private void searchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchMouseClicked
         // TODO add your handling code here:
 //         String pCode = productCode.getText();
 //        p = new ProductDAO().getByCode(pCode);
 // TODO add your handling code here:
-     
+
     }//GEN-LAST:event_searchMouseClicked
 
     private void btnaddQtyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnaddQtyMouseClicked
         // TODO add your handling code here://     
         String pCode = productCode.getText();
         p = new Product();
-         int row = productTable.rowAtPoint(evt.getPoint());
-         p.setProductCode(productTable.getValueAt(productTable.getSelectedRow(), 1).toString());
-         p.setProductName(productTable.getValueAt(productTable.getSelectedRow(), 0).toString());
-         p.setSellingCost(Double.valueOf(productTable.getValueAt(productTable.getSelectedRow(), 6).toString()));
-       
-        
+        int row = productTable.rowAtPoint(evt.getPoint());
+        p.setProductCode(productTable.getValueAt(productTable.getSelectedRow(), 1).toString());
+        p.setProductName(productTable.getValueAt(productTable.getSelectedRow(), 0).toString());
+        p.setSellingCost(Double.valueOf(productTable.getValueAt(productTable.getSelectedRow(), 6).toString()));
+
         if (p.getProductCode() != null) {
             int pQuantity = Integer.valueOf(qty.getText());
             DefaultTableModel model = (DefaultTableModel) posTable.getModel();
@@ -848,7 +849,7 @@ public class POSApp extends javax.swing.JFrame {
         int qtyAfterDeduction = Integer.valueOf(totalQty.getText()) - totalQuantity;
         tQty = tQty - totalQuantity;
         totalQty.setText(String.valueOf(qtyAfterDeduction));
-        
+
         double totalAmount = Double.valueOf(posTable.getValueAt(row, 3).toString());
         double amoutAfterDeduction = Double.valueOf(totalPrice.getText()) - totalAmount;
         tprice = tprice - totalAmount;
@@ -856,21 +857,22 @@ public class POSApp extends javax.swing.JFrame {
 
         if (posTable.getRowCount() == 1) {
             totalPrice.setText(String.valueOf(0.00));
-            tprice = 0.0;  
+            tprice = 0.0;
         }
         if (posTable.getRowCount() == 1) {
             totalQty.setText(String.valueOf(0));
             tQty = 0;
-            
-            
+
         }
         ((DefaultTableModel) posTable.getModel()).removeRow(row);
     }//GEN-LAST:event_btnRemoveActionPerformed
 
     private void totalPayableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_totalPayableMouseClicked
         // TODO add your handling code here:
-         double totalAmount = Double.valueOf(totalPrice.getText());
+        double totalAmount = Double.valueOf(totalPrice.getText());
+        pdiscont = Double.valueOf(discount.getText());
         double dcount = Double.valueOf(discount.getText()) / 100;
+        pvat = Double.valueOf(vat.getText());
         double sellingvat = Double.valueOf(vat.getText()) / 100;
 //        System.out.println(discount);
 //        System.out.println(vat);
@@ -887,41 +889,39 @@ public class POSApp extends javax.swing.JFrame {
 
     private void productCodeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_productCodeKeyTyped
         // TODO add your handling code here:
-        
+
         //code
-        
-        
-        
+
     }//GEN-LAST:event_productCodeKeyTyped
 
     private void productCodeKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_productCodeKeyReleased
-  
+
     }//GEN-LAST:event_productCodeKeyReleased
 
     private void productCodeKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_productCodeKeyPressed
         // TODO add your handling code here:
-        
-        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
             String pName = productCode.getText();
-         List<Product> products = new ProductDAO().getByName(pName);
-        String[] columnNames = {"Name", "Code", "Bar_Code", "Category", "Quantity", "Total price", "Selling Price", "Alert Qty"};
-        Object[][] data = new Object[products.size()][8];
-        for (int i = 0; i < products.size(); i++) {
-            Product s = products.get(i);
-            Object[] o = {s.getProductName(), s.getProductCode(), s.getProductBarCode(), s.getProductCategory(), s.getQuantity(), s.getToalPrice(), s.getSellingCost(), s.getAlertQty()};
-            for (int j = 0; j < 8; j++) {
-                data[i][j] = o[j];
+            List<Product> products = new ProductDAO().getByName(pName);
+            String[] columnNames = {"Name", "Code", "Bar_Code", "Category", "Quantity", "Total price", "Selling Price", "Alert Qty"};
+            Object[][] data = new Object[products.size()][8];
+            for (int i = 0; i < products.size(); i++) {
+                Product s = products.get(i);
+                Object[] o = {s.getProductName(), s.getProductCode(), s.getProductBarCode(), s.getProductCategory(), s.getQuantity(), s.getToalPrice(), s.getSellingCost(), s.getAlertQty()};
+                for (int j = 0; j < 8; j++) {
+                    data[i][j] = o[j];
+                }
             }
+            DefaultTableModel model = new DefaultTableModel(data, columnNames);
+            productTable.setModel(model);
         }
-        DefaultTableModel model = new DefaultTableModel(data, columnNames);
-        productTable.setModel(model);
-        }
-      
+
     }//GEN-LAST:event_productCodeKeyPressed
 
     private void invoiceMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_invoiceMouseClicked
         // TODO add your handling code here:
-         Random ran = new Random();
+        Random ran = new Random();
         int n = ran.nextInt(10000) + 1;
         String val = String.valueOf(n);
         invoice.setText(val);
@@ -930,14 +930,14 @@ public class POSApp extends javax.swing.JFrame {
     private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
         // TODO add your handling code here:
         POS pos = new POS();
-        
+
         pos.setInvoice(Integer.valueOf(invoice.getText()));
         pos.setTotalQty(Integer.valueOf(totalQty.getText()));
         pos.setTotalPrice(Double.valueOf(totalPrice.getText()));
         pos.setDiscount(Double.valueOf(discount.getText()));
         pos.setVat(Double.valueOf(vat.getText()));
         pos.setTotalPayAmountVlaue(Double.valueOf(totalPayAmountVlaue.getText()));
-        
+
         int status = new POSDAO().save(pos);
         if (status > 0) {
             JOptionPane.showMessageDialog(rootPane, "pos Saved!");
