@@ -357,7 +357,7 @@ public class PayMethod extends javax.swing.JFrame {
     private void btnSubmitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSubmitActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-        new RSPOSApp(this).setVisible(true);
+        //new RSPOSApp(this).setVisible(true);
     }//GEN-LAST:event_btnSubmitActionPerformed
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked

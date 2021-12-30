@@ -13,7 +13,9 @@ import com.rs.model.POS;
 import com.rs.model.Product;
 import java.awt.event.KeyEvent;
 import java.awt.print.PrinterException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.Vector;
 import java.util.logging.Level;
@@ -109,6 +111,14 @@ public class POSApp extends javax.swing.JFrame {
         qty = new javax.swing.JTextField();
         btnaddQty = new javax.swing.JLabel();
         btnAdd = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jPanel16 = new javax.swing.JPanel();
+        totalPayable1 = new javax.swing.JLabel();
+        totalBalance = new javax.swing.JLabel();
+        totalPaying = new javax.swing.JTextField();
+        balance = new javax.swing.JTextField();
+        payMethod = new javax.swing.JComboBox<>();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -529,7 +539,7 @@ public class POSApp extends javax.swing.JFrame {
         posTable.setRowHeight(28);
         jScrollPane1.setViewportView(posTable);
 
-        bg.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 300, 540, 320));
+        bg.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 260, 540, 320));
 
         jPanel5.setBackground(new java.awt.Color(217, 237, 247));
 
@@ -557,9 +567,9 @@ public class POSApp extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(97, 97, 97)
+                .addGap(93, 93, 93)
                 .addComponent(totalQty, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(34, 34, 34)
+                .addGap(38, 38, 38)
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 105, Short.MAX_VALUE)
                 .addComponent(totalPrice, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -577,7 +587,7 @@ public class POSApp extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        bg.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 640, -1, 50));
+        bg.add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 590, -1, 50));
 
         jPanel7.setBackground(new java.awt.Color(217, 237, 247));
 
@@ -588,14 +598,14 @@ public class POSApp extends javax.swing.JFrame {
         jLabel7.setBackground(new java.awt.Color(217, 237, 247));
         jLabel7.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(114, 175, 210));
-        jLabel7.setText("Order Vat");
+        jLabel7.setText("Order Vat (%)");
 
         vat.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
 
         jLabel12.setBackground(new java.awt.Color(217, 237, 247));
         jLabel12.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(114, 175, 210));
-        jLabel12.setText("Discount");
+        jLabel12.setText("Discount (%)");
 
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
@@ -603,12 +613,12 @@ public class POSApp extends javax.swing.JFrame {
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(107, 107, 107)
+                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(76, 76, 76)
                 .addComponent(discount, javax.swing.GroupLayout.PREFERRED_SIZE, 46, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(51, 51, 51)
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
+                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
                 .addComponent(vat, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(31, 31, 31))
         );
@@ -625,7 +635,7 @@ public class POSApp extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        bg.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 720, -1, 42));
+        bg.add(jPanel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 650, -1, 42));
 
         jPanel6.setBackground(new java.awt.Color(223, 240, 216));
 
@@ -650,9 +660,8 @@ public class POSApp extends javax.swing.JFrame {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(totalPayable, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 262, Short.MAX_VALUE)
-                .addComponent(totalPayAmountVlaue, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 287, Short.MAX_VALUE)
+                .addComponent(totalPayAmountVlaue, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel6Layout.setVerticalGroup(
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -664,7 +673,7 @@ public class POSApp extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        bg.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 790, -1, 42));
+        bg.add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 700, -1, 42));
 
         customerName.setFont(new java.awt.Font("Corbel", 1, 20)); // NOI18N
         bg.add(customerName, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 150, 500, 42));
@@ -685,8 +694,8 @@ public class POSApp extends javax.swing.JFrame {
                 btnRemoveActionPerformed(evt);
             }
         });
-        bg.add(btnRemove, new org.netbeans.lib.awtextra.AbsoluteConstraints(1570, 230, 40, -1));
-        bg.add(qty, new org.netbeans.lib.awtextra.AbsoluteConstraints(1080, 230, 60, 40));
+        bg.add(btnRemove, new org.netbeans.lib.awtextra.AbsoluteConstraints(1570, 210, 40, -1));
+        bg.add(qty, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 210, 60, 40));
 
         btnaddQty.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/addCart.png"))); // NOI18N
         btnaddQty.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
@@ -695,7 +704,7 @@ public class POSApp extends javax.swing.JFrame {
                 btnaddQtyMouseClicked(evt);
             }
         });
-        bg.add(btnaddQty, new org.netbeans.lib.awtextra.AbsoluteConstraints(1140, 230, 40, 40));
+        bg.add(btnaddQty, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 210, 40, 40));
 
         btnAdd.setText("add");
         btnAdd.addActionListener(new java.awt.event.ActionListener() {
@@ -704,6 +713,87 @@ public class POSApp extends javax.swing.JFrame {
             }
         });
         bg.add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 870, -1, -1));
+
+        jPanel16.setBackground(new java.awt.Color(223, 240, 216));
+
+        totalPayable1.setBackground(new java.awt.Color(114, 175, 210));
+        totalPayable1.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
+        totalPayable1.setText("Total Paying");
+        totalPayable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                totalPayable1MouseClicked(evt);
+            }
+        });
+
+        totalBalance.setBackground(new java.awt.Color(114, 175, 210));
+        totalBalance.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
+        totalBalance.setText("Balance");
+        totalBalance.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                totalBalanceMouseClicked(evt);
+            }
+        });
+
+        totalPaying.setBackground(new java.awt.Color(223, 240, 216));
+        totalPaying.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
+        totalPaying.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(204, 204, 204)));
+
+        balance.setBackground(new java.awt.Color(223, 240, 216));
+        balance.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
+        balance.setText("0.00");
+        balance.setBorder(null);
+
+        javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
+        jPanel16.setLayout(jPanel16Layout);
+        jPanel16Layout.setHorizontalGroup(
+            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel16Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(totalPayable1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(42, 42, 42)
+                .addComponent(totalPaying, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addComponent(totalBalance, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 65, Short.MAX_VALUE)
+                .addComponent(balance, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel16Layout.setVerticalGroup(
+            jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel16Layout.createSequentialGroup()
+                .addGap(6, 6, 6)
+                .addGroup(jPanel16Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(totalPayable1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(totalBalance, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(totalPaying, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(balance, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 56, Short.MAX_VALUE))
+        );
+
+        bg.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 750, 540, 100));
+
+        payMethod.setFont(new java.awt.Font("Corbel", 0, 18)); // NOI18N
+        payMethod.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "  ", "Cash", "Credit Card", "cheque", "Gift Card", "Others", " " }));
+        bg.add(payMethod, new org.netbeans.lib.awtextra.AbsoluteConstraints(1310, 210, 180, 40));
+
+        jLabel4.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
+        jLabel4.setText("Paying by ");
+        bg.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 220, 100, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -870,9 +960,9 @@ public class POSApp extends javax.swing.JFrame {
     private void totalPayableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_totalPayableMouseClicked
         // TODO add your handling code here:
         double totalAmount = Double.valueOf(totalPrice.getText());
-        pdiscont = Double.valueOf(discount.getText());
+        //pdiscont = Double.valueOf(discount.getText());
         double dcount = Double.valueOf(discount.getText()) / 100;
-        pvat = Double.valueOf(vat.getText());
+        // pvat = Double.valueOf(vat.getText());
         double sellingvat = Double.valueOf(vat.getText()) / 100;
 //        System.out.println(discount);
 //        System.out.println(vat);
@@ -884,7 +974,17 @@ public class POSApp extends javax.swing.JFrame {
 
     private void btnpaymentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnpaymentMouseClicked
         // TODO add your handling code here:
-        new PayMethod(this).setVisible(true);
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("invoiceNo", invoice.getText());
+        map.put("invoiceTotal", totalPrice.getText());
+        map.put("invoiceDiscount", discount.getText());
+        map.put("invoiceVat", vat.getText());
+        map.put("invoiceGroundTotal", totalPayAmountVlaue.getText());
+        map.put("invoiceAmount", totalPaying.getText());
+        map.put("invoiceChange", balance.getText());
+        map.put("paidMethod", payMethod.getSelectedItem());
+        map.put("invoiceTable", posTable.getModel());
+        new RSPOSApp(map).setVisible(true);
     }//GEN-LAST:event_btnpaymentMouseClicked
 
     private void productCodeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_productCodeKeyTyped
@@ -946,6 +1046,18 @@ public class POSApp extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btnAddActionPerformed
 
+    private void totalPayable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_totalPayable1MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_totalPayable1MouseClicked
+
+    private void totalBalanceMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_totalBalanceMouseClicked
+        // TODO add your handling code here:
+        double totalPay = Double.valueOf(totalPaying.getText());
+        double totalPayment = Double.valueOf(totalPayAmountVlaue.getText());
+        double tbalance = totalPay - totalPayment;
+        balance.setText(String.valueOf(tbalance));
+    }//GEN-LAST:event_totalBalanceMouseClicked
+
     private void getAllProduct() {
         List<Product> products = new ProductDAO().getAll();
         String[] columnNames = {"Name", "Code", "Bar_Code", "Category", "Quantity", "Total price", "Selling Price", "Alert Qty"};
@@ -1001,6 +1113,7 @@ public class POSApp extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel addCustomer;
+    private javax.swing.JTextField balance;
     private javax.swing.JPanel bg;
     private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnRemove;
@@ -1019,16 +1132,19 @@ public class POSApp extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
     private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel13;
     private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel15;
+    private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
@@ -1038,6 +1154,7 @@ public class POSApp extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel logo;
+    private javax.swing.JComboBox<String> payMethod;
     private javax.swing.JLabel people;
     private javax.swing.JLabel pos;
     private javax.swing.JTable posTable;
@@ -1054,8 +1171,11 @@ public class POSApp extends javax.swing.JFrame {
     private javax.swing.JPanel showPOS;
     private javax.swing.JPanel sidemenubar;
     private javax.swing.JPanel topbar;
+    private javax.swing.JLabel totalBalance;
     private javax.swing.JTextField totalPayAmountVlaue;
     private javax.swing.JLabel totalPayable;
+    private javax.swing.JLabel totalPayable1;
+    private javax.swing.JTextField totalPaying;
     private javax.swing.JTextField totalPrice;
     private javax.swing.JTextField totalQty;
     private javax.swing.JTextField vat;
