@@ -36,6 +36,7 @@ public class POSApp extends javax.swing.JFrame {
 
     public POSApp() {
         initComponents();
+
         // getAllProduct();
         customer = new AddCustomerDAO().getAll();
         for (int i = 0; i < customer.size(); i++) {
@@ -891,6 +892,7 @@ public class POSApp extends javax.swing.JFrame {
 // TODO add your handling code here:
 
     }//GEN-LAST:event_searchMouseClicked
+    int stock = 0;
 
     private void btnaddQtyMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnaddQtyMouseClicked
         // TODO add your handling code here://     
@@ -900,8 +902,13 @@ public class POSApp extends javax.swing.JFrame {
         p.setProductCode(productTable.getValueAt(productTable.getSelectedRow(), 1).toString());
         p.setProductName(productTable.getValueAt(productTable.getSelectedRow(), 0).toString());
         p.setSellingCost(Double.valueOf(productTable.getValueAt(productTable.getSelectedRow(), 6).toString()));
-
-        if (p.getProductCode() != null) {
+        stock = Integer.valueOf(productTable.getValueAt(productTable.getSelectedRow(), 4).toString());
+        System.out.println(stock);
+        System.out.println(Integer.valueOf(qty.getText().toString()));
+        updateqty();
+        //  int newStock = stock- (Integer.valueOf(qty.getText()));
+        //System.out.println(newStock);
+        if (p.getProductCode() != null && Integer.valueOf(qty.getText()) < stock) {
             int pQuantity = Integer.valueOf(qty.getText());
             DefaultTableModel model = (DefaultTableModel) posTable.getModel();
             Vector v = new Vector();
@@ -916,12 +923,29 @@ public class POSApp extends javax.swing.JFrame {
             totalPrice.setText(String.valueOf(tprice));
             p = null;
             qty.setText(null);
-        } else {
-            System.out.println("NOT null");
-            JOptionPane.showMessageDialog(rootPane, "NOT Found");
+
+        } else if (Integer.valueOf(qty.getText()) > stock) {
+            JOptionPane.showMessageDialog(rootPane, "NOT Enough Stock");
         }
+        
     }//GEN-LAST:event_btnaddQtyMouseClicked
 
+    private void updateqty() {
+        Product products = new Product();
+        int newStock = stock - Integer.valueOf(qty.getText());
+        System.out.println(newStock);
+        //products.setQuantity(newStock);
+        products.setQuantity(Integer.valueOf(newStock));
+        int status = new ProductDAO().updateQty(products);
+        System.out.println(status);
+        if (status > 0) {
+            JOptionPane.showMessageDialog(rootPane, "Product Update!");
+            System.out.println(newStock);
+        } else {
+
+            JOptionPane.showMessageDialog(rootPane, "Product Not Update!");
+        }
+    }
     private void printBillMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_printBillMouseClicked
         try {
             // TODO add your handling code here:
@@ -933,9 +957,9 @@ public class POSApp extends javax.swing.JFrame {
     int row;
     private void btnRemoveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoveActionPerformed
         // TODO add your handling code here:
-        // System.err.println(posTable.getRowCount());
+
         int totalQuantity = Integer.valueOf(posTable.getValueAt(row, 2).toString());
-        // System.out.println(totalAmount);
+
         int qtyAfterDeduction = Integer.valueOf(totalQty.getText()) - totalQuantity;
         tQty = tQty - totalQuantity;
         totalQty.setText(String.valueOf(qtyAfterDeduction));

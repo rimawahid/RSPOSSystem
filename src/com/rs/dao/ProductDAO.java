@@ -80,6 +80,23 @@ public class ProductDAO implements ICommonInterface<Product> {
         }
         return status;
     }
+    
+     public int updateQty(Product t) {
+        String sql = "update product set product_code = ?, product_qty = ? where product_code = ?";
+        int status = 0;
+
+        try {
+            con = DBConnection.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, t.getProductCode());
+            ps.setString(2,Integer.valueOf(t.getQuantity()).toString());
+            ps.setString(3, t.getProductCode());
+            status = ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return status;
+    }
 
     @Override
     public int delete(Product t) {

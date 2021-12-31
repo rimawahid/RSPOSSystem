@@ -6,17 +6,23 @@
 package com.rs.gui;
 
 import com.rs.model.POS;
+import com.rs.util.DBConnection;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.print.PageFormat;
 import java.awt.print.Printable;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableModel;
 
 /**
@@ -432,6 +438,7 @@ public class RSPOSApp extends javax.swing.JFrame {
 
     private void printActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_printActionPerformed
         // TODO add your handling code here:
+        addInvice();
         PrinterJob job = PrinterJob.getPrinterJob();
         job.setJobName("Print Data");
 
@@ -461,7 +468,33 @@ public class RSPOSApp extends javax.swing.JFrame {
                 ex.printStackTrace();
             }
         }
+
     }//GEN-LAST:event_printActionPerformed
+
+    private void addInvice() {
+        Connection con;
+        Statement ps;
+
+        DefaultTableModel model = (DefaultTableModel) invoiceTable.getModel();
+
+        try {
+            con = DBConnection.getConnection();
+            ps = con.createStatement();
+            for (int i = 0; i < model.getRowCount(); i++) {
+                String tProduct = model.getValueAt(i, 0).toString();
+                int tQty = Integer.valueOf(model.getValueAt(i, 2).toString());
+                double tPrice = Double.valueOf(model.getValueAt(i, 1).toString());
+                double tSubTotal = Double.valueOf(model.getValueAt(i, 3).toString());
+                String sql = "insert into invoiceTable ( product_name,  product_qty, price, total_price) values ('" + tProduct + "','" + tQty + "','" + tPrice + "' ,'" + tSubTotal + "')";
+                ps.addBatch(sql);
+            }
+            int[] rowsInserted = ps.executeBatch();
+            System.out.println("data inserted");
+            System.out.println(rowsInserted.length);
+        } catch (SQLException ex) {
+            Logger.getLogger(RSPOSApp.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     /**
      * @param args the command line arguments
