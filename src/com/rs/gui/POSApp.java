@@ -13,6 +13,8 @@ import com.rs.model.POS;
 import com.rs.model.Product;
 import java.awt.event.KeyEvent;
 import java.awt.print.PrinterException;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -36,7 +38,8 @@ public class POSApp extends javax.swing.JFrame {
 
     public POSApp() {
         initComponents();
-
+        getInvoiceNo();
+        currentdate();
         // getAllProduct();
         customer = new AddCustomerDAO().getAll();
         for (int i = 0; i < customer.size(); i++) {
@@ -44,6 +47,24 @@ public class POSApp extends javax.swing.JFrame {
         }
     }
 
+    public int getInvoiceNo() {
+        Random random = new Random();
+        int n = random.nextInt(1000) + 1;
+        String val = String.valueOf(n);
+        invoice.setText(val);
+        return n;
+    }
+
+    public void currentdate(){
+        Calendar cal = new GregorianCalendar();
+        int month = cal.get(Calendar.MONTH);
+        int year = cal.get(Calendar.YEAR);
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+        date.setText( day + "/"+(month+1)+"/"+ year);
+        int minute = cal.get(Calendar.MINUTE);
+        int hour = cal.get(Calendar.HOUR);
+        time.setText(hour+":"+ minute);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -56,6 +77,8 @@ public class POSApp extends javax.swing.JFrame {
         bg = new javax.swing.JPanel();
         topbar = new javax.swing.JPanel();
         logo = new javax.swing.JLabel();
+        date = new javax.swing.JLabel();
+        time = new javax.swing.JLabel();
         sidemenubar = new javax.swing.JPanel();
         dashboard = new javax.swing.JLabel();
         pos = new javax.swing.JLabel();
@@ -111,7 +134,6 @@ public class POSApp extends javax.swing.JFrame {
         btnRemove = new javax.swing.JButton();
         qty = new javax.swing.JTextField();
         btnaddQty = new javax.swing.JLabel();
-        btnAdd = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jPanel16 = new javax.swing.JPanel();
         totalPayable1 = new javax.swing.JLabel();
@@ -120,6 +142,7 @@ public class POSApp extends javax.swing.JFrame {
         balance = new javax.swing.JTextField();
         payMethod = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
+        ProcessPayment = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -131,6 +154,14 @@ public class POSApp extends javax.swing.JFrame {
         logo.setForeground(new java.awt.Color(255, 255, 255));
         logo.setText("RS POS");
 
+        date.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
+        date.setForeground(new java.awt.Color(255, 255, 255));
+        date.setText("date");
+
+        time.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
+        time.setForeground(new java.awt.Color(255, 255, 255));
+        time.setText("time");
+
         javax.swing.GroupLayout topbarLayout = new javax.swing.GroupLayout(topbar);
         topbar.setLayout(topbarLayout);
         topbarLayout.setHorizontalGroup(
@@ -138,13 +169,20 @@ public class POSApp extends javax.swing.JFrame {
             .addGroup(topbarLayout.createSequentialGroup()
                 .addGap(69, 69, 69)
                 .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(1692, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1099, Short.MAX_VALUE)
+                .addComponent(date)
+                .addGap(18, 18, 18)
+                .addComponent(time)
+                .addGap(484, 484, 484))
         );
         topbarLayout.setVerticalGroup(
             topbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(topbarLayout.createSequentialGroup()
                 .addGap(26, 26, 26)
-                .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(topbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(date)
+                    .addComponent(time))
                 .addContainerGap(26, Short.MAX_VALUE))
         );
 
@@ -309,6 +347,7 @@ public class POSApp extends javax.swing.JFrame {
         jLabel1.setText("Invoice");
         jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, -1, -1));
 
+        invoice.setEditable(false);
         invoice.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 invoiceMouseClicked(evt);
@@ -525,11 +564,11 @@ public class POSApp extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Product", "Price", "Qty", "Subtotal"
+                "Code", "Product", "Price", "Qty", "Subtotal"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, true, true, true
+                false, true, true, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -707,14 +746,6 @@ public class POSApp extends javax.swing.JFrame {
         });
         bg.add(btnaddQty, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 210, 40, 40));
 
-        btnAdd.setText("add");
-        btnAdd.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAddActionPerformed(evt);
-            }
-        });
-        bg.add(btnAdd, new org.netbeans.lib.awtextra.AbsoluteConstraints(1050, 870, -1, -1));
-
         jPanel16.setBackground(new java.awt.Color(223, 240, 216));
 
         totalPayable1.setBackground(new java.awt.Color(114, 175, 210));
@@ -783,7 +814,7 @@ public class POSApp extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jPanel16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 56, Short.MAX_VALUE))
+                .addContainerGap(56, Short.MAX_VALUE))
         );
 
         bg.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 750, 540, 100));
@@ -795,6 +826,15 @@ public class POSApp extends javax.swing.JFrame {
         jLabel4.setFont(new java.awt.Font("Corbel", 1, 18)); // NOI18N
         jLabel4.setText("Paying by ");
         bg.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(1220, 220, 100, -1));
+
+        ProcessPayment.setBackground(new java.awt.Color(255, 51, 51));
+        ProcessPayment.setText("jButton1");
+        ProcessPayment.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ProcessPaymentActionPerformed(evt);
+            }
+        });
+        bg.add(ProcessPayment, new org.netbeans.lib.awtextra.AbsoluteConstraints(1070, 850, -1, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -886,10 +926,7 @@ public class POSApp extends javax.swing.JFrame {
     double pdiscont;
     double pvat;
     private void searchMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_searchMouseClicked
-        // TODO add your handling code here:
-//         String pCode = productCode.getText();
-//        p = new ProductDAO().getByCode(pCode);
-// TODO add your handling code here:
+
 
     }//GEN-LAST:event_searchMouseClicked
     int stock = 0;
@@ -903,15 +940,12 @@ public class POSApp extends javax.swing.JFrame {
         p.setProductName(productTable.getValueAt(productTable.getSelectedRow(), 0).toString());
         p.setSellingCost(Double.valueOf(productTable.getValueAt(productTable.getSelectedRow(), 6).toString()));
         stock = Integer.valueOf(productTable.getValueAt(productTable.getSelectedRow(), 4).toString());
-        System.out.println(stock);
-        System.out.println(Integer.valueOf(qty.getText().toString()));
-        updateqty();
-        //  int newStock = stock- (Integer.valueOf(qty.getText()));
-        //System.out.println(newStock);
+
         if (p.getProductCode() != null && Integer.valueOf(qty.getText()) < stock) {
             int pQuantity = Integer.valueOf(qty.getText());
             DefaultTableModel model = (DefaultTableModel) posTable.getModel();
             Vector v = new Vector();
+            v.add(p.getProductCode());
             v.add(p.getProductName());
             v.add(p.getSellingCost());
             v.add(pQuantity);
@@ -927,25 +961,25 @@ public class POSApp extends javax.swing.JFrame {
         } else if (Integer.valueOf(qty.getText()) > stock) {
             JOptionPane.showMessageDialog(rootPane, "NOT Enough Stock");
         }
-        
+
     }//GEN-LAST:event_btnaddQtyMouseClicked
 
-    private void updateqty() {
-        Product products = new Product();
-        int newStock = stock - Integer.valueOf(qty.getText());
-        System.out.println(newStock);
-        //products.setQuantity(newStock);
-        products.setQuantity(Integer.valueOf(newStock));
-        int status = new ProductDAO().updateQty(products);
-        System.out.println(status);
-        if (status > 0) {
-            JOptionPane.showMessageDialog(rootPane, "Product Update!");
-            System.out.println(newStock);
-        } else {
-
-            JOptionPane.showMessageDialog(rootPane, "Product Not Update!");
-        }
-    }
+//    private void updateqty() {
+//        Product products = new Product();
+//        int newStock = stock - Integer.valueOf(qty.getText());
+//        System.out.println(newStock);
+//        //products.setQuantity(newStock);
+//        products.setQuantity(Integer.valueOf(newStock));
+//        int status = new ProductDAO().updateQty(products);
+//        System.out.println(status);
+//        if (status > 0) {
+//            JOptionPane.showMessageDialog(rootPane, "Product Update!");
+//            System.out.println(newStock);
+//        } else {
+//
+//            JOptionPane.showMessageDialog(rootPane, "Product Not Update!");
+//        }
+//    }
     private void printBillMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_printBillMouseClicked
         try {
             // TODO add your handling code here:
@@ -999,7 +1033,9 @@ public class POSApp extends javax.swing.JFrame {
     private void btnpaymentMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnpaymentMouseClicked
         // TODO add your handling code here:
         Map<String, Object> map = new HashMap<String, Object>();
+        map.put("invoiceDate", date.getText());
         map.put("invoiceNo", invoice.getText());
+        map.put("customer", customerName.getSelectedItem());
         map.put("invoiceTotal", totalPrice.getText());
         map.put("invoiceDiscount", discount.getText());
         map.put("invoiceVat", vat.getText());
@@ -1045,31 +1081,33 @@ public class POSApp extends javax.swing.JFrame {
 
     private void invoiceMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_invoiceMouseClicked
         // TODO add your handling code here:
-        Random ran = new Random();
-        int n = ran.nextInt(10000) + 1;
-        String val = String.valueOf(n);
-        invoice.setText(val);
+//        Random ran = new Random();
+//        int n = ran.nextInt(10000) + 1;
+//        String val = String.valueOf(n);
+//        invoice.setText(val);
     }//GEN-LAST:event_invoiceMouseClicked
 
-    private void btnAddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddActionPerformed
-        // TODO add your handling code here:
+    private void addPaymentInfo() {
         POS pos = new POS();
 
-        pos.setInvoice(Integer.valueOf(invoice.getText()));
+        pos.setInvoice(invoice.getText());
         pos.setTotalQty(Integer.valueOf(totalQty.getText()));
         pos.setTotalPrice(Double.valueOf(totalPrice.getText()));
         pos.setDiscount(Double.valueOf(discount.getText()));
         pos.setVat(Double.valueOf(vat.getText()));
         pos.setTotalPayAmountVlaue(Double.valueOf(totalPayAmountVlaue.getText()));
-
+        pos.setTotalPayable(Double.valueOf(totalPaying.getText()));
+        pos.setBalance(Double.valueOf(balance.getText()));
+        pos.setPayMethod(payMethod.getSelectedItem().toString());
+        pos.setCustomerName(customerName.getSelectedItem().toString());
+        pos.setSellDate(date.getText());
         int status = new POSDAO().save(pos);
         if (status > 0) {
             JOptionPane.showMessageDialog(rootPane, "pos Saved!");
         } else {
             JOptionPane.showMessageDialog(rootPane, "pos NOT Saved!");
         }
-    }//GEN-LAST:event_btnAddActionPerformed
-
+    }
     private void totalPayable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_totalPayable1MouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_totalPayable1MouseClicked
@@ -1081,6 +1119,24 @@ public class POSApp extends javax.swing.JFrame {
         double tbalance = totalPay - totalPayment;
         balance.setText(String.valueOf(tbalance));
     }//GEN-LAST:event_totalBalanceMouseClicked
+
+    private void ProcessPaymentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ProcessPaymentActionPerformed
+        // TODO add your handling code here:
+        int logOut = JOptionPane.showConfirmDialog(null, "Do you want to Pay?", "Select", JOptionPane.YES_NO_OPTION);
+        if (logOut == 0) {
+
+            int rowCount = posTable.getRowCount();
+            for (int i = 0; i < rowCount; i++) {
+                // System.out.println(productTable.getValueAt(i, 0).toString());
+                // System.out.println(productTable.getValueAt(i, 2).toString());
+                Product product = new Product();
+                product.setProductCode(posTable.getValueAt(i, 0).toString());
+                product.setQuantity(Integer.valueOf(posTable.getValueAt(i, 3).toString()));
+                new ProductDAO().updateStock(product, invoice.getText());
+            }
+        }
+        addPaymentInfo();
+    }//GEN-LAST:event_ProcessPaymentActionPerformed
 
     private void getAllProduct() {
         List<Product> products = new ProductDAO().getAll();
@@ -1136,16 +1192,17 @@ public class POSApp extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton ProcessPayment;
     private javax.swing.JLabel addCustomer;
     private javax.swing.JTextField balance;
     private javax.swing.JPanel bg;
-    private javax.swing.JButton btnAdd;
     private javax.swing.JButton btnRemove;
     private javax.swing.JLabel btnaddQty;
     private javax.swing.JLabel btnpayment;
     private javax.swing.JLabel categoris;
     private javax.swing.JComboBox<String> customerName;
     private javax.swing.JLabel dashboard;
+    private javax.swing.JLabel date;
     private javax.swing.JTextField discount;
     private javax.swing.JLabel giftCard;
     private javax.swing.JTextField invoice;
@@ -1194,6 +1251,7 @@ public class POSApp extends javax.swing.JFrame {
     private javax.swing.JLabel setting;
     private javax.swing.JPanel showPOS;
     private javax.swing.JPanel sidemenubar;
+    private javax.swing.JLabel time;
     private javax.swing.JPanel topbar;
     private javax.swing.JLabel totalBalance;
     private javax.swing.JTextField totalPayAmountVlaue;

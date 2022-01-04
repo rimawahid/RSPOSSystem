@@ -20,6 +20,7 @@ public class DashboardApp extends javax.swing.JFrame {
     public DashboardApp() {
         initComponents();
         currentdate();
+       
     }
     
     public void currentdate(){
@@ -28,8 +29,6 @@ public class DashboardApp extends javax.swing.JFrame {
         int year = cal.get(Calendar.YEAR);
         int day = cal.get(Calendar.DAY_OF_MONTH);
         date.setText((month+1)+"/"+ day + "/"+ year);
-        
-        //int second = cal.get(Calendar.SECOND);
         int minute = cal.get(Calendar.MINUTE);
         int hour = cal.get(Calendar.HOUR);
         time.setText(hour+":"+ minute);
@@ -93,6 +92,10 @@ public class DashboardApp extends javax.swing.JFrame {
         jLabel20 = new javax.swing.JLabel();
         jLabel21 = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
+        salescChart = new javax.swing.JPanel();
+        jLabel23 = new javax.swing.JLabel();
+        topProductChart = new javax.swing.JPanel();
+        jLabel24 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -675,6 +678,54 @@ public class DashboardApp extends javax.swing.JFrame {
 
         bg.add(quickLinks, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 190, 1580, 180));
 
+        salescChart.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel23.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
+        jLabel23.setText("Sales Chart");
+
+        javax.swing.GroupLayout salescChartLayout = new javax.swing.GroupLayout(salescChart);
+        salescChart.setLayout(salescChartLayout);
+        salescChartLayout.setHorizontalGroup(
+            salescChartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(salescChartLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel23)
+                .addContainerGap(833, Short.MAX_VALUE))
+        );
+        salescChartLayout.setVerticalGroup(
+            salescChartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(salescChartLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel23)
+                .addContainerGap(532, Short.MAX_VALUE))
+        );
+
+        bg.add(salescChart, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 390, 940, 570));
+
+        topProductChart.setBackground(new java.awt.Color(255, 255, 255));
+
+        jLabel24.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
+        jLabel24.setText("Top Products ");
+
+        javax.swing.GroupLayout topProductChartLayout = new javax.swing.GroupLayout(topProductChart);
+        topProductChart.setLayout(topProductChartLayout);
+        topProductChartLayout.setHorizontalGroup(
+            topProductChartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(topProductChartLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel24)
+                .addContainerGap(493, Short.MAX_VALUE))
+        );
+        topProductChartLayout.setVerticalGroup(
+            topProductChartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(topProductChartLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel24)
+                .addContainerGap(532, Short.MAX_VALUE))
+        );
+
+        bg.add(topProductChart, new org.netbeans.lib.awtextra.AbsoluteConstraints(1280, 390, 620, 570));
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -708,6 +759,8 @@ public class DashboardApp extends javax.swing.JFrame {
 
     private void categorisMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_categorisMouseClicked
         // TODO add your handling code here:
+        this.setVisible(false);
+        new CategoryApp().setVisible(true);
     }//GEN-LAST:event_categorisMouseClicked
 
     private void salesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salesMouseClicked
@@ -800,6 +853,8 @@ public class DashboardApp extends javax.swing.JFrame {
         new PeopleApp().setVisible(true);
     }//GEN-LAST:event_btnUsersMouseClicked
 
+    
+   
     /**
      * @param args the command line arguments
      */
@@ -865,6 +920,8 @@ public class DashboardApp extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
+    private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -881,9 +938,11 @@ public class DashboardApp extends javax.swing.JFrame {
     private javax.swing.JPanel quickLinks;
     private javax.swing.JLabel reports;
     private javax.swing.JLabel sales;
+    private javax.swing.JPanel salescChart;
     private javax.swing.JLabel setting;
     private javax.swing.JPanel sidemenubar;
     private javax.swing.JLabel time;
+    private javax.swing.JPanel topProductChart;
     private javax.swing.JPanel topbar;
     // End of variables declaration//GEN-END:variables
 }

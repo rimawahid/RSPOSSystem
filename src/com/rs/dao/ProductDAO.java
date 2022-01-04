@@ -80,23 +80,7 @@ public class ProductDAO implements ICommonInterface<Product> {
         }
         return status;
     }
-    
-     public int updateQty(Product t) {
-        String sql = "update product set product_code = ?, product_qty = ? where product_code = ?";
-        int status = 0;
 
-        try {
-            con = DBConnection.getConnection();
-            ps = con.prepareStatement(sql);
-            ps.setString(1, t.getProductCode());
-            ps.setString(2,Integer.valueOf(t.getQuantity()).toString());
-            ps.setString(3, t.getProductCode());
-            status = ps.executeUpdate();
-        } catch (SQLException ex) {
-            Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return status;
-    }
 
     @Override
     public int delete(Product t) {
@@ -189,8 +173,8 @@ public class ProductDAO implements ICommonInterface<Product> {
         }
         return product;
     }
-    
-     public Product getByNames(String name) {
+
+    public Product getByNames(String name) {
         String sql = "select * from product where product_name = ?";
         Product product = new Product();
         try {
@@ -224,7 +208,7 @@ public class ProductDAO implements ICommonInterface<Product> {
         }
         return product;
     }
-    
+
     public List<Product> getByName(String name) {
         String sql = "select * from product where product_name LIKE ?";
         List<Product> productList = new ArrayList<Product>();
@@ -260,6 +244,82 @@ public class ProductDAO implements ICommonInterface<Product> {
             }
         }
         return productList;
+    }
+
+    public int updateStock(Product product, String invoiceNo) {
+
+        String sql = "select * from product where product_code = ?";
+        int status = 0;
+        try {
+            con = DBConnection.getConnection();
+            ps = con.prepareStatement(sql);
+            ps.setString(1, product.getProductCode());
+
+            ResultSet rs = ps.executeQuery();
+            int existQty = 0;
+            while (rs.next()) {
+                existQty = Integer.valueOf(rs.getString("product_qty"));
+                String sql1 = "insert into selling (product_type, product_name, product_code, product_barcode, product_category, product_qty, buying_price,others_Cost, total_price, selling_price, supplier, alert_qty, status, invoice_no) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                try {
+                    con = DBConnection.getConnection();
+                    ps = con.prepareStatement(sql1);
+                    ps.setString(1, rs.getString("product_type"));
+                    ps.setString(2, rs.getString("product_name"));
+                    ps.setString(3, rs.getString("product_code"));
+                    ps.setString(4, rs.getString("product_barcode"));
+                    ps.setString(5, rs.getString("product_category"));
+                    ps.setInt(6, product.getQuantity());
+                    ps.setDouble(7, rs.getDouble("buying_price"));
+                    ps.setDouble(8, rs.getDouble("others_Cost"));
+                    ps.setDouble(9, rs.getDouble("total_price"));
+                    ps.setDouble(10, rs.getDouble("selling_price"));
+                    ps.setString(11, rs.getString("supplier"));
+                    ps.setInt(12, rs.getInt("alert_qty"));
+                    ps.setString(13, "SOLD");
+                    ps.setString(14, invoiceNo);
+
+                    status = ps.executeUpdate();
+                } catch (Exception e) {
+                    System.out.println(e);
+                } finally {
+                    try {
+                        ps.close();
+                        con.close();
+                    } catch (SQLException ex) {
+                        Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                String update_sql = "update product set product_qty = ? where  product_code = ?";
+
+                try {
+                    con = DBConnection.getConnection();
+                    ps = con.prepareStatement(update_sql);
+                    ps.setInt(1, (existQty - product.getQuantity()));
+                    System.out.println(existQty - product.getQuantity() + " dao");
+                    ps.setString(2, product.getProductCode());
+                    status = ps.executeUpdate();
+                } catch (Exception e) {
+                    System.out.println(e);
+                } finally {
+                    try {
+                        ps.close();
+                        con.close();
+                    } catch (SQLException ex) {
+                        Logger.getLogger(ProductDAO.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+
+            }
+        } catch (Exception e) {
+        } finally {
+            try {
+                ps.close();
+                con.close();
+            } catch (Exception e) {
+            }
+        }
+
+        return status;
     }
 
 }

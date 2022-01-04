@@ -1,15 +1,27 @@
-
 package com.rs.model;
 
 public class POS {
-    private int  id;
-    private int  invoice;
+
+    private int id;
+    private String invoice;
     private int totalQty;
     private double totalPrice;
     private double discount;
     private double vat;
     private double totalPayAmountVlaue;
     private String payMethod;
+    private double totalPayable;
+    private double balance;
+    private String customerName;
+    private String sellDate;
+
+    public String getSellDate() {
+        return sellDate;
+    }
+
+    public void setSellDate(String sellDate) {
+        this.sellDate = sellDate;
+    }
 
     public int getId() {
         return id;
@@ -19,11 +31,11 @@ public class POS {
         this.id = id;
     }
 
-    public int getInvoice() {
+    public String getInvoice() {
         return invoice;
     }
 
-    public void setInvoice(int invoice) {
+    public void setInvoice(String invoice) {
         this.invoice = invoice;
     }
 
@@ -74,5 +86,31 @@ public class POS {
     public void setPayMethod(String payMethod) {
         this.payMethod = payMethod;
     }
-    
+
+    public double getTotalPayable() {
+        return totalPayable;
+    }
+
+    public void setTotalPayable(double totalPayable) {
+        this.totalPayable = totalPayable;
+    }
+
+    public double getBalance() {
+        return balance;
+    }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
+    }
+
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
+
+   
+
 }

@@ -49,7 +49,9 @@ public class RSPOSApp extends javax.swing.JFrame {
 
     public RSPOSApp(Map map) {
         initComponents();
+        invoiceDate.setText(map.get("invoiceDate").toString());
         invoiceNo.setText(map.get("invoiceNo").toString());
+        customer.setText(map.get("customer").toString());
         invoiceTotal.setText(map.get("invoiceTotal").toString());
         invoiceDiscount.setText(map.get("invoiceDiscount").toString());
         invoiceVat.setText(map.get("invoiceVat").toString());
@@ -112,6 +114,7 @@ public class RSPOSApp extends javax.swing.JFrame {
         invoiceChange = new javax.swing.JTextField();
         invoiceNo = new javax.swing.JTextField();
         invoiceDate = new javax.swing.JTextField();
+        customer = new javax.swing.JLabel();
         print = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -232,7 +235,6 @@ public class RSPOSApp extends javax.swing.JFrame {
         jLabel14.setText("Paid by :");
 
         paidMethod.setEditable(false);
-        paidMethod.setBackground(new java.awt.Color(240, 240, 240));
         paidMethod.setFont(new java.awt.Font("Corbel", 0, 18)); // NOI18N
         paidMethod.setText("Cash");
         paidMethod.setBorder(null);
@@ -332,17 +334,21 @@ public class RSPOSApp extends javax.swing.JFrame {
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, rsposLayout.createSequentialGroup()
                             .addGap(28, 28, 28)
                             .addGroup(rsposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel8)
                                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(rsposLayout.createSequentialGroup()
-                                    .addGroup(rsposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel7)
-                                        .addComponent(jLabel6))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addGroup(rsposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(invoiceNo, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(invoiceDate, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                                .addGroup(rsposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addGroup(rsposLayout.createSequentialGroup()
+                                        .addComponent(jLabel8)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(customer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, rsposLayout.createSequentialGroup()
+                                        .addGroup(rsposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel7)
+                                            .addComponent(jLabel6))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(rsposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(invoiceNo, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(invoiceDate, javax.swing.GroupLayout.PREFERRED_SIZE, 188, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
                     .addGroup(rsposLayout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(successPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -372,7 +378,9 @@ public class RSPOSApp extends javax.swing.JFrame {
                     .addComponent(jLabel7)
                     .addComponent(invoiceNo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel8)
+                .addGroup(rsposLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(customer))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -533,6 +541,7 @@ public class RSPOSApp extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel btnClose;
+    private javax.swing.JLabel customer;
     private javax.swing.JTextField invoiceAmount;
     private javax.swing.JTextField invoiceChange;
     private javax.swing.JTextField invoiceDate;
