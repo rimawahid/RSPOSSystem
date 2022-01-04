@@ -5,6 +5,11 @@
  */
 package com.rs.gui;
 
+import com.rs.dao.POSDAO;
+import com.rs.model.POS;
+import java.util.List;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author USER
@@ -50,7 +55,7 @@ public class SalesApp extends javax.swing.JFrame {
         showItem = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        purchasesTable = new javax.swing.JTable();
+        salesTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -265,8 +270,8 @@ public class SalesApp extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Corbel", 0, 18)); // NOI18N
         jLabel6.setText("entries");
 
-        purchasesTable.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
-        purchasesTable.setModel(new javax.swing.table.DefaultTableModel(
+        salesTable.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        salesTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -274,13 +279,13 @@ public class SalesApp extends javax.swing.JFrame {
                 "Date", "Customer", "Total", "Tax", "Discount", "Grand Total", "Paid", "Status"
             }
         ));
-        purchasesTable.setRowHeight(28);
-        purchasesTable.addMouseListener(new java.awt.event.MouseAdapter() {
+        salesTable.setRowHeight(28);
+        salesTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                purchasesTableMouseClicked(evt);
+                salesTableMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(purchasesTable);
+        jScrollPane1.setViewportView(salesTable);
 
         javax.swing.GroupLayout listPurchaseLayout = new javax.swing.GroupLayout(listPurchase);
         listPurchase.setLayout(listPurchaseLayout);
@@ -403,17 +408,32 @@ public class SalesApp extends javax.swing.JFrame {
         new ListOpenedBills().setVisible(true);
     }//GEN-LAST:event_listOpenedBillsMouseClicked
 
-    private void purchasesTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_purchasesTableMouseClicked
+    private void salesTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salesTableMouseClicked
         // TODO add your handling code here:
-        int row = purchasesTable.rowAtPoint(evt.getPoint());
+        int row = salesTable.rowAtPoint(evt.getPoint());
 //
 //        s = new Purchase();
 //        s.setPurchaseDate(purchasesTable.getValueAt(row, 0).toString());
 //        s.setReference(purchasesTable.getValueAt(row, 1).toString());
 //        s.setTotal(Double.valueOf(purchasesTable.getValueAt(row, 2).toString()));
 //        s.setNote(purchasesTable.getValueAt(row, 3).toString());
-    }//GEN-LAST:event_purchasesTableMouseClicked
+    }//GEN-LAST:event_salesTableMouseClicked
 
+    
+    private void getAllProduct() {
+        List<POS> salesPos = new POSDAO().getAll();
+        String[] columnNames = {"Date", "Custome", "Total", "Discount", "Vat", "Grand Total","Pay Method" ,"Status"};
+        Object[][] data = new Object[salesPos.size()][8];
+        for (int i = 0; i < salesPos.size(); i++) {
+            POS s = salesPos.get(i);
+            Object[] o = {s.getProductType(), s.getProductName(), s.getProductCode(), s.getProductBarCode(), s.getProductCategory(), s.getQuantity(), s.getBuyingCost(), s.getOthersCost(), s.getToalPrice(), s.getSellingCost(), s.getSupplier(), s.getAlertQty()};
+            for (int j = 0; j < 8; j++) {
+                data[i][j] = o[j];
+            }
+        }
+        DefaultTableModel model = new DefaultTableModel(data, columnNames);
+        salesTable.setModel(model);
+    }
     /**
      * @param args the command line arguments
      */
@@ -467,9 +487,9 @@ public class SalesApp extends javax.swing.JFrame {
     private javax.swing.JLabel pos;
     private javax.swing.JLabel product;
     private javax.swing.JLabel purchases;
-    private javax.swing.JTable purchasesTable;
     private javax.swing.JLabel reports;
     private javax.swing.JLabel sales;
+    private javax.swing.JTable salesTable;
     private javax.swing.JLabel setting;
     private javax.swing.JComboBox<String> showItem;
     private javax.swing.JPanel sidemenubar;
