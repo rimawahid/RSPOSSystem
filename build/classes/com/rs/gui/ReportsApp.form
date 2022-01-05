@@ -1801,7 +1801,7 @@
                                 </Constraint>
                               </Constraints>
                             </Component>
-                            <Component class="javax.swing.JLabel" name="jLabel26">
+                            <Component class="javax.swing.JLabel" name="productReport">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Corbel" size="20" style="0"/>
@@ -1822,7 +1822,7 @@
                                 </Constraint>
                               </Constraints>
                             </Component>
-                            <Component class="javax.swing.JLabel" name="jLabel6">
+                            <Component class="javax.swing.JLabel" name="topProduct">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Corbel" size="20" style="0"/>
@@ -1830,7 +1830,7 @@
                                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                                   <Image iconType="3" name="/icons/icons8-product-24.png"/>
                                 </Property>
-                                <Property name="text" type="java.lang.String" value="Top Pruducts"/>
+                                <Property name="text" type="java.lang.String" value="Top Products"/>
                                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                                   <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
                                     <LineBorder/>
@@ -1843,7 +1843,7 @@
                                 </Constraint>
                               </Constraints>
                             </Component>
-                            <Component class="javax.swing.JLabel" name="jLabel11">
+                            <Component class="javax.swing.JLabel" name="salesReport">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Corbel" size="20" style="0"/>
@@ -1858,13 +1858,16 @@
                                   </Border>
                                 </Property>
                               </Properties>
+                              <Events>
+                                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="salesReportMouseClicked"/>
+                              </Events>
                               <Constraints>
                                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                                   <AbsoluteConstraints x="730" y="110" width="280" height="30"/>
                                 </Constraint>
                               </Constraints>
                             </Component>
-                            <Component class="javax.swing.JLabel" name="jLabel10">
+                            <Component class="javax.swing.JLabel" name="payMentsReport">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Corbel" size="20" style="0"/>
@@ -1879,6 +1882,9 @@
                                   </Border>
                                 </Property>
                               </Properties>
+                              <Events>
+                                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="payMentsReportMouseClicked"/>
+                              </Events>
                               <Constraints>
                                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                                   <AbsoluteConstraints x="730" y="160" width="280" height="30"/>
@@ -1909,7 +1915,7 @@
                                 </Constraint>
                               </Constraints>
                             </Component>
-                            <Component class="javax.swing.JLabel" name="jLabel20">
+                            <Component class="javax.swing.JLabel" name="registerReport">
                               <Properties>
                                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                                   <Font name="Corbel" size="20" style="0"/>
@@ -1924,6 +1930,9 @@
                                   </Border>
                                 </Property>
                               </Properties>
+                              <Events>
+                                <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="registerReportMouseClicked"/>
+                              </Events>
                               <Constraints>
                                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
                                   <AbsoluteConstraints x="1130" y="110" width="280" height="30"/>
@@ -1951,26 +1960,31 @@
                               </Properties>
                               <Constraints>
                                 <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                  <AbsoluteConstraints x="330" y="260" width="1560" height="530"/>
+                                  <AbsoluteConstraints x="330" y="260" width="1560" height="680"/>
                                 </Constraint>
                               </Constraints>
 
                               <Layout>
                                 <DimensionLayout dim="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Group type="102" alignment="0" attributes="0">
+                                      <Group type="102" alignment="1" attributes="0">
                                           <EmptySpace max="-2" attributes="0"/>
                                           <Group type="103" groupAlignment="1" attributes="0">
-                                              <Component id="salesvaluepanel" alignment="1" min="-2" pref="345" max="-2" attributes="0"/>
-                                              <Component id="jLabel2" alignment="0" min="-2" pref="345" max="-2" attributes="0"/>
+                                              <Component id="jPanel6" alignment="1" max="32767" attributes="0"/>
+                                              <Group type="102" alignment="1" attributes="0">
+                                                  <Group type="103" groupAlignment="1" attributes="0">
+                                                      <Component id="salesvaluepanel" alignment="1" min="-2" pref="345" max="-2" attributes="0"/>
+                                                      <Component id="jLabel2" alignment="0" min="-2" pref="345" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <EmptySpace min="-2" pref="44" max="-2" attributes="0"/>
+                                                  <Component id="salesvaluepanel2" min="-2" pref="345" max="-2" attributes="0"/>
+                                                  <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+                                                  <Component id="salesvaluepanel1" min="-2" pref="345" max="-2" attributes="0"/>
+                                                  <EmptySpace pref="47" max="32767" attributes="0"/>
+                                                  <Component id="salesvaluepanel3" min="-2" pref="345" max="-2" attributes="0"/>
+                                              </Group>
                                           </Group>
-                                          <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                                          <Component id="salesvaluepanel2" min="-2" pref="345" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="35" max="-2" attributes="0"/>
-                                          <Component id="salesvaluepanel1" min="-2" pref="345" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                                          <Component id="salesvaluepanel3" min="-2" pref="345" max="-2" attributes="0"/>
-                                          <EmptySpace pref="75" max="32767" attributes="0"/>
+                                          <EmptySpace min="-2" pref="32" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                 </DimensionLayout>
@@ -1978,17 +1992,26 @@
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="102" alignment="0" attributes="0">
                                           <EmptySpace max="-2" attributes="0"/>
-                                          <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                                          <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
-                                          <Group type="103" groupAlignment="0" attributes="0">
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Component id="salesvaluepanel2" alignment="0" min="-2" pref="119" max="-2" attributes="0"/>
-                                                  <Component id="salesvaluepanel" alignment="1" min="-2" max="-2" attributes="0"/>
-                                                  <Component id="salesvaluepanel1" alignment="0" min="-2" pref="120" max="-2" attributes="0"/>
+                                          <Group type="103" groupAlignment="1" attributes="0">
+                                              <Group type="102" alignment="1" attributes="0">
+                                                  <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                                                  <EmptySpace min="-2" pref="29" max="-2" attributes="0"/>
+                                                  <Group type="103" groupAlignment="0" attributes="0">
+                                                      <Component id="salesvaluepanel" min="-2" max="-2" attributes="0"/>
+                                                      <Component id="salesvaluepanel3" min="-2" pref="120" max="-2" attributes="0"/>
+                                                  </Group>
                                               </Group>
-                                              <Component id="salesvaluepanel3" min="-2" pref="120" max="-2" attributes="0"/>
+                                              <Group type="102" alignment="1" attributes="0">
+                                                  <Group type="103" groupAlignment="1" attributes="0">
+                                                      <Component id="salesvaluepanel2" min="-2" pref="119" max="-2" attributes="0"/>
+                                                      <Component id="salesvaluepanel1" min="-2" pref="120" max="-2" attributes="0"/>
+                                                  </Group>
+                                                  <EmptySpace min="-2" pref="1" max="-2" attributes="0"/>
+                                              </Group>
                                           </Group>
-                                          <EmptySpace pref="343" max="32767" attributes="0"/>
+                                          <EmptySpace min="-2" pref="40" max="-2" attributes="0"/>
+                                          <Component id="jPanel6" min="-2" max="-2" attributes="0"/>
+                                          <EmptySpace pref="135" max="32767" attributes="0"/>
                                       </Group>
                                   </Group>
                                 </DimensionLayout>
@@ -2073,6 +2096,7 @@
                                     </Component>
                                     <Component class="javax.swing.JTextField" name="salesValue">
                                       <Properties>
+                                        <Property name="editable" type="boolean" value="false"/>
                                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                                           <Color blue="ef" green="c0" red="0" type="rgb"/>
                                         </Property>
@@ -2210,12 +2234,13 @@
                                       </Properties>
                                       <Constraints>
                                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                          <AbsoluteConstraints x="118" y="13" width="-1" height="-1"/>
+                                          <AbsoluteConstraints x="120" y="10" width="-1" height="-1"/>
                                         </Constraint>
                                       </Constraints>
                                     </Component>
                                     <Component class="javax.swing.JTextField" name="salesValue1">
                                       <Properties>
+                                        <Property name="editable" type="boolean" value="false"/>
                                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                                           <Color blue="39" green="4b" red="dd" type="rgb"/>
                                         </Property>
@@ -2232,7 +2257,7 @@
                                       </Properties>
                                       <Constraints>
                                         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-                                          <AbsoluteConstraints x="118" y="45" width="187" height="-1"/>
+                                          <AbsoluteConstraints x="120" y="40" width="187" height="-1"/>
                                         </Constraint>
                                       </Constraints>
                                     </Component>
@@ -2503,6 +2528,7 @@
                                     </Component>
                                     <Component class="javax.swing.JTextField" name="salesValue3">
                                       <Properties>
+                                        <Property name="editable" type="boolean" value="false"/>
                                         <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                                           <Color blue="5a" green="a6" red="0" type="rgb"/>
                                         </Property>
@@ -2573,6 +2599,34 @@
                                           <AbsoluteConstraints x="150" y="90" width="-1" height="20"/>
                                         </Constraint>
                                       </Constraints>
+                                    </Component>
+                                  </SubComponents>
+                                </Container>
+                                <Container class="javax.swing.JPanel" name="jPanel6">
+
+                                  <Layout>
+                                    <DimensionLayout dim="0">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="jDayChooser1" alignment="1" max="32767" attributes="0"/>
+                                      </Group>
+                                    </DimensionLayout>
+                                    <DimensionLayout dim="1">
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Group type="102" alignment="0" attributes="0">
+                                              <EmptySpace min="-2" pref="3" max="-2" attributes="0"/>
+                                              <Component id="jDayChooser1" min="-2" pref="300" max="-2" attributes="0"/>
+                                              <EmptySpace pref="15" max="32767" attributes="0"/>
+                                          </Group>
+                                      </Group>
+                                    </DimensionLayout>
+                                  </Layout>
+                                  <SubComponents>
+                                    <Component class="com.toedter.calendar.JDayChooser" name="jDayChooser1">
+                                      <Properties>
+                                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                                          <Font name="Calibri" size="24" style="0"/>
+                                        </Property>
+                                      </Properties>
                                     </Component>
                                   </SubComponents>
                                 </Container>

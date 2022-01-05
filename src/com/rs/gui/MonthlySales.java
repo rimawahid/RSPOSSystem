@@ -112,12 +112,12 @@ public class MonthlySales extends javax.swing.JFrame {
         setting6 = new javax.swing.JLabel();
         reports6 = new javax.swing.JLabel();
         dailySales = new javax.swing.JLabel();
-        jLabel26 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
+        productReport = new javax.swing.JLabel();
+        topProduct = new javax.swing.JLabel();
+        salesReport = new javax.swing.JLabel();
+        paymentReport = new javax.swing.JLabel();
         jLabel19 = new javax.swing.JLabel();
-        jLabel20 = new javax.swing.JLabel();
+        registerReport = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
@@ -153,6 +153,8 @@ public class MonthlySales extends javax.swing.JFrame {
         jTextField7 = new javax.swing.JTextField();
         jTextField8 = new javax.swing.JTextField();
         jLabel18 = new javax.swing.JLabel();
+        jPanel6 = new javax.swing.JPanel();
+        jCalendar1 = new com.toedter.calendar.JCalendar();
         bg7 = new javax.swing.JPanel();
         topbar7 = new javax.swing.JPanel();
         logo7 = new javax.swing.JLabel();
@@ -1261,29 +1263,39 @@ public class MonthlySales extends javax.swing.JFrame {
         });
         bg6.add(dailySales, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 110, 280, 30));
 
-        jLabel26.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
-        jLabel26.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/blackreport.png"))); // NOI18N
-        jLabel26.setText("Products Reports");
-        jLabel26.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        bg6.add(jLabel26, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 160, 280, 30));
+        productReport.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
+        productReport.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/blackreport.png"))); // NOI18N
+        productReport.setText("Products Reports");
+        productReport.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        bg6.add(productReport, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 160, 280, 30));
 
-        jLabel6.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8-product-24.png"))); // NOI18N
-        jLabel6.setText("Top Pruducts");
-        jLabel6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        bg6.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(1530, 110, 280, 30));
+        topProduct.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
+        topProduct.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8-product-24.png"))); // NOI18N
+        topProduct.setText("Top Pruducts");
+        topProduct.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        bg6.add(topProduct, new org.netbeans.lib.awtextra.AbsoluteConstraints(1530, 110, 280, 30));
 
-        jLabel11.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/blackreport.png"))); // NOI18N
-        jLabel11.setText("Sales Report");
-        jLabel11.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        bg6.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 110, 280, 30));
+        salesReport.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
+        salesReport.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/blackreport.png"))); // NOI18N
+        salesReport.setText("Sales Report");
+        salesReport.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        salesReport.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                salesReportMouseClicked(evt);
+            }
+        });
+        bg6.add(salesReport, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 110, 280, 30));
 
-        jLabel10.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/blackreport.png"))); // NOI18N
-        jLabel10.setText("Payments Report");
-        jLabel10.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        bg6.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 160, 280, 30));
+        paymentReport.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
+        paymentReport.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/blackreport.png"))); // NOI18N
+        paymentReport.setText("Payments Report");
+        paymentReport.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        paymentReport.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                paymentReportMouseClicked(evt);
+            }
+        });
+        bg6.add(paymentReport, new org.netbeans.lib.awtextra.AbsoluteConstraints(730, 160, 280, 30));
 
         jLabel19.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
         jLabel19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/blackcart.png"))); // NOI18N
@@ -1291,11 +1303,11 @@ public class MonthlySales extends javax.swing.JFrame {
         jLabel19.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         bg6.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 160, 280, 30));
 
-        jLabel20.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
-        jLabel20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/blackreport.png"))); // NOI18N
-        jLabel20.setText("Registers Reports");
-        jLabel20.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        bg6.add(jLabel20, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 110, 280, 30));
+        registerReport.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
+        registerReport.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/blackreport.png"))); // NOI18N
+        registerReport.setText("Registers Reports");
+        registerReport.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        bg6.add(registerReport, new org.netbeans.lib.awtextra.AbsoluteConstraints(1130, 110, 280, 30));
 
         jLabel1.setFont(new java.awt.Font("Corbel", 0, 36)); // NOI18N
         jLabel1.setText("Monthly Sales");
@@ -1337,6 +1349,7 @@ public class MonthlySales extends javax.swing.JFrame {
         jLabel3.setText("SALES VALUE");
         salesvaluepanel.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 10, -1, -1));
 
+        salesValue.setEditable(false);
         salesValue.setBackground(new java.awt.Color(0, 192, 239));
         salesValue.setFont(new java.awt.Font("Calibri", 1, 20)); // NOI18N
         salesValue.setForeground(new java.awt.Color(255, 255, 255));
@@ -1390,6 +1403,7 @@ public class MonthlySales extends javax.swing.JFrame {
         jLabel5.setText("EXPENSES VALUE");
         salesvaluepanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(118, 13, -1, -1));
 
+        salesValue1.setEditable(false);
         salesValue1.setBackground(new java.awt.Color(221, 75, 57));
         salesValue1.setFont(new java.awt.Font("Calibri", 1, 20)); // NOI18N
         salesValue1.setForeground(new java.awt.Color(255, 255, 255));
@@ -1497,6 +1511,7 @@ public class MonthlySales extends javax.swing.JFrame {
         jLabel17.setText("PROFIT AND/OR LOSS");
         salesvaluepanel3.add(jLabel17, new org.netbeans.lib.awtextra.AbsoluteConstraints(118, 13, 210, -1));
 
+        salesValue3.setEditable(false);
         salesValue3.setBackground(new java.awt.Color(0, 166, 90));
         salesValue3.setFont(new java.awt.Font("Calibri", 1, 20)); // NOI18N
         salesValue3.setForeground(new java.awt.Color(255, 255, 255));
@@ -1520,22 +1535,42 @@ public class MonthlySales extends javax.swing.JFrame {
         jLabel18.setText("Sales");
         salesvaluepanel3.add(jLabel18, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 90, -1, 20));
 
+        jCalendar1.setFont(new java.awt.Font("Calibri", 0, 24)); // NOI18N
+
+        javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
+        jPanel6.setLayout(jPanel6Layout);
+        jPanel6Layout.setHorizontalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jCalendar1, javax.swing.GroupLayout.DEFAULT_SIZE, 1492, Short.MAX_VALUE)
+        );
+        jPanel6Layout.setVerticalGroup(
+            jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel6Layout.createSequentialGroup()
+                .addComponent(jCalendar1, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(salesvaluepanel, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29)
-                .addComponent(salesvaluepanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
-                .addComponent(salesvaluepanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(29, 29, 29)
-                .addComponent(salesvaluepanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(75, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 20, Short.MAX_VALUE)
+                        .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(salesvaluepanel, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(44, 44, 44)
+                        .addComponent(salesvaluepanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(salesvaluepanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(45, 45, 45)
+                        .addComponent(salesvaluepanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(36, 36, 36))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1549,10 +1584,12 @@ public class MonthlySales extends javax.swing.JFrame {
                         .addComponent(salesvaluepanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(salesvaluepanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(salesvaluepanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(343, Short.MAX_VALUE))
+                .addGap(48, 48, 48)
+                .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(54, Short.MAX_VALUE))
         );
 
-        bg6.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 260, 1560, 530));
+        bg6.add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 260, 1560, 590));
 
         bg5.add(bg6, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, -1));
 
@@ -2338,6 +2375,18 @@ public class MonthlySales extends javax.swing.JFrame {
         new ReportsApp().setVisible(true);
     }//GEN-LAST:event_dailySalesMouseClicked
 
+    private void salesReportMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salesReportMouseClicked
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new SalesReportApp().setVisible(true);
+    }//GEN-LAST:event_salesReportMouseClicked
+
+    private void paymentReportMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_paymentReportMouseClicked
+        // TODO add your handling code here:
+        this.setVisible(false);
+        new PaymentReport().setVisible(true);
+    }//GEN-LAST:event_paymentReportMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -2407,9 +2456,8 @@ public class MonthlySales extends javax.swing.JFrame {
     private javax.swing.JLabel giftCard5;
     private javax.swing.JLabel giftCard6;
     private javax.swing.JLabel giftCard7;
+    private com.toedter.calendar.JCalendar jCalendar1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
@@ -2419,12 +2467,10 @@ public class MonthlySales extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel24;
     private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
@@ -2433,7 +2479,6 @@ public class MonthlySales extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -2442,6 +2487,7 @@ public class MonthlySales extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel6;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;
@@ -2458,6 +2504,7 @@ public class MonthlySales extends javax.swing.JFrame {
     private javax.swing.JLabel logo5;
     private javax.swing.JLabel logo6;
     private javax.swing.JLabel logo7;
+    private javax.swing.JLabel paymentReport;
     private javax.swing.JLabel people;
     private javax.swing.JLabel people1;
     private javax.swing.JLabel people2;
@@ -2482,6 +2529,7 @@ public class MonthlySales extends javax.swing.JFrame {
     private javax.swing.JLabel product5;
     private javax.swing.JLabel product6;
     private javax.swing.JLabel product7;
+    private javax.swing.JLabel productReport;
     private javax.swing.JLabel purchases;
     private javax.swing.JLabel purchases1;
     private javax.swing.JLabel purchases2;
@@ -2490,6 +2538,7 @@ public class MonthlySales extends javax.swing.JFrame {
     private javax.swing.JLabel purchases5;
     private javax.swing.JLabel purchases6;
     private javax.swing.JLabel purchases7;
+    private javax.swing.JLabel registerReport;
     private javax.swing.JLabel reports;
     private javax.swing.JLabel reports1;
     private javax.swing.JLabel reports2;
@@ -2506,6 +2555,7 @@ public class MonthlySales extends javax.swing.JFrame {
     private javax.swing.JLabel sales5;
     private javax.swing.JLabel sales6;
     private javax.swing.JLabel sales7;
+    private javax.swing.JLabel salesReport;
     private javax.swing.JTextField salesValue;
     private javax.swing.JTextField salesValue1;
     private javax.swing.JTextField salesValue2;
@@ -2530,6 +2580,7 @@ public class MonthlySales extends javax.swing.JFrame {
     private javax.swing.JPanel sidemenubar5;
     private javax.swing.JPanel sidemenubar6;
     private javax.swing.JPanel sidemenubar7;
+    private javax.swing.JLabel topProduct;
     private javax.swing.JPanel topbar;
     private javax.swing.JPanel topbar1;
     private javax.swing.JPanel topbar2;

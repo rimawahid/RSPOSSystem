@@ -6,9 +6,13 @@
 package com.rs.gui;
 
 import com.rs.dao.POSDAO;
+import com.rs.dao.SellingDAO;
 import com.rs.model.POS;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
 
 /**
  *
@@ -23,6 +27,8 @@ public class SalesApp extends javax.swing.JFrame {
         initComponents();
         getAllProduct();
     }
+
+   
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -277,7 +283,7 @@ public class SalesApp extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Date", "Customer", "Total", "Tax", "Discount", "Grand Total", "Paid", "Status"
+                "Invoice", "Date", "Customer", "Total", "Tax", "Discount", "Grand Total", "Paid", "Status"
             }
         ));
         salesTable.setRowHeight(28);
@@ -306,8 +312,8 @@ public class SalesApp extends javax.swing.JFrame {
                                 .addComponent(jLabel6))))
                     .addGroup(listPurchaseLayout.createSequentialGroup()
                         .addGap(30, 30, 30)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1494, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(36, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1504, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
         listPurchaseLayout.setVerticalGroup(
             listPurchaseLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -320,11 +326,11 @@ public class SalesApp extends javax.swing.JFrame {
                     .addComponent(showItem, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 421, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
-        bg.add(listPurchase, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 240, 1560, 520));
+        bg.add(listPurchase, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 240, 1560, 550));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -399,7 +405,7 @@ public class SalesApp extends javax.swing.JFrame {
 
     private void dashboardMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_dashboardMouseClicked
         // TODO add your handling code here:
-         this.setVisible(false);
+        this.setVisible(false);
         new DashboardApp().setVisible(true);
     }//GEN-LAST:event_dashboardMouseClicked
 
@@ -408,26 +414,35 @@ public class SalesApp extends javax.swing.JFrame {
         this.setVisible(false);
         new ListOpenedBills().setVisible(true);
     }//GEN-LAST:event_listOpenedBillsMouseClicked
-
+    POS s;
     private void salesTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salesTableMouseClicked
         // TODO add your handling code here:
         int row = salesTable.rowAtPoint(evt.getPoint());
-//
-//        s = new Purchase();
-//        s.setPurchaseDate(purchasesTable.getValueAt(row, 0).toString());
-//        s.setReference(purchasesTable.getValueAt(row, 1).toString());
-//        s.setTotal(Double.valueOf(purchasesTable.getValueAt(row, 2).toString()));
-//        s.setNote(purchasesTable.getValueAt(row, 3).toString());
+        String invoice = salesTable.getValueAt(row, 0).toString();
+        //System.out.println(salesTable.getValueAt(row, 0).toString());
+        new SellingDAO().getInvoiceNo(invoice);
+        //s = new POS();
+        //s.setInvoice(salesTable.getValueAt(row, 0).toString());
+//        s.setSellDate(salesTable.getValueAt(row, 1).toString());
+//        s.setCustomerName(salesTable.getValueAt(row, 2).toString());
+//        s.setTotalPrice(Double.valueOf(salesTable.getValueAt(row, 3).toString()));
+//        s.setDiscount(Double.valueOf(salesTable.getValueAt(row, 4).toString()));
+//        s.setVat(Double.valueOf(salesTable.getValueAt(row, 5).toString()));
+//        s.setTotalPayAmountVlaue(Double.valueOf(salesTable.getValueAt(row, 6).toString()));
+//        s.setPayMethod(salesTable.getValueAt(row, 7).toString());
+//        s.setStatus(salesTable.getValueAt(row, 8).toString());
+        new InvoiceInfo(invoice).setVisible(true);
     }//GEN-LAST:event_salesTableMouseClicked
 
     
+
     private void getAllProduct() {
         List<POS> salesPos = new POSDAO().getAll();
-        String[] columnNames = {"Invoice","Date", "Custome", "Total", "Discount", "Vat", "Grand Total","Pay Method" ,"Status"};
+        String[] columnNames = {"Invoice", "Date", "Custome", "Total", "Discount", "Vat", "Grand Total", "Pay Method", "Status"};
         Object[][] data = new Object[salesPos.size()][9];
         for (int i = 0; i < salesPos.size(); i++) {
             POS s = salesPos.get(i);
-            Object[] o = {s.getInvoice(),s.getSellDate(), s.getCustomerName(), s.getTotalPrice(), s.getDiscount(), s.getVat(), s.getTotalPayAmountVlaue(), s.getPayMethod(), s.getStatus()};
+            Object[] o = {s.getInvoice(), s.getSellDate(), s.getCustomerName(), s.getTotalPrice(), s.getDiscount(), s.getVat(), s.getTotalPayAmountVlaue(), s.getPayMethod(), s.getStatus()};
             for (int j = 0; j < 9; j++) {
                 data[i][j] = o[j];
             }
@@ -435,6 +450,7 @@ public class SalesApp extends javax.swing.JFrame {
         DefaultTableModel model = new DefaultTableModel(data, columnNames);
         salesTable.setModel(model);
     }
+
     /**
      * @param args the command line arguments
      */

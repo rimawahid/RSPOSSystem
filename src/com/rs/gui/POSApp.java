@@ -1044,7 +1044,9 @@ public class POSApp extends javax.swing.JFrame {
         map.put("invoiceChange", balance.getText());
         map.put("paidMethod", payMethod.getSelectedItem());
         map.put("invoiceTable", posTable.getModel());
+      
         new RSPOSApp(map).setVisible(true);
+        
     }//GEN-LAST:event_btnpaymentMouseClicked
 
     private void productCodeKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_productCodeKeyTyped

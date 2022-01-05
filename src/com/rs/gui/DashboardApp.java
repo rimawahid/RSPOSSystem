@@ -904,10 +904,10 @@ public class DashboardApp extends javax.swing.JFrame {
     }//GEN-LAST:event_btnUsersMouseClicked
     private void barChart() {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-        dataset.setValue(80, "Marks", "Vat");
-        dataset.setValue(75, "Marks", "Discount");
-        dataset.setValue(70, "Marks", "Sales");
-        JFreeChart chart = ChartFactory.createBarChart(" ", "January-2022", "sales", dataset, PlotOrientation.VERTICAL, false, true, false);
+        dataset.setValue(8, "", "Vat");
+        dataset.setValue(12, "", "Discount");
+        dataset.setValue(70, "", "Sales");
+        JFreeChart chart = ChartFactory.createBarChart(" ", "January-2022", " ", dataset, PlotOrientation.VERTICAL, false, true, false);
         ChartPanel myChart = new ChartPanel(chart);
         salesChart.setLayout(new java.awt.BorderLayout());
         salesChart.add(myChart, BorderLayout.CENTER);
@@ -925,7 +925,7 @@ public class DashboardApp extends javax.swing.JFrame {
         ChartPanel myChart = new ChartPanel(chart);
         //myChart.setMouseWheelEnabled(true);
         pieChart.setLayout(new java.awt.BorderLayout());
-        pieChart.add(myChart, BorderLayout.LINE_END);
+        pieChart.add(myChart, BorderLayout.NORTH);
         pieChart.validate();
     }
 

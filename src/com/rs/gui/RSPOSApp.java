@@ -62,18 +62,6 @@ public class RSPOSApp extends javax.swing.JFrame {
         invoiceTable.setModel((TableModel) map.get("invoiceTable"));
     }
 
-//    RSPOSApp(PayMethod p) {
-//        initComponents();
-//        new PayMethod();
-//        new POSApp();
-//        new POS();
-//        invoiceDiscount.setText(Double.valueOf(p.showInvoiceDcount).toString());
-//        invoiceVat.setText(Double.valueOf(p.showInvoiceVat).toString());
-//        invoiceAmount.setText(Double.valueOf(p.showInvoiceAmount).toString());
-//        
-//        //invoiceAmount.setText(Double.valueOf(p.totalAmounts).toString());
-//        //System.out.println(Double.valueOf(p.showDcount).toString()+ "invoice");
-//    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -185,11 +173,11 @@ public class RSPOSApp extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Product", "Quantity", "Price", "Subtotal"
+                "Code", "Product", "Quantity", "Price", "Subtotal"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, true, false
+                false, false, true, false, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
