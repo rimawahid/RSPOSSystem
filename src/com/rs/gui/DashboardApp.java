@@ -5,8 +5,19 @@
  */
 package com.rs.gui;
 
+import java.awt.BorderLayout;
+import java.awt.Color;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
+import java.util.Locale;
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartFrame;
+import org.jfree.chart.ChartPanel;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.data.category.DefaultCategoryDataset;
+import org.jfree.data.general.DefaultPieDataset;
 
 /**
  *
@@ -20,18 +31,19 @@ public class DashboardApp extends javax.swing.JFrame {
     public DashboardApp() {
         initComponents();
         currentdate();
-       
+        barChart();
+        pieChart();
     }
-    
-    public void currentdate(){
+
+    public void currentdate() {
         Calendar cal = new GregorianCalendar();
         int month = cal.get(Calendar.MONTH);
         int year = cal.get(Calendar.YEAR);
         int day = cal.get(Calendar.DAY_OF_MONTH);
-        date.setText((month+1)+"/"+ day + "/"+ year);
+        date.setText((month + 1) + "/" + day + "/" + year);
         int minute = cal.get(Calendar.MINUTE);
         int hour = cal.get(Calendar.HOUR);
-        time.setText(hour+":"+ minute);
+        time.setText(hour + ":" + minute);
     }
 
     /**
@@ -94,8 +106,10 @@ public class DashboardApp extends javax.swing.JFrame {
         jLabel22 = new javax.swing.JLabel();
         salescChart = new javax.swing.JPanel();
         jLabel23 = new javax.swing.JLabel();
+        salesChart = new javax.swing.JPanel();
         topProductChart = new javax.swing.JPanel();
         jLabel24 = new javax.swing.JLabel();
+        pieChart = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -683,21 +697,39 @@ public class DashboardApp extends javax.swing.JFrame {
         jLabel23.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
         jLabel23.setText("Sales Chart");
 
+        javax.swing.GroupLayout salesChartLayout = new javax.swing.GroupLayout(salesChart);
+        salesChart.setLayout(salesChartLayout);
+        salesChartLayout.setHorizontalGroup(
+            salesChartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 868, Short.MAX_VALUE)
+        );
+        salesChartLayout.setVerticalGroup(
+            salesChartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 462, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout salescChartLayout = new javax.swing.GroupLayout(salescChart);
         salescChart.setLayout(salescChartLayout);
         salescChartLayout.setHorizontalGroup(
             salescChartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(salescChartLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel23)
-                .addContainerGap(833, Short.MAX_VALUE))
+                .addGroup(salescChartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(salescChartLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel23))
+                    .addGroup(salescChartLayout.createSequentialGroup()
+                        .addGap(34, 34, 34)
+                        .addComponent(salesChart, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
         salescChartLayout.setVerticalGroup(
             salescChartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(salescChartLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel23)
-                .addContainerGap(532, Short.MAX_VALUE))
+                .addGap(28, 28, 28)
+                .addComponent(salesChart, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(42, Short.MAX_VALUE))
         );
 
         bg.add(salescChart, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 390, 940, 570));
@@ -707,21 +739,39 @@ public class DashboardApp extends javax.swing.JFrame {
         jLabel24.setFont(new java.awt.Font("Corbel", 0, 20)); // NOI18N
         jLabel24.setText("Top Products ");
 
+        javax.swing.GroupLayout pieChartLayout = new javax.swing.GroupLayout(pieChart);
+        pieChart.setLayout(pieChartLayout);
+        pieChartLayout.setHorizontalGroup(
+            pieChartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 552, Short.MAX_VALUE)
+        );
+        pieChartLayout.setVerticalGroup(
+            pieChartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 462, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout topProductChartLayout = new javax.swing.GroupLayout(topProductChart);
         topProductChart.setLayout(topProductChartLayout);
         topProductChartLayout.setHorizontalGroup(
             topProductChartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(topProductChartLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel24)
-                .addContainerGap(493, Short.MAX_VALUE))
+                .addGroup(topProductChartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(topProductChartLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel24))
+                    .addGroup(topProductChartLayout.createSequentialGroup()
+                        .addGap(35, 35, 35)
+                        .addComponent(pieChart, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
         topProductChartLayout.setVerticalGroup(
             topProductChartLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(topProductChartLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel24)
-                .addContainerGap(532, Short.MAX_VALUE))
+                .addGap(26, 26, 26)
+                .addComponent(pieChart, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(44, Short.MAX_VALUE))
         );
 
         bg.add(topProductChart, new org.netbeans.lib.awtextra.AbsoluteConstraints(1280, 390, 620, 570));
@@ -852,9 +902,33 @@ public class DashboardApp extends javax.swing.JFrame {
         this.setVisible(false);
         new PeopleApp().setVisible(true);
     }//GEN-LAST:event_btnUsersMouseClicked
+    private void barChart() {
+        DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+        dataset.setValue(80, "Marks", "Vat");
+        dataset.setValue(75, "Marks", "Discount");
+        dataset.setValue(70, "Marks", "Sales");
+        JFreeChart chart = ChartFactory.createBarChart(" ", "January-2022", "sales", dataset, PlotOrientation.VERTICAL, false, true, false);
+        ChartPanel myChart = new ChartPanel(chart);
+        salesChart.setLayout(new java.awt.BorderLayout());
+        salesChart.add(myChart, BorderLayout.CENTER);
+        salesChart.validate();
 
-    
-   
+    }
+
+    private void pieChart() {
+        DefaultPieDataset pieDataset = new DefaultPieDataset();
+        pieDataset.setValue("Laptop", new Integer(10));
+        pieDataset.setValue("Mouse ", new Integer(20));
+        pieDataset.setValue("Keyboard", new Integer(30));
+        pieDataset.setValue("four", new Integer(40));
+        JFreeChart chart = ChartFactory.createPieChart("", pieDataset, true, true, true);
+        ChartPanel myChart = new ChartPanel(chart);
+        //myChart.setMouseWheelEnabled(true);
+        pieChart.setLayout(new java.awt.BorderLayout());
+        pieChart.add(myChart, BorderLayout.LINE_END);
+        pieChart.validate();
+    }
+
     /**
      * @param args the command line arguments
      */
@@ -932,12 +1006,14 @@ public class DashboardApp extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JLabel logo;
     private javax.swing.JLabel people;
+    private javax.swing.JPanel pieChart;
     private javax.swing.JLabel pos;
     private javax.swing.JLabel product;
     private javax.swing.JLabel purchases;
     private javax.swing.JPanel quickLinks;
     private javax.swing.JLabel reports;
     private javax.swing.JLabel sales;
+    private javax.swing.JPanel salesChart;
     private javax.swing.JPanel salescChart;
     private javax.swing.JLabel setting;
     private javax.swing.JPanel sidemenubar;

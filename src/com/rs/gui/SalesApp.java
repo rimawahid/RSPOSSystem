@@ -423,12 +423,12 @@ public class SalesApp extends javax.swing.JFrame {
     
     private void getAllProduct() {
         List<POS> salesPos = new POSDAO().getAll();
-        String[] columnNames = {"Date", "Custome", "Total", "Discount", "Vat", "Grand Total","Pay Method" ,"Status"};
-        Object[][] data = new Object[salesPos.size()][8];
+        String[] columnNames = {"Invoice","Date", "Custome", "Total", "Discount", "Vat", "Grand Total","Pay Method" ,"Status"};
+        Object[][] data = new Object[salesPos.size()][9];
         for (int i = 0; i < salesPos.size(); i++) {
             POS s = salesPos.get(i);
-            Object[] o = {s.getSellDate(), s.getCustomerName(), s.getTotalPrice(), s.getDiscount(), s.getVat(), s.getTotalPayAmountVlaue(), s.getPayMethod(), s.getStatus()};
-            for (int j = 0; j < 8; j++) {
+            Object[] o = {s.getInvoice(),s.getSellDate(), s.getCustomerName(), s.getTotalPrice(), s.getDiscount(), s.getVat(), s.getTotalPayAmountVlaue(), s.getPayMethod(), s.getStatus()};
+            for (int j = 0; j < 9; j++) {
                 data[i][j] = o[j];
             }
         }

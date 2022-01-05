@@ -77,6 +77,7 @@ public class POSDAO implements ICommonInterface<POS> {
             while (rs.next()) {
                 POS showpos = new POS();
                 showpos.setSellDate(rs.getString("date"));
+                showpos.setInvoice(rs.getString("invoice"));
                 showpos.setCustomerName(rs.getString("customer"));
                 showpos.setTotalPrice(Double.valueOf(rs.getString("total_price").toString()));
                 showpos.setDiscount(Double.valueOf(rs.getString("discount").toString()));
