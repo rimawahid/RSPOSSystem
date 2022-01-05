@@ -83,6 +83,7 @@ public class POSDAO implements ICommonInterface<POS> {
                 showpos.setVat(Double.valueOf(rs.getString("vat").toString()));
                 showpos.setTotalPayAmountVlaue(Double.valueOf(rs.getString("total_payable").toString()));
                 showpos.setPayMethod(rs.getString("pay_method"));
+                showpos.setStatus(rs.getString("status"));
                 //showpos.s(rs.getString("status"));
                 pos.add(showpos);
                 i++;

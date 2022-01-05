@@ -21,6 +21,7 @@ public class SalesApp extends javax.swing.JFrame {
      */
     public SalesApp() {
         initComponents();
+        getAllProduct();
     }
 
     /**
@@ -426,7 +427,7 @@ public class SalesApp extends javax.swing.JFrame {
         Object[][] data = new Object[salesPos.size()][8];
         for (int i = 0; i < salesPos.size(); i++) {
             POS s = salesPos.get(i);
-            Object[] o = {s.getProductType(), s.getProductName(), s.getProductCode(), s.getProductBarCode(), s.getProductCategory(), s.getQuantity(), s.getBuyingCost(), s.getOthersCost(), s.getToalPrice(), s.getSellingCost(), s.getSupplier(), s.getAlertQty()};
+            Object[] o = {s.getSellDate(), s.getCustomerName(), s.getTotalPrice(), s.getDiscount(), s.getVat(), s.getTotalPayAmountVlaue(), s.getPayMethod(), s.getStatus()};
             for (int j = 0; j < 8; j++) {
                 data[i][j] = o[j];
             }

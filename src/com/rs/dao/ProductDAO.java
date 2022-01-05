@@ -223,8 +223,8 @@ public class ProductDAO implements ICommonInterface<Product> {
                 product.setProductType(rs.getString("product_type"));
                 product.setProductName(rs.getString("product_name"));
                 product.setProductCode(rs.getString("product_code"));
-                product.setProductCategory(rs.getString("product_barcode"));
-                product.setProductBarCode(rs.getString("product_category"));
+                product.setProductBarCode(rs.getString("product_barcode"));
+                product.setProductCategory(rs.getString("product_category"));
                 product.setQuantity(Integer.valueOf(rs.getString("product_qty")));
                 product.setBuyingCost(Double.valueOf(rs.getString("buying_price")));
                 product.setOthersCost(Double.valueOf(rs.getString("others_Cost")));
