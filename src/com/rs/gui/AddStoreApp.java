@@ -8,6 +8,8 @@ package com.rs.gui;
 
 import com.rs.dao.StoreDAO;
 import com.rs.model.Store;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -23,10 +25,22 @@ public class AddStoreApp extends javax.swing.JFrame {
     List<Store> stores;
     public AddStoreApp() {
         initComponents();
+        currentdate();
     }
     AddStoreApp(Store s){
         initComponents();
         addValue(s);
+        currentdate();
+    }
+    public void currentdate() {
+        Calendar cal = new GregorianCalendar();
+        int month = cal.get(Calendar.MONTH);
+        int year = cal.get(Calendar.YEAR);
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+        date.setText(day+ "/" + (month + 1)  + "/" + year);
+        int minute = cal.get(Calendar.MINUTE);
+        int hour = cal.get(Calendar.HOUR);
+        time.setText(hour + ":" + minute);
     }
 
     /**
@@ -41,6 +55,8 @@ public class AddStoreApp extends javax.swing.JFrame {
         bg = new javax.swing.JPanel();
         topbar = new javax.swing.JPanel();
         logo = new javax.swing.JLabel();
+        date = new javax.swing.JLabel();
+        time = new javax.swing.JLabel();
         sidemenubar = new javax.swing.JPanel();
         dashboard = new javax.swing.JLabel();
         pos = new javax.swing.JLabel();
@@ -93,6 +109,13 @@ public class AddStoreApp extends javax.swing.JFrame {
         logo.setForeground(new java.awt.Color(255, 255, 255));
         logo.setText("RS POS");
 
+        date.setFont(new java.awt.Font("Calibri", 0, 24)); // NOI18N
+        date.setForeground(new java.awt.Color(255, 255, 255));
+
+        time.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
+        time.setForeground(new java.awt.Color(255, 255, 255));
+        time.setText("time");
+
         javax.swing.GroupLayout topbarLayout = new javax.swing.GroupLayout(topbar);
         topbar.setLayout(topbarLayout);
         topbarLayout.setHorizontalGroup(
@@ -100,13 +123,27 @@ public class AddStoreApp extends javax.swing.JFrame {
             .addGroup(topbarLayout.createSequentialGroup()
                 .addGap(69, 69, 69)
                 .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(1692, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1194, Short.MAX_VALUE)
+                .addGroup(topbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, topbarLayout.createSequentialGroup()
+                        .addComponent(date)
+                        .addGap(498, 498, 498))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, topbarLayout.createSequentialGroup()
+                        .addComponent(time)
+                        .addGap(402, 402, 402))))
         );
         topbarLayout.setVerticalGroup(
             topbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(topbarLayout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(topbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(topbarLayout.createSequentialGroup()
+                        .addGap(26, 26, 26)
+                        .addGroup(topbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(date)))
+                    .addGroup(topbarLayout.createSequentialGroup()
+                        .addGap(31, 31, 31)
+                        .addComponent(time)))
                 .addContainerGap(26, Short.MAX_VALUE))
         );
 
@@ -576,17 +613,15 @@ public class AddStoreApp extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
                 .addComponent(bg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(0, 24, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
                 .addComponent(bg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(0, 26, Short.MAX_VALUE))
         );
 
         pack();
@@ -789,6 +824,7 @@ public class AddStoreApp extends javax.swing.JFrame {
     private javax.swing.JButton btnUpdatestore;
     private javax.swing.JLabel categoris;
     private javax.swing.JLabel dashboard;
+    private javax.swing.JLabel date;
     private javax.swing.JLabel giftCard;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -826,6 +862,7 @@ public class AddStoreApp extends javax.swing.JFrame {
     private javax.swing.JTextField storePhone;
     private javax.swing.JTextField storePostalCode;
     private javax.swing.JTextField storeState;
+    private javax.swing.JLabel time;
     private javax.swing.JPanel topbar;
     // End of variables declaration//GEN-END:variables
 }

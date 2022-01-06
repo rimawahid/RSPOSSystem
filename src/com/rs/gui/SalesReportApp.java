@@ -7,6 +7,8 @@ package com.rs.gui;
 
 import com.rs.dao.POSDAO;
 import com.rs.model.POS;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
@@ -22,6 +24,18 @@ public class SalesReportApp extends javax.swing.JFrame {
     public SalesReportApp() {
         initComponents();
         getAllProduct();
+        currentdate();
+    }
+
+    public void currentdate() {
+        Calendar cal = new GregorianCalendar();
+        int month = cal.get(Calendar.MONTH);
+        int year = cal.get(Calendar.YEAR);
+        int day = cal.get(Calendar.DAY_OF_MONTH);
+        date.setText((month + 1) + "/" + day + "/" + year);
+        int minute = cal.get(Calendar.MINUTE);
+        int hour = cal.get(Calendar.HOUR);
+        time.setText(hour + ":" + minute);
     }
 
     /**
@@ -36,6 +50,8 @@ public class SalesReportApp extends javax.swing.JFrame {
         bg = new javax.swing.JPanel();
         topbar = new javax.swing.JPanel();
         logo = new javax.swing.JLabel();
+        date = new javax.swing.JLabel();
+        time = new javax.swing.JLabel();
         sidemenubar = new javax.swing.JPanel();
         dashboard = new javax.swing.JLabel();
         pos = new javax.swing.JLabel();
@@ -73,6 +89,14 @@ public class SalesReportApp extends javax.swing.JFrame {
         logo.setForeground(new java.awt.Color(255, 255, 255));
         logo.setText("RS POS");
 
+        date.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
+        date.setForeground(new java.awt.Color(255, 255, 255));
+        date.setText("date");
+
+        time.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
+        time.setForeground(new java.awt.Color(255, 255, 255));
+        time.setText("time");
+
         javax.swing.GroupLayout topbarLayout = new javax.swing.GroupLayout(topbar);
         topbar.setLayout(topbarLayout);
         topbarLayout.setHorizontalGroup(
@@ -80,13 +104,21 @@ public class SalesReportApp extends javax.swing.JFrame {
             .addGroup(topbarLayout.createSequentialGroup()
                 .addGap(69, 69, 69)
                 .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(1692, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 1145, Short.MAX_VALUE)
+                .addComponent(date)
+                .addGap(35, 35, 35)
+                .addComponent(time)
+                .addGap(421, 421, 421))
         );
         topbarLayout.setVerticalGroup(
             topbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(topbarLayout.createSequentialGroup()
                 .addGap(26, 26, 26)
-                .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(topbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(topbarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(date)
+                        .addComponent(time))
+                    .addComponent(logo, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(26, Short.MAX_VALUE))
         );
 
@@ -483,19 +515,17 @@ public class SalesReportApp extends javax.swing.JFrame {
 
     private void paymentReportMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_paymentReportMouseClicked
         // TODO add your handling code here:
-         this.setVisible(false);
+        this.setVisible(false);
         new PaymentReport().setVisible(true);
     }//GEN-LAST:event_paymentReportMouseClicked
 
-    
-    
     private void getAllProduct() {
         List<POS> salesPos = new POSDAO().getAll();
-        String[] columnNames = {"Invoice","Date", "Custome", "Total", "Discount", "Vat", "Grand Total","Pay Method" ,"Status"};
+        String[] columnNames = {"Invoice", "Date", "Custome", "Total", "Discount", "Vat", "Grand Total", "Pay Method", "Status"};
         Object[][] data = new Object[salesPos.size()][9];
         for (int i = 0; i < salesPos.size(); i++) {
             POS s = salesPos.get(i);
-            Object[] o = {s.getInvoice(),s.getSellDate(), s.getCustomerName(), s.getTotalPrice(), s.getDiscount(), s.getVat(), s.getTotalPayAmountVlaue(), s.getPayMethod(), s.getStatus()};
+            Object[] o = {s.getInvoice(), s.getSellDate(), s.getCustomerName(), s.getTotalPrice(), s.getDiscount(), s.getVat(), s.getTotalPayAmountVlaue(), s.getPayMethod(), s.getStatus()};
             for (int j = 0; j < 9; j++) {
                 data[i][j] = o[j];
             }
@@ -503,6 +533,7 @@ public class SalesReportApp extends javax.swing.JFrame {
         DefaultTableModel model = new DefaultTableModel(data, columnNames);
         salesTable.setModel(model);
     }
+
     /**
      * @param args the command line arguments
      */
@@ -543,6 +574,7 @@ public class SalesReportApp extends javax.swing.JFrame {
     private javax.swing.JLabel categoris;
     private javax.swing.JLabel dailySales;
     private javax.swing.JLabel dashboard;
+    private javax.swing.JLabel date;
     private javax.swing.JLabel giftCard;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel4;
@@ -566,6 +598,7 @@ public class SalesReportApp extends javax.swing.JFrame {
     private javax.swing.JLabel setting;
     private javax.swing.JComboBox<String> showItem;
     private javax.swing.JPanel sidemenubar;
+    private javax.swing.JLabel time;
     private javax.swing.JLabel topProduct;
     private javax.swing.JPanel topbar;
     // End of variables declaration//GEN-END:variables

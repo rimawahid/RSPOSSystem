@@ -415,22 +415,13 @@ public class SalesApp extends javax.swing.JFrame {
         new ListOpenedBills().setVisible(true);
     }//GEN-LAST:event_listOpenedBillsMouseClicked
     POS s;
+    
+    
     private void salesTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salesTableMouseClicked
         // TODO add your handling code here:
         int row = salesTable.rowAtPoint(evt.getPoint());
         String invoice = salesTable.getValueAt(row, 0).toString();
-        //System.out.println(salesTable.getValueAt(row, 0).toString());
         new SellingDAO().getInvoiceNo(invoice);
-        //s = new POS();
-        //s.setInvoice(salesTable.getValueAt(row, 0).toString());
-//        s.setSellDate(salesTable.getValueAt(row, 1).toString());
-//        s.setCustomerName(salesTable.getValueAt(row, 2).toString());
-//        s.setTotalPrice(Double.valueOf(salesTable.getValueAt(row, 3).toString()));
-//        s.setDiscount(Double.valueOf(salesTable.getValueAt(row, 4).toString()));
-//        s.setVat(Double.valueOf(salesTable.getValueAt(row, 5).toString()));
-//        s.setTotalPayAmountVlaue(Double.valueOf(salesTable.getValueAt(row, 6).toString()));
-//        s.setPayMethod(salesTable.getValueAt(row, 7).toString());
-//        s.setStatus(salesTable.getValueAt(row, 8).toString());
         new InvoiceInfo(invoice).setVisible(true);
     }//GEN-LAST:event_salesTableMouseClicked
 

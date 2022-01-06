@@ -5,6 +5,7 @@
  */
 package com.rs.gui;
 
+import com.rs.model.Store;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.util.Calendar;
@@ -62,7 +63,7 @@ public class DashboardApp extends javax.swing.JFrame {
         time = new javax.swing.JLabel();
         sidemenubar = new javax.swing.JPanel();
         dashboard = new javax.swing.JLabel();
-        pos = new javax.swing.JLabel();
+        store = new javax.swing.JLabel();
         product = new javax.swing.JLabel();
         categoris = new javax.swing.JLabel();
         sales = new javax.swing.JLabel();
@@ -71,6 +72,7 @@ public class DashboardApp extends javax.swing.JFrame {
         people = new javax.swing.JLabel();
         setting = new javax.swing.JLabel();
         reports = new javax.swing.JLabel();
+        pos = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         quickLinks = new javax.swing.JPanel();
         btnProducts = new javax.swing.JPanel();
@@ -163,13 +165,13 @@ public class DashboardApp extends javax.swing.JFrame {
         dashboard.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8-bookmark-24.png"))); // NOI18N
         dashboard.setText("Dashboard");
 
-        pos.setFont(new java.awt.Font("Corbel", 0, 18)); // NOI18N
-        pos.setForeground(new java.awt.Color(255, 255, 255));
-        pos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8-sale-32.png"))); // NOI18N
-        pos.setText("POS");
-        pos.addMouseListener(new java.awt.event.MouseAdapter() {
+        store.setFont(new java.awt.Font("Corbel", 0, 18)); // NOI18N
+        store.setForeground(new java.awt.Color(255, 255, 255));
+        store.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8-sale-32.png"))); // NOI18N
+        store.setText("Store");
+        store.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                posMouseClicked(evt);
+                storeMouseClicked(evt);
             }
         });
 
@@ -253,6 +255,16 @@ public class DashboardApp extends javax.swing.JFrame {
             }
         });
 
+        pos.setFont(new java.awt.Font("Corbel", 0, 18)); // NOI18N
+        pos.setForeground(new java.awt.Color(255, 255, 255));
+        pos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/icons8-sale-32.png"))); // NOI18N
+        pos.setText("POS");
+        pos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                posMouseClicked(evt);
+            }
+        });
+
         javax.swing.GroupLayout sidemenubarLayout = new javax.swing.GroupLayout(sidemenubar);
         sidemenubar.setLayout(sidemenubarLayout);
         sidemenubarLayout.setHorizontalGroup(
@@ -262,14 +274,15 @@ public class DashboardApp extends javax.swing.JFrame {
                 .addGroup(sidemenubarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(categoris, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(dashboard, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(pos, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(store, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(product, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(sales, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(purchases, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(giftCard, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(people, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(setting, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(reports, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(reports, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(pos, javax.swing.GroupLayout.PREFERRED_SIZE, 176, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(96, Short.MAX_VALUE))
         );
         sidemenubarLayout.setVerticalGroup(
@@ -277,6 +290,8 @@ public class DashboardApp extends javax.swing.JFrame {
             .addGroup(sidemenubarLayout.createSequentialGroup()
                 .addGap(61, 61, 61)
                 .addComponent(dashboard, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(store, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(pos, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -295,7 +310,7 @@ public class DashboardApp extends javax.swing.JFrame {
                 .addComponent(setting, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(reports, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(346, Short.MAX_VALUE))
+                .addContainerGap(286, Short.MAX_VALUE))
         );
 
         bg.add(sidemenubar, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 82, -1, 1000));
@@ -795,11 +810,11 @@ public class DashboardApp extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void posMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_posMouseClicked
+    private void storeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_storeMouseClicked
         // TODO add your handling code here:
         this.setVisible(false);
-        new POSApp().setVisible(true);
-    }//GEN-LAST:event_posMouseClicked
+        new StoreApp().setVisible(true);
+    }//GEN-LAST:event_storeMouseClicked
 
     private void productMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_productMouseClicked
         // TODO add your handling code here:
@@ -902,6 +917,10 @@ public class DashboardApp extends javax.swing.JFrame {
         this.setVisible(false);
         new PeopleApp().setVisible(true);
     }//GEN-LAST:event_btnUsersMouseClicked
+
+    private void posMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_posMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_posMouseClicked
     private void barChart() {
         DefaultCategoryDataset dataset = new DefaultCategoryDataset();
         dataset.setValue(8, "", "Vat");
@@ -1017,6 +1036,7 @@ public class DashboardApp extends javax.swing.JFrame {
     private javax.swing.JPanel salescChart;
     private javax.swing.JLabel setting;
     private javax.swing.JPanel sidemenubar;
+    private javax.swing.JLabel store;
     private javax.swing.JLabel time;
     private javax.swing.JPanel topProductChart;
     private javax.swing.JPanel topbar;
